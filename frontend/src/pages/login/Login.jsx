@@ -3,9 +3,10 @@ import { useEffect } from "react";
 function Login() {
   useEffect(() => {
     document.title = "Login | BLEVEN";
-
     document.body.classList.add("login-page", "hold-transition");
+    document.body.style.background = "#e7eef8";
     return () => {
+      document.body.style.background = null;
       document.body.classList.remove("login-page", "hold-transition");
     };
   }, []);

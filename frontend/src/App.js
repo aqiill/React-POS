@@ -9,9 +9,7 @@ function App() {
     <>
     <Router>
       <Routes>
-        {/* <BodyClass bodyClass="hold-transition login-page"> */}
           <Route path="/login" element={<Login />}/>
-        {/* </BodyClass> */}
       </Routes>
     </Router>
     </>
