@@ -89,6 +89,68 @@ class Produk extends ResourceController
         }
     }
 
+    public function stok()
+    {
+        $model = new M_produk();
+        if ($this->validateApiKey() == TRUE) {
+            $produk = $model->stok();
+
+            if ($produk) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Stock Alert',
+                    'data' => $produk
+                ];
+
+                return $this->response->setJSON($response);
+            } else {
+                $response = [
+                    'status' => 404,
+                    'message' => 'Data not found'
+                ];
+
+                return $this->response->setJSON($response);
+            }
+        } else {
+            $response = [
+                'status' => 401,
+                'message' => 'API Key tidak ditemukan.'
+            ];
+            return $this->response->setJSON($response);
+        }
+    }
+
+    public function expired()
+    {
+        $model = new M_produk();
+        if ($this->validateApiKey() == TRUE) {
+            $produk = $model->expired();
+
+            if ($produk) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Expired Soon',
+                    'data' => $produk
+                ];
+
+                return $this->response->setJSON($response);
+            } else {
+                $response = [
+                    'status' => 404,
+                    'message' => 'Data not found'
+                ];
+
+                return $this->response->setJSON($response);
+            }
+        } else {
+            $response = [
+                'status' => 401,
+                'message' => 'API Key tidak ditemukan.'
+            ];
+            return $this->response->setJSON($response);
+        }
+    }
+
     public function show($id = null)
     {
         if ($this->validateApiKey() == TRUE) {
@@ -122,16 +184,17 @@ class Produk extends ResourceController
     public function create()
     {
         if ($this->validateApiKey() == TRUE) {
+            $i = $this->request->getJSON();
             $data = [
-                'kode_produk' => $this->request->getPost('kode_produk'),
-                'nama_produk' => $this->request->getPost('nama_produk'),
-                'kategori_id' => $this->request->getPost('kategori_id'),
-                'harga_modal' => $this->request->getPost('harga_modal'),
-                'harga_jual' => $this->request->getPost('harga_jual'),
-                'stok' => $this->request->getPost('stok'),
-                'gambar' => $this->request->getPost('gambar'),
-                'expired_date' => $this->request->getPost('expired_date'),
-                'date_created' => date('Y-m-d H:i:s')
+                'kode_produk' => $i->kode_produk,
+                'nama_produk' => $i->nama_produk,
+                'kategori_id' => $i->kategori_id,
+                'harga_modal' => $i->harga_modal,
+                'harga_jual' => $i->harga_jual,
+                'stok' => $i->stok,
+                'gambar' => $i->gambar,
+                'expired_date' => $i->expired_date,
+                'date_modified' => date('Y-m-d H:i:s')
             ];
 
             $createdData = $this->model->insert($data);
@@ -164,15 +227,15 @@ class Produk extends ResourceController
     public function update($id = null)
     {
         if ($this->validateApiKey() == TRUE) {
+            $i = $this->request->getJSON();
             $data = [
-                'kode_produk' => $this->request->getPost('kode_produk'),
-                'nama_produk' => $this->request->getPost('nama_produk'),
-                'kategori_id' => $this->request->getPost('kategori_id'),
-                'harga_modal' => $this->request->getPost('harga_modal'),
-                'harga_jual' => $this->request->getPost('harga_jual'),
-                'stok' => $this->request->getPost('stok'),
-                'gambar' => $this->request->getPost('gambar'),
-                'expired_date' => $this->request->getPost('expired_date'),
+                'kode_produk' => $i->kode_produk,
+                'nama_produk' => $i->nama_produk,
+                'kategori_id' => $i->kategori_id,
+                'harga_modal' => $i->harga_modal,
+                'harga_jual' => $i->harga_jual,
+                'stok' => $i->stok,
+                'gambar' => $i->gambar,
                 'date_modified' => date('Y-m-d H:i:s')
             ];
 

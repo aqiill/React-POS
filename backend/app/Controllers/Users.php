@@ -3,11 +3,10 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-use CodeIgniter\API\ResponseTrait;
 
-class Kategori extends ResourceController
+class Users extends ResourceController
 {
-    protected $modelName = 'App\Models\M_kategori';
+    protected $modelName = 'App\Models\M_users';
     protected $format    = 'json';
 
     private function validateApiKey()
@@ -26,13 +25,13 @@ class Kategori extends ResourceController
     public function index()
     {
         if ($this->validateApiKey() == TRUE) {
-            $kategori = $this->model->findAll();
+            $users = $this->model->findAll();
 
-            if ($kategori) {
+            if ($users) {
                 $response = [
                     'status' => 200,
-                    'message' => 'Data Kategori',
-                    'data' => $kategori
+                    'message' => 'Data Users',
+                    'data' => $users
                 ];
 
                 return $this->response->setJSON($response);
@@ -56,13 +55,13 @@ class Kategori extends ResourceController
     public function show($id = null)
     {
         if ($this->validateApiKey() == TRUE) {
-            $kategori = $this->model->find($id);
+            $users = $this->model->find($id);
 
-            if ($kategori) {
+            if ($users) {
                 $response = [
                     'status' => 200,
-                    'message' => 'Data Kategori',
-                    'data' => $kategori
+                    'message' => 'Data Users',
+                    'data' => $users
                 ];
 
                 return $this->response->setJSON($response);
@@ -88,7 +87,10 @@ class Kategori extends ResourceController
         if ($this->validateApiKey() == TRUE) {
             $i = $this->request->getJSON();
             $data = [
-                'nama_kategori' => $i->nama_kategori,
+                'nama_user' => $i->nama_user,
+                'email_user' => $i->email_user,
+                'password' => sha1($i->password),
+                'role' => $i->role,
                 'date_created' => date('Y-m-d H:i:s')
             ];
 
@@ -124,8 +126,11 @@ class Kategori extends ResourceController
         if ($this->validateApiKey() == TRUE) {
             $i = $this->request->getJSON();
             $data = [
-                'nama_kategori' => $i->nama_kategori,
-                'date_updated' => date('Y-m-d H:i:s')
+                'nama_user' => $i->nama_user,
+                'email_user' => $i->email_user,
+                'password' => sha1($i->password),
+                'role' => $i->role,
+                'date_created' => date('Y-m-d H:i:s')
             ];
 
             $updatedData = $this->model->update($id, $data);
