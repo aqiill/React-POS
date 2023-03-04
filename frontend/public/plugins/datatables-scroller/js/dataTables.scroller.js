@@ -1,5 +1,24 @@
-/*! Scroller 2.1.0
- * ©2011-2022 SpryMedia Ltd - datatables.net/license
+/*! Scroller 2.0.5
+ * ©2011-2021 SpryMedia Ltd - datatables.net/license
+ */
+
+/**
+ * @summary     Scroller
+ * @description Virtual rendering for DataTables
+ * @version     2.0.5
+ * @file        dataTables.scroller.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2011-2021 SpryMedia Ltd.
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license - http://datatables.net/license/mit
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: http://www.datatables.net
  */
 
 (function( factory ){
@@ -13,19 +32,11 @@
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
 				root = window;
 			}
 
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
-			}
-
-			if ( ! $.fn.dataTable ) {
-				require('datatables.net')(root, $);
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net')(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -38,26 +49,6 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
-
-
-
-/**
- * @summary     Scroller
- * @description Virtual rendering for DataTables
- * @version     2.1.0
- * @author      SpryMedia Ltd (www.sprymedia.co.uk)
- * @contact     www.sprymedia.co.uk/contact
- * @copyright   SpryMedia Ltd.
- *
- * This source file is free software, available under the following license:
- *   MIT license - http://datatables.net/license/mit
- *
- * This source file is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
- *
- * For details please refer to: http://www.datatables.net
- */
 
 
 /**
@@ -542,10 +533,6 @@ $.extend( Scroller.prototype, {
 			if ( initialStateSave && loadedState ) {
 				data.scroller = loadedState.scroller;
 				initialStateSave = false;
-
-				if (data.scroller) {
-					that.s.lastScrollTop = data.scroller.scrollTop;
-				}
 			}
 			else {
 				// Need to used the saved position on init
@@ -557,12 +544,6 @@ $.extend( Scroller.prototype, {
 				};
 			}
 		} );
-
-		dt.on( 'stateLoadParams.scroller', function( e, settings, data ) {
-			if (data.scroller !== undefined) {
-				that.scrollToRow(data.scroller.topRow);
-			}
-		});
 
 		if ( loadedState && loadedState.scroller ) {
 			this.s.topRowFloat = loadedState.scroller.topRow;
@@ -687,8 +668,7 @@ $.extend( Scroller.prototype, {
 			iTableHeight = $(this.s.dt.nTable).height(),
 			displayStart = this.s.dt._iDisplayStart,
 			displayLen = this.s.dt._iDisplayLength,
-			displayEnd = this.s.dt.fnRecordsDisplay(),
-			viewportEndY = iScrollTop + heights.viewport;
+			displayEnd = this.s.dt.fnRecordsDisplay();
 
 		// Disable the scroll event listener while we are updating the DOM
 		this.s.skip = true;
@@ -715,17 +695,6 @@ $.extend( Scroller.prototype, {
 		else if ( displayStart + displayLen >= displayEnd ) {
 			tableTop = heights.scroll - iTableHeight;
 		}
-		else {
-			var iTableBottomY = tableTop + iTableHeight;
-			if (iTableBottomY < viewportEndY) {
-				// The last row of the data is above the end of the viewport.
-				// This means the background is visible, which is not what the user expects.
-				var newTableTop = viewportEndY - iTableHeight;
-				var diffPx = newTableTop - tableTop;
-				this.s.baseScrollTop += diffPx + 1; // Update start row number in footer.
-				tableTop = newTableTop; // Move table so last line of data is at the bottom of the viewport.
-			}
-		}
 
 		this.dom.table.style.top = tableTop+'px';
 
@@ -743,38 +712,35 @@ $.extend( Scroller.prototype, {
 
 		this.s.skip = false;
 
-		if(that.s.ingnoreScroll) {
-			// Restore the scrolling position that was saved by DataTable's state
-			// saving Note that this is done on the second draw when data is Ajax
-			// sourced, and the first draw when DOM soured
-			if ( this.s.dt.oFeatures.bStateSave && this.s.dt.oLoadedState !== null &&
-				 typeof this.s.dt.oLoadedState.scroller != 'undefined' )
+		// Restore the scrolling position that was saved by DataTable's state
+		// saving Note that this is done on the second draw when data is Ajax
+		// sourced, and the first draw when DOM soured
+		if ( this.s.dt.oFeatures.bStateSave && this.s.dt.oLoadedState !== null &&
+			 typeof this.s.dt.oLoadedState.scroller != 'undefined' )
+		{
+			// A quirk of DataTables is that the draw callback will occur on an
+			// empty set if Ajax sourced, but not if server-side processing.
+			var ajaxSourced = (this.s.dt.sAjaxSource || that.s.dt.ajax) && ! this.s.dt.oFeatures.bServerSide ?
+				true :
+				false;
+
+			if ( ( ajaxSourced && this.s.dt.iDraw == 2) ||
+			     (!ajaxSourced && this.s.dt.iDraw == 1) )
 			{
-				// A quirk of DataTables is that the draw callback will occur on an
-				// empty set if Ajax sourced, but not if server-side processing.
-				var ajaxSourced = (this.s.dt.sAjaxSource || that.s.dt.ajax) && ! this.s.dt.oFeatures.bServerSide ?
-					true :
-					false;
-	
-				if ( ( ajaxSourced && this.s.dt.iDraw >= 2) ||
-					 (!ajaxSourced && this.s.dt.iDraw >= 1) )
-				{
+				setTimeout( function () {
+					$(that.dom.scroller).scrollTop( that.s.dt.oLoadedState.scroller.scrollTop );
+
+					// In order to prevent layout thrashing we need another
+					// small delay
 					setTimeout( function () {
-						$(that.dom.scroller).scrollTop( that.s.dt.oLoadedState.scroller.scrollTop );
-	
-						// In order to prevent layout thrashing we need another
-						// small delay
-						setTimeout( function () {
-							that.s.ingnoreScroll = false;
-						}, 0 );
+						that.s.ingnoreScroll = false;
 					}, 0 );
-				}
-			}
-			else {
-				that.s.ingnoreScroll = false;
+				}, 0 );
 			}
 		}
-
+		else {
+			that.s.ingnoreScroll = false;
+		}
 
 		// Because of the order of the DT callbacks, the info update will
 		// take precedence over the one we want here. So a 'thread' break is
@@ -1110,7 +1076,6 @@ $.extend( Scroller.prototype, {
 			this.dom.label
 				.html( this.s.dt.fnFormatNumber( parseInt( this.s.topRowFloat, 10 )+1 ) )
 				.css( 'top', iScrollTop + (iScrollTop * labelFactor) )
-				.css( 'right', 10 - this.dom.scroller.scrollLeft)
 				.css( 'display', 'block' );
 		}
 	},
@@ -1233,7 +1198,7 @@ Scroller.oDefaults = Scroller.defaults;
  *  @name      Scroller.version
  *  @static
  */
-Scroller.version = "2.1.0";
+Scroller.version = "2.0.5";
 
 
 
@@ -1340,6 +1305,5 @@ Api.register( 'scroller.page()', function() {
 	// undefined
 } );
 
-
-return DataTable;
+return Scroller;
 }));

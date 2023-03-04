@@ -1,5 +1,24 @@
-/*! KeyTable 2.8.0
- * ©2009-2022 SpryMedia Ltd - datatables.net/license
+/*! KeyTable 2.6.4
+ * ©2009-2021 SpryMedia Ltd - datatables.net/license
+ */
+
+/**
+ * @summary     KeyTable
+ * @description Spreadsheet like keyboard navigation for DataTables
+ * @version     2.6.4
+ * @file        dataTables.keyTable.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2009-2021 SpryMedia Ltd.
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license - http://datatables.net/license/mit
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: http://www.datatables.net
  */
 
 (function( factory ){
@@ -13,19 +32,11 @@
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
 				root = window;
 			}
 
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
-			}
-
-			if ( ! $.fn.dataTable ) {
-				require('datatables.net')(root, $);
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net')(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -38,28 +49,6 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
-
-
-
-/**
- * @summary     KeyTable
- * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.8.0
- * @file        dataTables.keyTable.js
- * @author      SpryMedia Ltd
- * @contact     datatables.net
- * @copyright   Copyright 2009-2022 SpryMedia Ltd.
- *
- * This source file is free software, available under the following license:
- *   MIT license - http://datatables.net/license/mit
- *
- * This source file is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
- *
- * For details please refer to: http://www.datatables.net
- */
-
 var namespaceCounter = 0;
 var editorNamespaceCounter = 0;
 
@@ -318,29 +307,16 @@ $.extend( KeyTable.prototype, {
 		}
 
 		// Stave saving
-		// if ( dt.settings()[0].oFeatures.bStateSave ) {
+		if ( dt.settings()[0].oFeatures.bStateSave ) {
 			dt.on( 'stateSaveParams'+namespace, function (e, s, d) {
 				d.keyTable = that.s.lastFocus ?
 					that.s.lastFocus.cell.index() :
 					null;
 			} );
-		// }
+		}
 
 		dt.on( 'column-visibility'+namespace, function (e) {
 			that._tabInput();
-		} );
-
-		dt.on( 'column-reorder'+namespace, function (e, s, d) {
-			// Need to update the last focus cell's index
-			var lastFocus = that.s.lastFocus;
-
-			if (lastFocus && lastFocus.cell) {
-				var curr = lastFocus.relative.column;
-				
-				// Manipulate the API instance to correct the column index
-				lastFocus.cell[0][0].column = d.mapping.indexOf(curr);
-				lastFocus.relative.column = d.mapping.indexOf(curr);
-			}
 		} );
 
 		// Redraw - retain focus on the current cell
@@ -605,11 +581,6 @@ $.extend( KeyTable.prototype, {
 
 					// On blur of the navigation submit
 					dt.on( 'key-blur.editor', function (e, dt, cell) {
-						// When Editor has its own blur enabled - do nothing here
-						if (editor.s.editOpts.onBlur === 'submit') {
-							return;
-						}
-
 						if ( editor.displayed() && cell.node() === editCell.node() ) {
 							editor.submit();
 						}
@@ -830,6 +801,7 @@ $.extend( KeyTable.prototype, {
 		dt.state.save();
 	},
 
+
 	/**
 	 * Handle key press
 	 *
@@ -883,11 +855,7 @@ $.extend( KeyTable.prototype, {
 		switch( e.keyCode ) {
 			case 9: // tab
 				// `enable` can be tab-only
-				e.preventDefault();
-
-				this._keyAction( function () {
-					that._shift( e, e.shiftKey ? 'left' : 'right', true );
-				} );
+				this._shift( e, e.shiftKey ? 'left' : 'right', true );
 				break;
 
 			case 27: // esc
@@ -901,11 +869,9 @@ $.extend( KeyTable.prototype, {
 				if ( navEnable && !scrolling ) {
 					e.preventDefault();
 
-					this._keyAction( function () {
-						dt
-							.page( e.keyCode === 33 ? 'previous' : 'next' )
-							.draw( false );
-					} );
+					dt
+						.page( e.keyCode === 33 ? 'previous' : 'next' )
+						.draw( false );
 				}
 				break;
 
@@ -913,47 +879,36 @@ $.extend( KeyTable.prototype, {
 			case 36: // home (start of current page)
 				if ( navEnable ) {
 					e.preventDefault();
+					var indexes = dt.cells( {page: 'current'} ).indexes();
+					var colIndexes = this._columns();
 
-					this._keyAction( function () {
-						var indexes = dt.cells( {page: 'current'} ).indexes();
-						var colIndexes = that._columns();
-
-						that._focus( dt.cell(
-							indexes[ e.keyCode === 35 ? indexes.length-1 : colIndexes[0] ]
-						), null, true, e );
-					} );
+					this._focus( dt.cell(
+						indexes[ e.keyCode === 35 ? indexes.length-1 : colIndexes[0] ]
+					), null, true, e );
 				}
 				break;
 
 			case 37: // left arrow
 				if ( navEnable ) {
-					this._keyAction( function () {
-						that._shift( e, 'left' );
-					} );
+					this._shift( e, 'left' );
 				}
 				break;
 
 			case 38: // up arrow
 				if ( navEnable ) {
-					this._keyAction( function () {
-						that._shift( e, 'up' );
-					} );
+					this._shift( e, 'up' );
 				}
 				break;
 
 			case 39: // right arrow
 				if ( navEnable ) {
-					this._keyAction( function () {
-						that._shift( e, 'right' );
-					} );
+					this._shift( e, 'right' );
 				}
 				break;
 
 			case 40: // down arrow
 				if ( navEnable ) {
-					this._keyAction( function () {
-						that._shift( e, 'down' );
-					} );
+					this._shift( e, 'down' );
 				}
 				break;
 
@@ -970,23 +925,6 @@ $.extend( KeyTable.prototype, {
 					this._emitEvent( 'key', [ dt, e.keyCode, this.s.lastFocus.cell, e ] );
 				}
 				break;
-		}
-	},
-
-	/**
-	 * Whether we perform a key shift action immediately or not depends
-	 * upon if Editor is being used. If it is, then we wait until it
-	 * completes its action
-	 * @param {*} action Function to trigger when ready
-	 */
-	_keyAction: function (action) {
-		var editor = this.c.editor;
-
-		if (editor && editor.mode()) {
-			editor.submit(action);
-		}
-		else {
-			action();
 		}
 	},
 
@@ -1077,7 +1015,7 @@ $.extend( KeyTable.prototype, {
 			return;
 		}
 	
-		var currentCell = last.cell;
+		var currentCell  = last.cell;
 		if ( ! currentCell ) {
 			return;
 		}
@@ -1306,7 +1244,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.8.0";
+KeyTable.version = "2.6.4";
 
 
 $.fn.dataTable.KeyTable = KeyTable;
@@ -1407,5 +1345,5 @@ $(document).on( 'preInit.dt.dtk', function (e, settings, json) {
 } );
 
 
-return DataTable;
+return KeyTable;
 }));

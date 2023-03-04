@@ -13,19 +13,11 @@
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
 				root = window;
 			}
 
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
-			}
-
-			if ( ! $.fn.dataTable ) {
-				require('datatables.net-bs4')(root, $);
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net-bs4')(root, $).$;
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
@@ -42,8 +34,6 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
-
-
 
 $.extend( true, DataTable.Buttons.defaults, {
 	dom: {
@@ -93,6 +83,5 @@ $.extend( true, DataTable.Buttons.defaults, {
 DataTable.ext.buttons.collection.className += ' dropdown-toggle';
 DataTable.ext.buttons.collection.rightAlignClassName = 'dropdown-menu-right';
 
-
-return DataTable;
+return DataTable.Buttons;
 }));

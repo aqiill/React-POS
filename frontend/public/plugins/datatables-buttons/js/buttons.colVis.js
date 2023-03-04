@@ -14,19 +14,11 @@
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
 				root = window;
 			}
 
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
-			}
-
-			if ( ! $.fn.dataTable ) {
-				require('datatables.net')(root, $);
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net')(root, $).$;
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
@@ -43,7 +35,6 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
-
 
 
 $.extend( DataTable.ext.buttons, {
@@ -69,6 +60,8 @@ $.extend( DataTable.ext.buttons, {
 
 		// Rebuild the collection with the new column structure if columns are reordered
 		dt.on( 'column-reorder.dt'+conf.namespace, function (e, settings, details) {
+			// console.log(node);
+			// console.log('node', dt.button(null, node).node());
 			dt.button(null, dt.button(null, node).node()).collectionRebuild([{
 				extend: 'columnsToggle',
 				columns: conf.columns,
@@ -238,5 +231,5 @@ $.extend( DataTable.ext.buttons, {
 } );
 
 
-return DataTable;
+return DataTable.Buttons;
 }));

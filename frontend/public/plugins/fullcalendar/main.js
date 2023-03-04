@@ -1,7 +1,7 @@
 /*!
-FullCalendar v5.11.4
+FullCalendar v5.10.1
 Docs & License: https://fullcalendar.io/
-(c) 2022 Adam Shaw
+(c) 2021 Adam Shaw
 */
 var FullCalendar = (function (exports) {
     'use strict';
@@ -77,15 +77,14 @@ var FullCalendar = (function (exports) {
             Fragment: y,
             createContext: createContext$1,
             createPortal: I,
-            flushSync: flushSync$1,
+            flushToDom: flushToDom$1,
             unmountComponentAtNode: unmountComponentAtNode$1,
         };
     }
     // HACKS...
     // TODO: lock version
     // TODO: link gh issues
-    function flushSync$1(runBeforeFlush) {
-        runBeforeFlush();
+    function flushToDom$1() {
         var oldDebounceRendering = n.debounceRendering; // orig
         var callbackQ = [];
         function execCallbackSync(callback) {
@@ -1207,7 +1206,8 @@ var FullCalendar = (function (exports) {
             return currentResults;
         };
     }
-    function memoizeHashlike(workerFunc, resEquality, teardownFunc) {
+    function memoizeHashlike(// used?
+    workerFunc, resEquality, teardownFunc) {
         var _this = this;
         var currentArgHash = {};
         var currentResHash = {};
@@ -1841,14 +1841,13 @@ var FullCalendar = (function (exports) {
         eventSources: identity,
     };
     var COMPLEX_OPTION_COMPARATORS = {
-        headerToolbar: isMaybeObjectsEqual,
-        footerToolbar: isMaybeObjectsEqual,
-        buttonText: isMaybeObjectsEqual,
-        buttonHints: isMaybeObjectsEqual,
-        buttonIcons: isMaybeObjectsEqual,
-        dateIncrement: isMaybeObjectsEqual,
+        headerToolbar: isBoolComplexEqual,
+        footerToolbar: isBoolComplexEqual,
+        buttonText: isBoolComplexEqual,
+        buttonHints: isBoolComplexEqual,
+        buttonIcons: isBoolComplexEqual,
     };
-    function isMaybeObjectsEqual(a, b) {
+    function isBoolComplexEqual(a, b) {
         if (typeof a === 'object' && typeof b === 'object' && a && b) { // both non-null objects
             return isPropsEqual(a, b);
         }
@@ -5121,7 +5120,7 @@ var FullCalendar = (function (exports) {
     var Fragment = FullCalendarVDom.Fragment;
     var createContext = FullCalendarVDom.createContext;
     var createPortal = FullCalendarVDom.createPortal;
-    var flushSync = FullCalendarVDom.flushSync;
+    var flushToDom = FullCalendarVDom.flushToDom;
     var unmountComponentAtNode = FullCalendarVDom.unmountComponentAtNode;
     /* eslint-enable */
 
@@ -5205,12 +5204,6 @@ var FullCalendar = (function (exports) {
             }
             return !compareObjs(this.props, nextProps, this.propEquality) ||
                 !compareObjs(this.state, nextState, this.stateEquality);
-        };
-        // HACK for freakin' React StrictMode
-        PureComponent.prototype.safeSetState = function (newState) {
-            if (!compareObjs(this.state, __assign(__assign({}, this.state), newState), this.stateEquality)) {
-                this.setState(newState);
-            }
         };
         PureComponent.addPropsEquality = addPropsEquality;
         PureComponent.addStateEquality = addStateEquality;
@@ -7402,15 +7395,11 @@ var FullCalendar = (function (exports) {
             var anyChanges = false;
             var extra = {};
             for (var optionName in raw) {
-                if (raw[optionName] === currentRaw[optionName] ||
-                    (COMPLEX_OPTION_COMPARATORS[optionName] &&
-                        COMPLEX_OPTION_COMPARATORS[optionName](raw[optionName], currentRaw[optionName]))) {
+                if (raw[optionName] === currentRaw[optionName]) {
                     refined[optionName] = currentRefined[optionName];
                 }
                 else {
-                    if (raw[optionName] === this.currentCalendarOptionsInput[optionName] ||
-                        (COMPLEX_OPTION_COMPARATORS[optionName] &&
-                            COMPLEX_OPTION_COMPARATORS[optionName](raw[optionName], this.currentCalendarOptionsInput[optionName]))) {
+                    if (raw[optionName] === this.currentCalendarOptionsInput[optionName]) {
                         if (optionName in this.currentCalendarOptionsRefined) { // might be an "extra" prop
                             refined[optionName] = this.currentCalendarOptionsRefined[optionName];
                         }
@@ -8146,14 +8135,11 @@ var FullCalendar = (function (exports) {
                 interactionSettingsStore[component.uid] = settings;
             };
             _this.unregisterInteractiveComponent = function (component) {
-                var listeners = _this.interactionsStore[component.uid];
-                if (listeners) {
-                    for (var _i = 0, listeners_1 = listeners; _i < listeners_1.length; _i++) {
-                        var listener = listeners_1[_i];
-                        listener.destroy();
-                    }
-                    delete _this.interactionsStore[component.uid];
+                for (var _i = 0, _a = _this.interactionsStore[component.uid]; _i < _a.length; _i++) {
+                    var listener = _a[_i];
+                    listener.destroy();
                 }
+                delete _this.interactionsStore[component.uid];
                 delete interactionSettingsStore[component.uid];
             };
             // Resizing
@@ -9243,7 +9229,7 @@ var FullCalendar = (function (exports) {
             };
             // TODO: can do a really simple print-view. dont need to join rows
             _this.handleSizing = function () {
-                _this.safeSetState(__assign({ shrinkWidth: _this.computeShrinkWidth() }, _this.computeScrollerDims()));
+                _this.setState(__assign({ shrinkWidth: _this.computeShrinkWidth() }, _this.computeScrollerDims()));
             };
             return _this;
         }
@@ -9812,7 +9798,7 @@ var FullCalendar = (function (exports) {
 
     // exports
     // --------------------------------------------------------------------------------------------------
-    var version = '5.11.4'; // important to type it, so .d.ts has generic string
+    var version = '5.10.1'; // important to type it, so .d.ts has generic string
 
     var Calendar = /** @class */ (function (_super) {
         __extends(Calendar, _super);
@@ -9839,14 +9825,12 @@ var FullCalendar = (function (exports) {
                 if (_this.isRendering) {
                     _this.isRendered = true;
                     var currentData_1 = _this.currentData;
-                    flushSync(function () {
-                        render(createElement(CalendarRoot, { options: currentData_1.calendarOptions, theme: currentData_1.theme, emitter: currentData_1.emitter }, function (classNames, height, isHeightAuto, forPrint) {
-                            _this.setClassNames(classNames);
-                            _this.setHeight(height);
-                            return (createElement(CustomContentRenderContext.Provider, { value: _this.customContentRenderId },
-                                createElement(CalendarContent, __assign({ isHeightAuto: isHeightAuto, forPrint: forPrint }, currentData_1))));
-                        }), _this.el);
-                    });
+                    render(createElement(CalendarRoot, { options: currentData_1.calendarOptions, theme: currentData_1.theme, emitter: currentData_1.emitter }, function (classNames, height, isHeightAuto, forPrint) {
+                        _this.setClassNames(classNames);
+                        _this.setHeight(height);
+                        return (createElement(CustomContentRenderContext.Provider, { value: _this.customContentRenderId },
+                            createElement(CalendarContent, __assign({ isHeightAuto: isHeightAuto, forPrint: forPrint }, currentData_1))));
+                    }), _this.el);
                 }
                 else if (_this.isRendered) {
                     _this.isRendered = false;
@@ -9854,6 +9838,7 @@ var FullCalendar = (function (exports) {
                     _this.setClassNames([]);
                     _this.setHeight('');
                 }
+                flushToDom();
             };
             _this.el = el;
             _this.renderRunner = new DelayedRunner(_this.handleRenderRequest);
@@ -9891,10 +9876,8 @@ var FullCalendar = (function (exports) {
             }
         };
         Calendar.prototype.updateSize = function () {
-            var _this = this;
-            flushSync(function () {
-                _super.prototype.updateSize.call(_this);
-            });
+            _super.prototype.updateSize.call(this);
+            flushToDom();
         };
         Calendar.prototype.batchRendering = function (func) {
             this.renderRunner.pause('batchRendering');
@@ -10563,9 +10546,8 @@ var FullCalendar = (function (exports) {
         AutoScroller.prototype.computeBestEdge = function (left, top) {
             var edgeThreshold = this.edgeThreshold;
             var bestSide = null;
-            var scrollCaches = this.scrollCaches || [];
-            for (var _i = 0, scrollCaches_1 = scrollCaches; _i < scrollCaches_1.length; _i++) {
-                var scrollCache = scrollCaches_1[_i];
+            for (var _i = 0, _a = this.scrollCaches; _i < _a.length; _i++) {
+                var scrollCache = _a[_i];
                 var rect = scrollCache.clientRect;
                 var leftDist = left - rect.left;
                 var rightDist = rect.right - left;
@@ -12728,7 +12710,7 @@ var FullCalendar = (function (exports) {
                 var oldInstanceHeights = this.state.eventInstanceHeights;
                 var newInstanceHeights = this.queryEventInstanceHeights();
                 var limitByContentHeight = props.dayMaxEvents === true || props.dayMaxEventRows === true;
-                this.safeSetState({
+                this.setState({
                     // HACK to prevent oscillations of events being shown/hidden from max-event-rows
                     // Essentially, once you compute an element's height, never null-out.
                     // TODO: always display all events, as visibility:hidden?
@@ -14539,14 +14521,14 @@ var FullCalendar = (function (exports) {
         },
     });
 
-    var BootstrapTheme$1 = /** @class */ (function (_super) {
+    var BootstrapTheme = /** @class */ (function (_super) {
         __extends(BootstrapTheme, _super);
         function BootstrapTheme() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         return BootstrapTheme;
     }(Theme));
-    BootstrapTheme$1.prototype.classes = {
+    BootstrapTheme.prototype.classes = {
         root: 'fc-theme-bootstrap',
         table: 'table-bordered',
         tableCellShaded: 'table-active',
@@ -14557,67 +14539,26 @@ var FullCalendar = (function (exports) {
         popoverHeader: 'popover-header',
         popoverContent: 'popover-body',
     };
-    BootstrapTheme$1.prototype.baseIconClass = 'fa';
-    BootstrapTheme$1.prototype.iconClasses = {
+    BootstrapTheme.prototype.baseIconClass = 'fa';
+    BootstrapTheme.prototype.iconClasses = {
         close: 'fa-times',
         prev: 'fa-chevron-left',
         next: 'fa-chevron-right',
         prevYear: 'fa-angle-double-left',
         nextYear: 'fa-angle-double-right',
     };
-    BootstrapTheme$1.prototype.rtlIconClasses = {
+    BootstrapTheme.prototype.rtlIconClasses = {
         prev: 'fa-chevron-right',
         next: 'fa-chevron-left',
         prevYear: 'fa-angle-double-right',
         nextYear: 'fa-angle-double-left',
     };
-    BootstrapTheme$1.prototype.iconOverrideOption = 'bootstrapFontAwesome'; // TODO: make TS-friendly. move the option-processing into this plugin
-    BootstrapTheme$1.prototype.iconOverrideCustomButtonOption = 'bootstrapFontAwesome';
-    BootstrapTheme$1.prototype.iconOverridePrefix = 'fa-';
-    var plugin$1 = createPlugin({
-        themeClasses: {
-            bootstrap: BootstrapTheme$1,
-        },
-    });
-
-    var BootstrapTheme = /** @class */ (function (_super) {
-        __extends(BootstrapTheme, _super);
-        function BootstrapTheme() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return BootstrapTheme;
-    }(Theme));
-    BootstrapTheme.prototype.classes = {
-        root: 'fc-theme-bootstrap5',
-        tableCellShaded: 'fc-theme-bootstrap5-shaded',
-        buttonGroup: 'btn-group',
-        button: 'btn btn-primary',
-        buttonActive: 'active',
-        popover: 'popover',
-        popoverHeader: 'popover-header',
-        popoverContent: 'popover-body',
-    };
-    BootstrapTheme.prototype.baseIconClass = 'bi';
-    BootstrapTheme.prototype.iconClasses = {
-        close: 'bi-x-lg',
-        prev: 'bi-chevron-left',
-        next: 'bi-chevron-right',
-        prevYear: 'bi-chevron-double-left',
-        nextYear: 'bi-chevron-double-right',
-    };
-    BootstrapTheme.prototype.rtlIconClasses = {
-        prev: 'bi-chevron-right',
-        next: 'bi-chevron-left',
-        prevYear: 'bi-chevron-double-right',
-        nextYear: 'bi-chevron-double-left',
-    };
-    // wtf
-    BootstrapTheme.prototype.iconOverrideOption = 'buttonIcons'; // TODO: make TS-friendly
-    BootstrapTheme.prototype.iconOverrideCustomButtonOption = 'icon';
-    BootstrapTheme.prototype.iconOverridePrefix = 'bi-';
+    BootstrapTheme.prototype.iconOverrideOption = 'bootstrapFontAwesome'; // TODO: make TS-friendly. move the option-processing into this plugin
+    BootstrapTheme.prototype.iconOverrideCustomButtonOption = 'bootstrapFontAwesome';
+    BootstrapTheme.prototype.iconOverridePrefix = 'fa-';
     var plugin = createPlugin({
         themeClasses: {
-            bootstrap5: BootstrapTheme,
+            bootstrap: BootstrapTheme,
         },
     });
 
@@ -14761,13 +14702,13 @@ var FullCalendar = (function (exports) {
         eventSourceRefiners: EVENT_SOURCE_REFINERS,
     });
 
-    globalPlugins.push(interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, plugin$1, plugin, googleCalendarPlugin);
+    globalPlugins.push(interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, plugin, googleCalendarPlugin);
 
     exports.BASE_OPTION_DEFAULTS = BASE_OPTION_DEFAULTS;
     exports.BASE_OPTION_REFINERS = BASE_OPTION_REFINERS;
     exports.BaseComponent = BaseComponent;
     exports.BgEvent = BgEvent;
-    exports.BootstrapTheme = BootstrapTheme$1;
+    exports.BootstrapTheme = BootstrapTheme;
     exports.Calendar = Calendar;
     exports.CalendarApi = CalendarApi;
     exports.CalendarContent = CalendarContent;
@@ -14909,7 +14850,7 @@ var FullCalendar = (function (exports) {
     exports.findDirectChildren = findDirectChildren;
     exports.findElements = findElements;
     exports.flexibleCompare = flexibleCompare;
-    exports.flushSync = flushSync;
+    exports.flushToDom = flushToDom;
     exports.formatDate = formatDate;
     exports.formatDayString = formatDayString;
     exports.formatIsoTimeString = formatIsoTimeString;

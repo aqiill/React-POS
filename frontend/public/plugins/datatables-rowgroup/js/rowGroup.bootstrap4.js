@@ -1,5 +1,5 @@
 /*! Bootstrap 4 styling wrapper for RowGroup
- * © SpryMedia Ltd - datatables.net/license
+ * ©2018 SpryMedia Ltd - datatables.net/license
  */
 
 (function( factory ){
@@ -13,25 +13,16 @@
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
 				root = window;
 			}
 
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net-bs4')(root, $).$;
 			}
 
-			if ( ! $.fn.dataTable ) {
-				require('datatables.net-bs4')(root, $);
-			}
-
-			if ( ! $.fn.dataTable ) {
+			if ( ! $.fn.dataTable.RowGroup ) {
 				require('datatables.net-rowgroup')(root, $);
 			}
-
 
 			return factory( $, root, root.document );
 		};
@@ -41,11 +32,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
-var DataTable = $.fn.dataTable;
 
+return $.fn.dataTable;
 
-
-
-return DataTable;
 }));
