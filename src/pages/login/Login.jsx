@@ -13,8 +13,8 @@ function Login() {
       document.body.style.background = null;
       document.body.classList.remove("login-page", "hold-transition");
     };
-    // e3fd6b146fcb65f7419e3531a0a84f4d700b8210;
   }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,12 +26,21 @@ function Login() {
         { email_user: email, password },
         { headers: { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" } }
       );
-      navigate("/home");
-      // console.log(response.data);
+      localStorage.setItem("nama", response.data.data.nama_user);
+      localStorage.setItem("email_user", response.data.data.email_user);
+      // navigate("/home");
+      window.location.href = "/home";
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("email_user")) {
+      // navigate("/home");
+      window.location.href = "/home";
+    }
+  }, [navigate]);
 
   return (
     <>
