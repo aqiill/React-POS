@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Login | BLEVEN";
     document.body.classList.add("login-page", "hold-transition");
@@ -12,6 +15,23 @@ function Login() {
     };
     // e3fd6b146fcb65f7419e3531a0a84f4d700b8210;
   }, []);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/login/auth",
+        { email_user: email, password },
+        { headers: { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" } }
+      );
+      navigate("/home");
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -31,6 +51,7 @@ function Login() {
               id="form-login"
               className="needs-validation"
               noValidate
+              onSubmit={handleSubmit}
             >
               <div className="form-group">
                 <label className="font-weight-lighter mb-0" htmlFor="email">
@@ -42,6 +63,8 @@ function Login() {
                     className="form-control-plaintext mt-0"
                     style={{ borderBottom: "2px solid #000000" }}
                     id="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                     placeholder="Enter email"
                     required
                   />
@@ -71,6 +94,8 @@ function Login() {
                     className="form-control-plaintext mt-0"
                     style={{ borderBottom: "2px solid #000000" }}
                     id="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                     placeholder="Enter password"
                     required
                   />

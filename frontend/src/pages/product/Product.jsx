@@ -95,6 +95,206 @@ function Product() {
                             </div>
                           </div>
                         </div>
+                        <div className="card-susu float-right mb-2">
+                          <img src="../dist/img/susu.png" alt="Image" />
+                          <div
+                            className="card-text mt-1 p-0 ml-1"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            Susu Ultra Milk Coklat 200ml
+                            <div
+                              className="progress"
+                              style={{
+                                height: 6,
+                                width: 162,
+                                backgroundColor: "red",
+                                marginTop: 35,
+                                borderRadius: 10,
+                              }}
+                            >
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={0}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <div
+                              className="row"
+                              style={{
+                                marginBottom: 5,
+                                fontWeight: "normal",
+                                fontSize: "small",
+                              }}
+                            >
+                              <div className="col-md-6">9 days left</div>
+                              <div className="col-md-6 text-right">
+                                10/02/2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="card-susu float-right mb-2">
+                          <img src="../dist/img/susu.png" alt="Image" />
+                          <div
+                            className="card-text mt-1 p-0 ml-1"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            Susu Ultra Milk Coklat 200ml
+                            <div
+                              className="progress"
+                              style={{
+                                height: 6,
+                                width: 162,
+                                backgroundColor: "red",
+                                marginTop: 35,
+                                borderRadius: 10,
+                              }}
+                            >
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={0}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <div
+                              className="row"
+                              style={{
+                                marginBottom: 5,
+                                fontWeight: "normal",
+                                fontSize: "small",
+                              }}
+                            >
+                              <div className="col-md-6">9 days left</div>
+                              <div className="col-md-6 text-right">
+                                10/02/2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="card-susu float-right mb-2">
+                          <img src="../dist/img/susu.png" alt="Image" />
+                          <div
+                            className="card-text mt-1 p-0 ml-1"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            Susu Ultra Milk Coklat 200ml
+                            <div
+                              className="progress"
+                              style={{
+                                height: 6,
+                                width: 162,
+                                backgroundColor: "red",
+                                marginTop: 35,
+                                borderRadius: 10,
+                              }}
+                            >
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={0}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <div
+                              className="row"
+                              style={{
+                                marginBottom: 5,
+                                fontWeight: "normal",
+                                fontSize: "small",
+                              }}
+                            >
+                              <div className="col-md-6">9 days left</div>
+                              <div className="col-md-6 text-right">
+                                10/02/2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="card-susu float-right mb-2">
+                          <img src="../dist/img/susu.png" alt="Image" />
+                          <div
+                            className="card-text mt-1 p-0 ml-1"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            Susu Ultra Milk Coklat 200ml
+                            <div
+                              className="progress"
+                              style={{
+                                height: 6,
+                                width: 162,
+                                backgroundColor: "red",
+                                marginTop: 35,
+                                borderRadius: 10,
+                              }}
+                            >
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={0}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <div
+                              className="row"
+                              style={{
+                                marginBottom: 5,
+                                fontWeight: "normal",
+                                fontSize: "small",
+                              }}
+                            >
+                              <div className="col-md-6">9 days left</div>
+                              <div className="col-md-6 text-right">
+                                10/02/2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="card-susu float-right mb-2">
+                          <img src="../dist/img/susu.png" alt="Image" />
+                          <div
+                            className="card-text mt-1 p-0 ml-1"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            Susu Ultra Milk Coklat 200ml
+                            <div
+                              className="progress"
+                              style={{
+                                height: 6,
+                                width: 162,
+                                backgroundColor: "red",
+                                marginTop: 35,
+                                borderRadius: 10,
+                              }}
+                            >
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={0}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <div
+                              className="row"
+                              style={{
+                                marginBottom: 5,
+                                fontWeight: "normal",
+                                fontSize: "small",
+                              }}
+                            >
+                              <div className="col-md-6">9 days left</div>
+                              <div className="col-md-6 text-right">
+                                10/02/2023
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
