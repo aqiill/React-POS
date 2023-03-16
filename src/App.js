@@ -21,6 +21,7 @@ function App() {
           <Route path="/product" element={isLoggedIn ? <Product /> : <Navigate to="/login" />} />
           <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
           <Route path="/profile1" element={isLoggedIn ? <ProfileEdit /> : <Navigate to="/login" />} />
+          <Route path="/cashier" element={isLoggedIn ? <ProfileEdit /> : <Navigate to="/login" />} />
         </Routes>
       </Router>
     </>
