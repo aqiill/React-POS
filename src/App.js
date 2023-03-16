@@ -6,19 +6,22 @@ import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import ProfileEdit from './pages/profile/ProfileEdit';
 
+
 function App() {
+  const isLoggedIn = localStorage.getItem('email_user') !== null;
+
   return (
     <>
-    <Router>
-      <Routes>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/home" element={<Dashboard />}/>
-          <Route path="/employee" element={<Employee />}/>
-          <Route path="/product" element={<Product />}/>
-          <Route path="/profile" element={<Profile />}/>
-          <Route path="/profile1" element={<ProfileEdit />}/>
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/login" element={isLoggedIn ? <Navigate to="/home" /> : <Login />} />
+          <Route path="/home" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+          <Route path="/employee" element={isLoggedIn ? <Employee /> : <Navigate to="/login" />} />
+          <Route path="/product" element={isLoggedIn ? <Product /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
+          <Route path="/profile1" element={isLoggedIn ? <ProfileEdit /> : <Navigate to="/login" />} />
+        </Routes>
+      </Router>
     </>
   );
 }
