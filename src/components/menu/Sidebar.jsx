@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, redirect as Redirect } from "react-router-dom";
 
-const MenuDash = () => {
+const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
   const nama_user = localStorage.getItem("nama_user");
   const handleLogout = () => {
@@ -30,7 +30,11 @@ const MenuDash = () => {
               <p>MENU</p>
             </li>
             {/* Dashboard nav AKTIV */}
-            <li className="nav-item menu-open">
+            <li
+              className={`nav-item ${
+                activePage === "dashboard" ? "menu-open" : ""
+              }`}
+            >
               <a href="#" className="nav-link active">
                 <div className="icon-active">
                   <img
@@ -48,7 +52,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Product Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "product" ? "menu-open" : ""
+              }`}
+            >
               <a
                 href="../AdminLTE-3.2.0/pages/product.html"
                 className="nav-link"
@@ -62,7 +70,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Category Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "category" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -73,7 +85,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Report Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "report" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -84,7 +100,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Employee Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "employee" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -95,7 +115,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Member Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "member" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -110,7 +134,11 @@ const MenuDash = () => {
               <p>OTHER</p>
             </li>
             {/* Settings Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "setting" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -121,7 +149,11 @@ const MenuDash = () => {
               </a>
             </li>
             {/* Help & Support Nav */}
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                activePage === "help&support" ? "menu-open" : ""
+              }`}
+            >
               <a href="pages/widgets.html" className="nav-link">
                 <img
                   className="nav-icon"
@@ -167,4 +199,4 @@ const MenuDash = () => {
     </aside>
   );
 };
-export default MenuDash;
+export default Sidebar;
