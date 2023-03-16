@@ -3,12 +3,11 @@ import { useNavigate, redirect as Redirect } from "react-router-dom";
 
 const MenuDash = () => {
   const navigate = useNavigate();
-  const nama = localStorage.getItem("nama");
+  const nama_user = localStorage.getItem("nama_user");
   const handleLogout = () => {
-    localStorage.removeItem("nama");
+    localStorage.removeItem("nama_user");
     localStorage.removeItem("email_user");
-    // navigate("/login");
-    window.location.href = "/login"; // mengalihkan ke halaman login
+    navigate("/login");
   };
   return (
     <aside
@@ -157,7 +156,7 @@ const MenuDash = () => {
             </div>
             <div className="info">
               <a href="#" className="d-block" style={{ color: "black" }}>
-                {nama}
+                {nama_user}
               </a>
             </div>
           </div>

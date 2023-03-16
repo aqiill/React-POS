@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Login | BLEVEN";
@@ -17,28 +16,41 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:8080/login/auth",
-        { email_user: email, password },
-        { headers: { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" } }
+        {
+          email_user: email,
+          password: password
+        },
+        {
+          headers: {
+            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210"
+          }
+        }
       );
-      localStorage.setItem("nama", response.data.data.nama_user);
-      localStorage.setItem("email_user", response.data.data.email_user);
-      // navigate("/home");
-      window.location.href = "/home";
+      if (response.data.status === 200) {
+        localStorage.setItem("nama_user", response.data.data.nama_user);
+        localStorage.setItem("email_user", response.data.data.email_user);
+        navigate("/home");
+      }
+      else {
+        console.log("Email atau Password Salah");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error while processing form submission: ", error);
+      console.error("Error response data: ", error.response && error.response.data);
     }
   };
 
+
   useEffect(() => {
     if (localStorage.getItem("email_user")) {
-      // navigate("/home");
-      window.location.href = "/home";
+      navigate("/home");
     }
   }, [navigate]);
 
