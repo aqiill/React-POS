@@ -5,6 +5,7 @@ import Login from './pages/login/Login';
 import Product from './pages/product/Product';
 import Profile from './pages/profile/Profile';
 import ProfileEdit from './pages/profile/ProfileEdit';
+import Cashier from './pages/cashier/Cashier';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/product" element={<Product />}/>
           <Route path="/profile" element={<Profile />}/>
           <Route path="/profile1" element={<ProfileEdit />}/>
+          <Route path="/cashier" element={<Cashier/>}/>
       </Routes>
     </Router>
     </>
