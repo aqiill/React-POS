@@ -4,6 +4,7 @@ import { useNavigate, redirect as Redirect, Link } from "react-router-dom";
 const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
   const nama_user = localStorage.getItem("nama_user");
+  console.log(activePage);
 
   const handleLogout = () => {
     localStorage.removeItem("nama_user");
@@ -30,35 +31,36 @@ const Sidebar = ({ activePage }) => {
             <li className="nav-header">
               <p>MENU</p>
             </li>
-            {/* Dashboard nav AKTIV */}
-            <li
-              className={`nav-item ${
-                activePage === "dashboard" ? "menu-open" : ""
-              }`}
-            >
-              <a href="#" className="nav-link active">
-                <div className="icon-active">
-                  <img
+
+            {/* <img
                     className="nav-icon"
                     src="./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg"
                     alt="Dashboard Logo"
-                  />
-                </div>
-                <div
-                  className="active-wrap"
-                  style={{ position: "relative", paddingTop: 2 }}
-                >
-                  <p>Dashboard</p>
-                </div>
-              </a>
+                  /> */}
+            {/* Dashboard nav AKTIV */}
+            <li className="nav-item menu-open">
+              <Link
+                to="/home"
+                className={`nav-link ${
+                  activePage === "dashboard" ? "active" : ""
+                }`}
+              >
+                <img
+                  className="nav-icon"
+                  src="./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg"
+                  alt="Dashboard Logo"
+                />
+                <p>Dashboard</p>
+              </Link>
             </li>
             {/* Product Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "product" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/product" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/product"
+                className={`nav-link ${
+                  activePage === "product" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="../docs/assets/img/file-tray-stacked-outline.svg"
@@ -68,12 +70,13 @@ const Sidebar = ({ activePage }) => {
               </Link>
             </li>
             {/* Category Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "category" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/category" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/category"
+                className={`nav-link ${
+                  activePage === "category" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/category_FILL0_wght400_GRAD0_opsz48.svg"
@@ -83,12 +86,13 @@ const Sidebar = ({ activePage }) => {
               </Link>
             </li>
             {/* Report Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "report" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/report" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/report"
+                className={`nav-link ${
+                  activePage === "report" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/summarize_FILL0_wght400_GRAD0_opsz48.svg"
@@ -98,12 +102,13 @@ const Sidebar = ({ activePage }) => {
               </Link>
             </li>
             {/* Employee Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "employee" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/employee" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/employee"
+                className={`nav-link ${
+                  activePage === "employee" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg"
@@ -113,12 +118,13 @@ const Sidebar = ({ activePage }) => {
               </Link>
             </li>
             {/* Member Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "member" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/member" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/member"
+                className={`nav-link ${
+                  activePage === "member" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/group_FILL0_wght400_GRAD0_opsz48.svg"
@@ -132,12 +138,13 @@ const Sidebar = ({ activePage }) => {
               <p>OTHER</p>
             </li>
             {/* Settings Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "settings" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/settings" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/settings"
+                className={`nav-link ${
+                  activePage === "settings" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/settings_FILL0_wght400_GRAD0_opsz48.svg"
@@ -147,12 +154,13 @@ const Sidebar = ({ activePage }) => {
               </Link>
             </li>
             {/* Help & Support Nav */}
-            <li
-              className={`nav-item ${
-                activePage === "help&support" ? "menu-open" : ""
-              }`}
-            >
-              <Link to="/help&support" className="nav-link">
+            <li className="nav-item menu-open">
+              <Link
+                to="/help&support"
+                className={`nav-link ${
+                  activePage === "help&support" ? "active" : ""
+                }`}
+              >
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg"
