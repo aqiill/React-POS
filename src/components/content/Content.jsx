@@ -297,7 +297,7 @@ const Content = () => {
                                         <div className="card-columns">
                                             {expiredProducts.map((product) => (
                                                 <div className="card-susu float-right mb-2">
-                                                    <img src="dist/img/susu.png" alt="Image" />
+                                                    <img src={product.gambar} alt="Image" />
                                                     <div className="card-text mt-1 p-0 ml-1" style={{ fontWeight: 'bold' }}> {product.nama_produk}
                                                         <div className="progress" style={{ height: 6, width: 162, backgroundColor: 'red', marginTop: 35, borderRadius: 10 }}>
                                                             <div className="progress-bar" role="progressbar" aria-valuenow={0} aria-valuemin={0} aria-valuemax={100} />

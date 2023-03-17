@@ -57,6 +57,7 @@ function App() {
               <ProfileEdit />
             </ProtectedRouter>
           } />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
     </>
