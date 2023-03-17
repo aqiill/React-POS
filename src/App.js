@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Category from "./pages/category/category";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Employee from "./pages/employee/Employee";
 import Login from "./pages/login/Login";
+import Member from "./pages/member/Member";
 import Product from "./pages/product/Product";
 import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
+import Report from "./pages/report/Report";
 
 
 function App() {
@@ -19,14 +22,29 @@ function App() {
               <Dashboard />
             </ProtectedRouter>
           } />
+          <Route path="/product" element={
+            <ProtectedRouter>
+              <Product />
+            </ProtectedRouter>
+          } />
+          <Route path="/category" element={
+            <ProtectedRouter>
+              <Category />
+            </ProtectedRouter>
+          } />
+          <Route path="/report" element={
+            <ProtectedRouter>
+              <Report />
+            </ProtectedRouter>
+          } />
           <Route path="/employee" element={
             <ProtectedRouter>
               <Employee />
             </ProtectedRouter>
           } />
-          <Route path="/product" element={
+          <Route path="/member" element={
             <ProtectedRouter>
-              <Product />
+              <Member />
             </ProtectedRouter>
           } />
           <Route path="/profile" element={
