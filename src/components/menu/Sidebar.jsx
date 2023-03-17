@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate, redirect as Redirect } from "react-router-dom";
+import { useNavigate, redirect as Redirect, Link } from "react-router-dom";
 
 const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
   const nama_user = localStorage.getItem("nama_user");
+
   const handleLogout = () => {
     localStorage.removeItem("nama_user");
     localStorage.removeItem("email_user");
@@ -57,17 +58,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "product" ? "menu-open" : ""
               }`}
             >
-              <a
-                href="../AdminLTE-3.2.0/pages/product.html"
-                className="nav-link"
-              >
+              <Link to="/product" className="nav-link">
                 <img
                   className="nav-icon"
                   src="../docs/assets/img/file-tray-stacked-outline.svg"
                   alt="Product Logo"
                 />
                 <p>Product</p>
-              </a>
+              </Link>
             </li>
             {/* Category Nav */}
             <li
@@ -75,14 +73,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "category" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/category" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/category_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Category Logo"
                 />
                 <p>Category</p>
-              </a>
+              </Link>
             </li>
             {/* Report Nav */}
             <li
@@ -90,14 +88,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "report" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/report" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/summarize_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Report Logo"
                 />
                 <p>Report</p>
-              </a>
+              </Link>
             </li>
             {/* Employee Nav */}
             <li
@@ -105,14 +103,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "employee" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/employee" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Employee Logo"
                 />
                 <p>Employee</p>
-              </a>
+              </Link>
             </li>
             {/* Member Nav */}
             <li
@@ -120,14 +118,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "member" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/member" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/group_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Member Logo"
                 />
                 <p>Member</p>
-              </a>
+              </Link>
             </li>
             {/* OTHERS */}
             <li className="nav-header">
@@ -136,17 +134,17 @@ const Sidebar = ({ activePage }) => {
             {/* Settings Nav */}
             <li
               className={`nav-item ${
-                activePage === "setting" ? "menu-open" : ""
+                activePage === "settings" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/settings" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/settings_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Settings Logo"
                 />
                 <p>Settings</p>
-              </a>
+              </Link>
             </li>
             {/* Help & Support Nav */}
             <li
@@ -154,14 +152,14 @@ const Sidebar = ({ activePage }) => {
                 activePage === "help&support" ? "menu-open" : ""
               }`}
             >
-              <a href="pages/widgets.html" className="nav-link">
+              <Link to="/help&support" className="nav-link">
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Help & Support Logo"
                 />
                 <p>Help &amp; Support</p>
-              </a>
+              </Link>
             </li>
             {/* Sign Out Nav */}
             <li className="nav-item">
@@ -199,4 +197,5 @@ const Sidebar = ({ activePage }) => {
     </aside>
   );
 };
+
 export default Sidebar;
