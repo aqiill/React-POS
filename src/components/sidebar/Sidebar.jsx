@@ -1,16 +1,86 @@
 import React from "react";
-import { useNavigate, redirect as Redirect, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+const NavItem = ({ to, iconSrc, altText, text, isActive }) => (
+  <li className="nav-item menu-open">
+    <Link to={to} className={`nav-link ${isActive && "active"}`}>
+      <img className="nav-icon" src={iconSrc} alt={altText} />
+      <p>{text}</p>
+    </Link>
+  </li>
+);
 
 const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
   const nama_user = localStorage.getItem("nama_user");
-  console.log(activePage);
 
   const handleLogout = () => {
     localStorage.removeItem("nama_user");
     localStorage.removeItem("email_user");
     navigate("/login");
   };
+
+  const menus = [
+    {
+      label: "MENU",
+      items: [
+        {
+          to: "/home",
+          icon: "./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Dashboard",
+          name: "dashboard",
+        },
+        {
+          to: "/product",
+          icon: "../docs/assets/img/file-tray-stacked-outline.svg",
+          title: "Product",
+          name: "product",
+        },
+        {
+          to: "/category",
+          icon: "./docs/assets/img/category_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Category",
+          name: "category",
+        },
+        {
+          to: "/report",
+          icon: "./docs/assets/img/summarize_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Report",
+          name: "report",
+        },
+        {
+          to: "/employee",
+          icon: "./docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Employee",
+          name: "employee",
+        },
+        {
+          to: "/member",
+          icon: "./docs/assets/img/group_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Member",
+          name: "member",
+        },
+      ],
+    },
+    {
+      label: "OTHER",
+      items: [
+        {
+          to: "/settings",
+          icon: "./docs/assets/img/settings_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Settings",
+          name: "settings",
+        },
+        {
+          to: "/help-and-support",
+          icon: "./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Help & Support",
+          name: "help-and-support",
+        },
+      ],
+    },
+  ];
+
   return (
     <aside
       className="main-sidebar sidebar-base sidebar-no-expand"
@@ -27,157 +97,32 @@ const Sidebar = ({ activePage }) => {
             data-accordion="false"
             style={{ marginTop: 16 }}
           >
-            {/* MENU */}
-            <li className="nav-header">
-              <p>MENU</p>
-            </li>
-
-            {/* <img
-                    className="nav-icon"
-                    src="./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg"
-                    alt="Dashboard Logo"
-                  /> */}
-            {/* Dashboard nav AKTIV */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/home"
-                className={`nav-link ${
-                  activePage === "dashboard" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Dashboard Logo"
-                />
-                <p>Dashboard</p>
-              </Link>
-            </li>
-            {/* Product Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/product"
-                className={`nav-link ${
-                  activePage === "product" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="../docs/assets/img/file-tray-stacked-outline.svg"
-                  alt="Product Logo"
-                />
-                <p>Product</p>
-              </Link>
-            </li>
-            {/* Category Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/category"
-                className={`nav-link ${
-                  activePage === "category" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/category_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Category Logo"
-                />
-                <p>Category</p>
-              </Link>
-            </li>
-            {/* Report Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/report"
-                className={`nav-link ${
-                  activePage === "report" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/summarize_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Report Logo"
-                />
-                <p>Report</p>
-              </Link>
-            </li>
-            {/* Employee Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/employee"
-                className={`nav-link ${
-                  activePage === "employee" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Employee Logo"
-                />
-                <p>Employee</p>
-              </Link>
-            </li>
-            {/* Member Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/member"
-                className={`nav-link ${
-                  activePage === "member" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/group_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Member Logo"
-                />
-                <p>Member</p>
-              </Link>
-            </li>
-            {/* OTHERS */}
-            <li className="nav-header">
-              <p>OTHER</p>
-            </li>
-            {/* Settings Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/settings"
-                className={`nav-link ${
-                  activePage === "settings" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/settings_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Settings Logo"
-                />
-                <p>Settings</p>
-              </Link>
-            </li>
-            {/* Help & Support Nav */}
-            <li className="nav-item menu-open">
-              <Link
-                to="/help-and-support"
-                className={`nav-link ${
-                  activePage === "help-and-support" ? "active" : ""
-                }`}
-              >
-                <img
-                  className="nav-icon"
-                  src="./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Help & Support Logo"
-                />
-                <p>Help &amp; Support</p>
-              </Link>
-            </li>
+            {menus.map((menuGroup) => (
+              <React.Fragment key={menuGroup.label}>
+                <li className="nav-header">
+                  <p>{menuGroup.label}</p>
+                </li>
+                {menuGroup.items.map((menu) => (
+                  <NavItem
+                    key={menu.name}
+                    to={menu.to}
+                    iconSrc={menu.icon}
+                    altText={menu.title + " Logo"}
+                    text={menu.title}
+                    isActive={activePage === menu.name}
+                  />
+                ))}
+              </React.Fragment>
+            ))}
             {/* Sign Out Nav */}
             <li className="nav-item">
               <a href="#!" className="nav-link" onClick={handleLogout}>
                 <img
                   className="nav-icon"
                   src="./docs/assets/img/logout_FILL0_wght400_GRAD0_opsz48.svg"
-                  alt="Sign Out Logo"
+                  alt="Logo Keluar"
                 />
-                <p>Sign Out</p>
+                <p>Keluar</p>
               </a>
             </li>
           </ul>
@@ -189,7 +134,7 @@ const Sidebar = ({ activePage }) => {
               <img
                 src="dist/img/user2-160x160.jpg"
                 className="img-circle elevation-2"
-                alt="User Image"
+                alt="Gambar Pengguna"
               />
             </div>
             <div className="info">
