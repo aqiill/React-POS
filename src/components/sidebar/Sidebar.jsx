@@ -156,9 +156,9 @@ const Sidebar = ({ activePage }) => {
             {/* Help & Support Nav */}
             <li className="nav-item menu-open">
               <Link
-                to="/help&support"
+                to="/help-and-support"
                 className={`nav-link ${
-                  activePage === "help&support" ? "active" : ""
+                  activePage === "help-and-support" ? "active" : ""
                 }`}
               >
                 <img

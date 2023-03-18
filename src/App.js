@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Category from "./pages/category/Category";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Employee from "./pages/employee/Employee";
+import HelpAndSupport from "./pages/help-and-support/Help-and-Support";
 import Login from "./pages/login/Login";
 import Member from "./pages/member/Member";
 import Product from "./pages/product/Product";
 import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
 import Report from "./pages/report/Report";
+import Settings from "./pages/settings/Settings";
 
 
 function App() {
@@ -45,6 +47,16 @@ function App() {
           <Route path="/member" element={
             <ProtectedRouter>
               <Member />
+            </ProtectedRouter>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRouter>
+              <Settings />
+            </ProtectedRouter>
+          } />
+          <Route path="/help-and-support" element={
+            <ProtectedRouter>
+              <HelpAndSupport />
             </ProtectedRouter>
           } />
           <Route path="/profile" element={
