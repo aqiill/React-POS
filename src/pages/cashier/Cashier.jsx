@@ -1,4 +1,5 @@
-import NavigationBarCashier from "../../components/NavigationBar/NavigationBarCashier";
+import Header from "../../components/header/Header";
+import Sidebar from "../../components/sidebar/Sidebar";
 import Table from "../../components/table/Table";
 import { useEffect } from "react";
 
@@ -30,8 +31,8 @@ const Cashier = () => {
   return (
     <>
       <div className="wrapper">
-        <NavigationBarCashier />;
-        <Table />
+        <Header />
+        <Sidebar activePage="Cashier" />
       </div>
     </>
   );

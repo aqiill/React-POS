@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import Header from "../../components/header/Header";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 function Employee() {
   useEffect(() => {
@@ -31,7 +32,10 @@ function Employee() {
 
   return (
     <>
-      <NavigationBar />
+      <div className="wrapper">
+        <Header />
+        <Sidebar activePage="employee" />
+      </div>
     </>
   );
 }
