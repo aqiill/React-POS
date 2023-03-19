@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Cashier from "./pages/cashier/Cashier";
 import Category from "./pages/category/Category";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -18,87 +23,19 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRouter>
-                <Dashboard />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/product"
-            element={
-              <ProtectedRouter>
-                <Product />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/category"
-            element={
-              <ProtectedRouter>
-                <Category />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/report"
-            element={
-              <ProtectedRouter>
-                <Report />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/employee"
-            element={
-              <ProtectedRouter>
-                <Employee />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/member"
-            element={
-              <ProtectedRouter>
-                <Member />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRouter>
-                <Settings />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/help-and-support"
-            element={
-              <ProtectedRouter>
-                <HelpAndSupport />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRouter>
-                <Profile />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/profile1"
-            element={
-              <ProtectedRouter>
-                <ProfileEdit />
-              </ProtectedRouter>
-            }
-          />
           <Route path="/cashier" element={<Cashier />} />
+          <ProtectedRouter>
+            <Route path="/home" element={<Dashboard />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/member" element={<Member />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/help-and-support" element={<HelpAndSupport />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile-edit" element={<ProfileEdit />} />
+          </ProtectedRouter>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
@@ -107,6 +44,7 @@ function App() {
 }
 
 export default App;
+
 export function ProtectedRouter({ children }) {
   if (localStorage.getItem("email_user")) {
     return children;
