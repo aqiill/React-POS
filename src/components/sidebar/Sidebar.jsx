@@ -122,7 +122,7 @@ const Sidebar = ({ activePage }) => {
                   src="./docs/assets/img/logout_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Logo Keluar"
                 />
-                <p>Keluar</p>
+                <p>Sign Out</p>
               </a>
             </li>
           </ul>
