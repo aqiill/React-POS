@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Table from "../../components/table/TableProd";
 
 function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -258,6 +259,7 @@ function Product() {
                   >
                     <div className="card-header border-0">
                       <div className="d-flex justify-content-between">
+                      
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
                             className="btn bg-transparent table-product-button"
@@ -410,15 +412,16 @@ function Product() {
                               </div>
                             </div>
                           </div>
-                          <button
+                          {/* <button
                             className="btn bg-transparent table-product-button"
                             onclick="window.print()"
                           >
                             <iconify-icon icon="oi:share-boxed" />
                             Export Product
-                          </button>
+                          </button> */}
                         </div>
-                        <div>
+                        
+                        {/* <div>
                           <div className="input-group">
                             <div className="form-outline">
                               <input
@@ -431,10 +434,11 @@ function Product() {
                               <i className="fas fa-search" />
                             </button>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
-                    <div className="card-body" style={{ padding: "0px 24px" }}>
+                    <Table />
+                    {/* <div className="card-body" style={{ padding: "0px 24px" }}>
                       <div
                         className="scrollable-table"
                         style={{ maxHeight: 300, overflowY: "auto" }}
@@ -492,7 +496,7 @@ function Product() {
                           </tbody>
                         </table>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

@@ -1,19 +1,10 @@
 import React from "react";
-// import $ from "jquery";
-// import "../../dist/js/table.js";
-// import styles from "../../dist/css/custom.css";
 
-function Table() {
+function orderList() {
   return (
-    <>
-      <div className="col-lg-12">
-        <div
-          className="card order-list"
-          style={{
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            borderRadius: 10,
-          }}
-        >
+    <div>
+      <div>
+        <div className="card order-list" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10 }}>
           <div className="card-header border-0">
             <div className="d-flex justify-content-between">
               <h6>Order List</h6>
@@ -47,11 +38,7 @@ function Table() {
                 <tr className="fs-10">
                   <td scope="row">1</td>
                   <td>
-                    <img
-                      className="table-product-img"
-                      src="../dist/img/susu.png"
-                      alt
-                    />
+                    <img className="table-product-img" src="../dist/img/susu.png" alt />
                   </td>
                   <td>Susu Ultra Milk Coklat 200ml</td>
                   <td>22/02/2023</td>
@@ -60,29 +47,17 @@ function Table() {
                   <td>IDR 25,500.00</td>
                   <td>
                     <button className="btn table-actions-button bg-transparent">
-                      <iconify-icon
-                        icon="mdi:minus-circle-outline"
-                        style={{ color: "black" }}
-                        width={20}
-                      />
+                      <iconify-icon icon="mdi:minus-circle-outline" style={{ color: "black" }} width={20} />
                     </button>
                     <button className="btn table-actions-button bg-transparent">
-                      <iconify-icon
-                        icon="mdi:plus-circle-outline"
-                        style={{ color: "black" }}
-                        width={20}
-                      />
+                      <iconify-icon icon="mdi:plus-circle-outline" style={{ color: "black" }} width={20} />
                     </button>
                   </td>
                 </tr>
                 <tr className="fs-10">
                   <td scope="row">1</td>
                   <td>
-                    <img
-                      className="table-product-img"
-                      src="../dist/img/susu.png"
-                      alt
-                    />
+                    <img className="table-product-img" src="../dist/img/susu.png" alt />
                   </td>
                   <td>Susu Ultra Milk Coklat 200ml</td>
                   <td>22/02/2023</td>
@@ -91,18 +66,10 @@ function Table() {
                   <td>IDR 25,500.00</td>
                   <td>
                     <button className="btn table-actions-button bg-transparent">
-                      <iconify-icon
-                        icon="mdi:minus-circle-outline"
-                        style={{ color: "black" }}
-                        width={20}
-                      />
+                      <iconify-icon icon="mdi:minus-circle-outline" style={{ color: "black" }} width={20} />
                     </button>
                     <button className="btn table-actions-button bg-transparent">
-                      <iconify-icon
-                        icon="mdi:plus-circle-outline"
-                        style={{ color: "black" }}
-                        width={20}
-                      />
+                      <iconify-icon icon="mdi:plus-circle-outline" style={{ color: "black" }} width={20} />
                     </button>
                   </td>
                 </tr>
@@ -110,44 +77,25 @@ function Table() {
             </table>
           </div>
         </div>
-        <div
-          className="card"
-          style={{
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            borderRadius: 10,
-          }}
-        >
+        <div className="card" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10 }}>
           <div className="card-header border-0 d-flex justify-content-between">
             <h6>Payment Method</h6>
             <h6>Payment Details</h6>
           </div>
-          <div
-            className="card-body d-flex justify-content-between"
-            style={{ padding: "0px 24px" }}
-          >
+          <div className="card-body d-flex justify-content-between" style={{ padding: "0px 24px" }}>
             <div>
               <form action>
                 <div className="form-group">
                   <label htmlFor="inputMemberId" />
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="memberId"
-                    aria-describedby="emailHelp"
-                    placeholder="Input Member ID"
-                  />
+                  <input type="email" className="form-control" id="memberId" aria-describedby="emailHelp" placeholder="Input Member ID" />
                 </div>
                 <div className="form-group">
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect1"
-                    placeholder="Select Payment Method"
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                  <select className="form-control" id="exampleFormControlSelect1" placeholder="Select Payment Method">
+                    <option>Method 1</option>
+                    <option>Method 2</option>
+                    <option>Method 3</option>
+                    <option>Method 4</option>
+                    <option>Method 5</option>
                   </select>
                 </div>
               </form>
@@ -168,46 +116,25 @@ function Table() {
             </div>
           </div>
           <div className="m-12">
-            <button
-              type="button"
-              className="btn btn-primary float-right"
-              data-target="#invoiceModal"
-              data-toggle="modal"
-            >
+            <button type="button" className="btn btn-primary float-right" data-target="#invoiceModal" data-toggle="modal">
               Procceed
             </button>
           </div>
           {/* Modal */}
-          <div
-            className="modal fade invoiceModal"
-            id="invoiceModal"
-            tabIndex={-1}
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
+          <div className="modal fade invoiceModal" id="invoiceModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
                     INVOICE
                   </h5>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div className="modal-body">
                   <div className="row">
-                    <img
-                      className="invoiceLogo"
-                      src="../docs/assets/img/POS_logo.png"
-                      alt
-                    />
+                    <img className="invoiceLogo" src="../docs/assets/img/POS_logo.png" alt />
                   </div>
                   <div className="row">
                     <div className="col">
@@ -254,10 +181,7 @@ function Table() {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-primary rounded blueAccent horizontalCenter generateInvoice"
-                  >
+                  <button type="button" className="btn btn-primary rounded blueAccent horizontalCenter generateInvoice">
                     Generate Invoice
                   </button>
                 </div>
@@ -266,8 +190,8 @@ function Table() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Table;
+export default orderList;
