@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Table from "../../components/table/TableProd";
+import Table from "./Tabel";
 
 function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -71,7 +71,7 @@ function Product() {
       "sidebar-mini-xs"
     );
     document.body.style.background = "#e7eef8";
-
+    document.body.style.overflowX = "hidden";
     return () => {
       document.body.classList.remove(
         "hold-transition",
@@ -88,7 +88,7 @@ function Product() {
 
   return (
     <>
-      <div className="wrapper">
+    <div classname="wrapper">
         <Header />
         <Sidebar activePage="product" />
         <div className="content-wrapper row">
