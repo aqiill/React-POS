@@ -7,72 +7,8 @@ import "datatables.net-buttons/js/buttons.flash.js";
 import "datatables.net-buttons/js/buttons.html5.js";
 import "datatables.net-buttons/js/buttons.print.js";
 import $ from "jquery";
-import { Component } from "react";
+import React, { Component } from "react";
 
-const names = [
-  {
-    photo: "../dist/img/susu.png",
-    productName: "Susu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-  {
-    photo: "../dist/img/susu.png",
-    productName: "aSusu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-  {
-    photo: "../dist/img/susu.png",
-    productName: "bSusu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-  {
-    photo: "../dist/img/susu.png",
-    productName: "bSusu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-  {
-    photo: "../dist/img/susu.png",
-    productName: "bSusu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-  {
-    photo: "../dist/img/susu.png",
-    productName: "bSusu Ultra Milk Coklat 200ml",
-    brand: "Ultra Jaya",
-    category: "Milk",
-    expireDate: "22/02/2023",
-    stock: 500,
-    capitalPrice: "IDR 4,500.00",
-    price: "IDR 25,500.00",
-  },
-];
-
-// const DataTable = ({ data }) => {
 //   const tableRef = useRef(null);
 
 //   useEffect(() => {
@@ -220,20 +156,19 @@ class Table extends Component {
 
   showTable = () => {
     try {
-      return names.map((item, index) => {
+      return this.props.products.map((item, index) => {
         return (
           <tr>
             <td className="text-muted">{index + 1}</td>
             <td className="text-muted">
-              <img class="table-product-img" src={item.photo} alt="product" />
+              <img class="table-product-img" src={item.gambar} alt="product" />
             </td>
-            <td className="text-muted">{item.productName}</td>
-            <td className="text-muted">{item.brand}</td>
-            <td className="text-muted">{item.category}</td>
-            <td className="text-muted">{item.expireDate}</td>
-            <td className="text-muted">{item.stock}</td>
-            <td className="text-muted">{item.capitalPrice}</td>
-            <td className="text-muted">{item.price}</td>
+            <td className="text-muted">{item.nama_produk}</td>
+            <td className="text-muted">{item.nama_kategori}</td>
+            <td className="text-muted">{item.expired_date}</td>
+            <td className="text-muted">{item.stok}</td>
+            <td className="text-muted">{item.harga_modal}</td>
+            <td className="text-muted">{item.harga_jual}</td>
             <td>
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow"
@@ -271,7 +206,6 @@ class Table extends Component {
                 <th className="text-muted">No</th>
                 <th className="text-muted">Photo</th>
                 <th className="text-muted">Product Name</th>
-                <th className="text-muted">Brand</th>
                 <th className="text-muted">Category</th>
                 <th className="text-muted">Expire Date</th>
                 <th className="text-muted">Stock</th>

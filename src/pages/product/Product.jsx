@@ -8,6 +8,7 @@ function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
   const [stockProducts, setStockProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,13 +30,14 @@ function Product() {
         });
         setStockProducts(stockRes.data.data);
 
-        const productRes = await axios.get("http://localhost:8080/produk/", {
+        const productRes = await axios.get("http://localhost:8080/produk/kategori", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
         });
 
         setProducts(productRes.data.data);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -85,6 +87,10 @@ function Product() {
       document.body.style.background = null;
     };
   }, []);
+
+  if (loading) {
+    return <div className="loading-container"><p>Loading...</p></div>;
+  }
 
   return (
     <>
@@ -436,66 +442,7 @@ function Product() {
                         </div> */}
                       </div>
                     </div>
-                    <Table />
-                    {/* <div className="card-body" style={{ padding: "0px 24px" }}>
-                      <div
-                        className="scrollable-table"
-                        style={{ maxHeight: 300, overflowY: "auto" }}
-                      >
-                        <table className="table">
-                          <thead>
-                            <tr className="text-muted fs-10">
-                              <td scope="col">No</td>
-                              <td scope="col">Image</td>
-                              <td scope="col">Product Name</td>
-                              <td scope="col">Expire Date</td>
-                              <td scope="col">Stock</td>
-                              <td scope="col">Capital Price</td>
-                              <td scope="col">Price</td>
-                              <td scope="col">Actions</td>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {products.map((product, index) => (
-                              <tr className="fs-10">
-                                <td scope="row">{index + 1}</td>
-                                <td>
-                                  <img
-                                    className="table-product-img"
-                                    src={product.gambar}
-                                    alt
-                                  />
-                                </td>
-                                <td>{product.nama_produk}</td>
-                                <td>{product.expired_date}</td>
-                                <td>{product.stok}</td>
-                                <td>{formatPrice(product.harga_modal)}</td>
-                                <td>{formatPrice(product.harga_jual)}</td>
-                                <td>
-                                  <button
-                                    className="btn table-actions-button bg-transparent border drop-shadow"
-                                    data-toggle="modal"
-                                    data-target=".bd-example-modal-sm2"
-                                    style={{ borderRadius: "50%" }}
-                                  >
-                                    <iconify-icon icon="oi:pencil" />
-                                  </button>
-                                  <button
-                                    className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                                    style={{ borderRadius: "50%" }}
-                                  >
-                                    <iconify-icon
-                                      icon="oi:trash"
-                                      style={{ marginLeft: 2 }}
-                                    />
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div> */}
+                    <Table products={products} />
                   </div>
                 </div>
               </div>
