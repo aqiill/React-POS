@@ -45,10 +45,7 @@ const Profile = () => {
           <div className="card" style={{ height: 755, width: 750 }}>
             <div className="card-body">
               <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
-                <img
-                  src="https://via.placeholder.com/150"
-                  alt="Profile Picture"
-                />
+                <img src="https://via.placeholder.com/150" alt="Profile" />
                 <input type="file" className="file-upload" />
               </div>
               <div className="form-group" style={{ marginTop: 56 }}>

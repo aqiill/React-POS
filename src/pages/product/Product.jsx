@@ -88,7 +88,7 @@ function Product() {
 
   return (
     <>
-    <div classname="wrapper">
+      <div classname="wrapper">
         <Header />
         <Sidebar activePage="product" />
         <div className="content-wrapper row">
@@ -116,7 +116,7 @@ function Product() {
                         <div className="card-columns">
                           {expiredProducts.map((product) => (
                             <div className="card-susu float-right mb-2">
-                              <img src={product.gambar} alt="Image" />
+                              <img src={product.gambar} alt="Product" />
                               <div
                                 className="card-text mt-1 p-0 ml-1"
                                 style={{ fontWeight: "bold" }}
@@ -196,7 +196,7 @@ function Product() {
                             <img
                               className="card-img-top"
                               src={product.gambar}
-                              alt="Product Image"
+                              alt="Product"
                             />
                             <div
                               className="card-body p-0 ml-1"
@@ -259,7 +259,6 @@ function Product() {
                   >
                     <div className="card-header border-0">
                       <div className="d-flex justify-content-between">
-                      
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
                             className="btn bg-transparent table-product-button"
@@ -420,7 +419,7 @@ function Product() {
                             Export Product
                           </button> */}
                         </div>
-                        
+
                         {/* <div>
                           <div className="input-group">
                             <div className="form-outline">
