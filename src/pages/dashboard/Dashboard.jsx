@@ -2,34 +2,12 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Content from "../../components/content/Content";
 import { useEffect } from "react";
+import CommonComponent from "../../components/common/CommonComponent";
 
 const Dashboard = () => {
-  useEffect(() => {
-    document.title = "POS | Dashboard";
-    document.body.classList.add(
-      "hold-transition",
-      "light-mode",
-      "sidebar-mini",
-      "layout-fixed",
-      "layout-navbar-fixed",
-      "layout-footer-fixed",
-      "sidebar-mini-xs"
-    );
-
-    return () => {
-      document.body.classList.remove(
-        "hold-transition",
-        "light-mode",
-        "sidebar-mini",
-        "layout-fixed",
-        "layout-navbar-fixed",
-        "layout-footer-fixed",
-        "sidebar-mini-xs"
-      );
-    };
-  }, []);
   return (
     <>
+      <CommonComponent pageTitle="Dashboard" backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
         <Sidebar activePage="dashboard" />

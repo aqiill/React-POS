@@ -138,9 +138,13 @@ const Sidebar = ({ activePage }) => {
               />
             </div>
             <div className="info">
-              <a href="#" className="d-block" style={{ color: "black" }}>
+              <Link
+                to={"/profile"}
+                className="d-block"
+                style={{ color: "black" }}
+              >
                 {nama_user}
-              </a>
+              </Link>
             </div>
           </div>
         </nav>

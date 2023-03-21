@@ -1,37 +1,12 @@
 import { useEffect } from "react";
+import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 function Settings() {
-  useEffect(() => {
-    document.title = "Report | POS";
-    document.body.classList.add(
-      "hold-transition",
-      "light-mode",
-      "sidebar-mini",
-      "layout-fixed",
-      "layout-navbar-fixed",
-      "layout-footer-fixed",
-      "sidebar-mini-xs"
-    );
-    document.body.style.background = "#e7eef8";
-
-    return () => {
-      document.body.classList.remove(
-        "hold-transition",
-        "light-mode",
-        "sidebar-mini",
-        "layout-fixed",
-        "layout-navbar-fixed",
-        "layout-footer-fixed",
-        "sidebar-mini-xs"
-      );
-      document.body.style.background = null;
-    };
-  }, []);
-
   return (
     <>
+      <CommonComponent pageTitle={"Settings"} backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
         <Sidebar activePage="settings" />
