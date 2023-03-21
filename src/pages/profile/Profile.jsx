@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import CommonComponent from "../../components/common/CommonComponent";
+import axios from "axios";
 
 const Profile = () => {
+  const [profile, setProfile] = useState([]);
+  const apiConfig = {
+    baseURL: "http://localhost:8080",
+    headers: {
+      api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/users/1", apiConfig);
+        setProfile(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+        console.error(error);
+        // Tambahkan pesan error yang jelas untuk memberitahu pengguna tentang kesalahan yang terjadi
+        setProfile([]);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
@@ -39,7 +63,7 @@ const Profile = () => {
                       type="text"
                       className="form-control-plaintext"
                       id="name"
-                      defaultValue="Lamda Ganteng"
+                      defaultValue={profile.nama_user}
                       style={{
                         borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                         fontSize: "larger",
@@ -77,7 +101,7 @@ const Profile = () => {
                     type="text"
                     className="form-control-plaintext"
                     id="role"
-                    defaultValue="Owner"
+                    defaultValue={profile.role}
                     style={{
                       borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                       fontSize: "larger",
@@ -95,7 +119,7 @@ const Profile = () => {
                     type="email"
                     className="form-control-plaintext"
                     id="mail"
-                    defaultValue="lamda@gmail.com"
+                    defaultValue={profile.email_user}
                     style={{
                       borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                       fontSize: "larger",
@@ -114,7 +138,7 @@ const Profile = () => {
                       type="password"
                       className="form-control-plaintext"
                       id="pw"
-                      defaultValue="Lamda Ganteng"
+                      defaultValue={profile.password}
                       style={{
                         borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                         fontSize: "larger",
