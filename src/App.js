@@ -91,7 +91,7 @@ function App() {
             }
           />
           <Route
-            path="/profile1"
+            path="/profileEdit"
             element={
               <ProtectedRouter>
                 <ProfileEdit />

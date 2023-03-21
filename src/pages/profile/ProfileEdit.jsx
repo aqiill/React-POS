@@ -27,7 +27,9 @@ const ProfileEdit = () => {
                 style={{ backgroundColor: "rgba(1, 1, 1, 0)", border: "none" }}
                 onclick="history.back()"
               >
-                <i className="fas fa-arrow-left" style={{ color: "black" }} />
+                <a href="/profile">
+                  <i className="fas fa-arrow-left" style={{ color: "black" }} />
+                  </a>
               </button>
               <div className="card-body">
                 <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>

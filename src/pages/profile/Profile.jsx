@@ -134,7 +134,7 @@ const Profile = () => {
                       type="button"
                       id="editButton2"
                     >
-                      <a href="/pages/profileEditpw.html">
+                      <a href="/profileEdit">
                         <i
                           className="bi bi-pencil-fill"
                           style={{ color: "black" }}
