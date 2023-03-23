@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Login | BLEVEN";
@@ -14,9 +17,11 @@ function Login() {
     };
   }, []);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("email_user")) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,34 +30,30 @@ function Login() {
         "http://localhost:8080/login/auth",
         {
           email_user: email,
-          password: password
+          password: password,
         },
         {
           headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210"
-          }
+            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+          },
         }
       );
       if (response.data.status === 200) {
         localStorage.setItem("nama_user", response.data.data.nama_user);
         localStorage.setItem("email_user", response.data.data.email_user);
         navigate("/home");
-      }
-      else {
-        console.log("Email atau Password Salah");
+      } else {
+        throw new Error("Invalid email or password");
       }
     } catch (error) {
       console.error("Error while processing form submission: ", error);
-      console.error("Error response data: ", error.response && error.response.data);
+      console.error(
+        "Error response data: ",
+        error.response && error.response.data
+      );
+      alert("Failed to login. Please check your email and password.");
     }
   };
-
-
-  useEffect(() => {
-    if (localStorage.getItem("email_user")) {
-      navigate("/home");
-    }
-  }, [navigate]);
 
   return (
     <>
@@ -82,7 +83,6 @@ function Login() {
                   <input
                     type="email"
                     className="form-control-plaintext mt-0"
-                    style={{ borderBottom: "2px solid #000000" }}
                     id="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
@@ -113,7 +113,6 @@ function Login() {
                   <input
                     type="password"
                     className="form-control-plaintext mt-0"
-                    style={{ borderBottom: "2px solid #000000" }}
                     id="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
@@ -124,7 +123,6 @@ function Login() {
                     <button
                       className="btn"
                       type="button"
-                      style={{ borderBottom: "2px solid #000000" }}
                       id="togglePasswordVisibility"
                     >
                       <i className="fas fa-eye" />
