@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Content from "../../components/content/Content";
 import { useEffect } from "react";
 import CommonComponent from "../../components/common/CommonComponent";
+import ModalInvoice from "../../components/content/ModalInvoice";
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
         <Header />
         <Sidebar activePage="dashboard" />
         <Content />
+        <ModalInvoice />
       </div>
     </>
   );
