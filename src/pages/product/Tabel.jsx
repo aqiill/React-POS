@@ -88,16 +88,16 @@ class Table extends Component {
       return this.props.products.map((item, index) => {
         return (
           <tr>
-            <td className="text-muted">{index + 1}</td>
-            <td className="text-muted">
+            <td className="">{index + 1}</td>
+            <td className="">
               <img class="table-product-img" src={item.gambar} alt="product" />
             </td>
-            <td className="text-muted">{item.nama_produk}</td>
-            <td className="text-muted">{item.nama_kategori}</td>
-            <td className="text-muted">{item.expired_date}</td>
-            <td className="text-muted">{item.stok}</td>
-            <td className="text-muted">{item.harga_modal}</td>
-            <td className="text-muted">{item.harga_jual}</td>
+            <td className="">{item.nama_produk}</td>
+            <td className="">{item.nama_kategori}</td>
+            <td className="">{item.expired_date}</td>
+            <td className="">{item.stok}</td>
+            <td className="">{item.harga_modal}</td>
+            <td className="">{item.harga_jual}</td>
             <td>
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow"
@@ -132,15 +132,15 @@ class Table extends Component {
           >
             <thead>
               <tr>
-                <th className="text-muted">No</th>
-                <th className="text-muted">Photo</th>
-                <th className="text-muted">Product Name</th>
-                <th className="text-muted">Category</th>
-                <th className="text-muted">Expire Date</th>
-                <th className="text-muted">Stock</th>
-                <th className="text-muted">Capital Price</th>
-                <th className="text-muted">Price</th>
-                <th className="text-muted">Action</th>
+                <th className="">No</th>
+                <th className="">Photo</th>
+                <th className="">Product Name</th>
+                <th className="">Category</th>
+                <th className="">Expire Date</th>
+                <th className="">Stock</th>
+                <th className="">Capital Price</th>
+                <th className="">Price</th>
+                <th className="">Action</th>
               </tr>
             </thead>
             <tbody>{this.showTable()}</tbody>
