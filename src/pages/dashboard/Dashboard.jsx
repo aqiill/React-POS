@@ -11,6 +11,7 @@ const Dashboard = () => {
       <div className="wrapper">
         <Header />
         <Sidebar activePage="dashboard" />
+        <Content />
       </div>
     </>
   );
