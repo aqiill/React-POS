@@ -1,6 +1,6 @@
 import axios from "axios";
 import CommonComponent from "../../components/common/CommonComponent";
-import EmployeeTable from "./EmployeeTable";
+// import EmployeeTable from "./EmployeeTable";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
@@ -122,7 +122,7 @@ function Employee() {
           <div className="col-6">
             <h2>Data Employee</h2>
             <div id="employee-table">
-              <EmployeeTable employee={employee} />
+              {/* <EmployeeTable employee={employee} /> */}
             </div>
           </div>
           <div className="col-6">

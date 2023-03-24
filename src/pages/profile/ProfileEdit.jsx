@@ -1,9 +1,34 @@
-import React, { Component } from "react";
+import axios from "axios";
+import React, { Component, useEffect, useState } from "react";
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 const ProfileEdit = () => {
+  const [profile, setProfile] = useState([]);
+  const apiConfig = {
+    baseURL: "http://localhost:8080",
+    headers: {
+      api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/users/1", apiConfig);
+        setProfile(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+        console.error(error);
+        // Tambahkan pesan error yang jelas untuk memberitahu pengguna tentang kesalahan yang terjadi
+        setProfile([]);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <CommonComponent pageTitle={"Edit Profile"} backgroundStyle="#e7eef8" />
@@ -48,7 +73,7 @@ const ProfileEdit = () => {
                     type="email"
                     className="form-control-plaintext"
                     id="name"
-                    defaultValue="lamda@gmail.com"
+                    defaultValue={profile.email_user}
                     style={{
                       borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                       fontSize: "larger",
