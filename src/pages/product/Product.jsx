@@ -8,7 +8,42 @@ function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
   const [stockProducts, setStockProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [kode_produk, setKodeProduk] = useState('');
+  const [nama_produk, setNamaProduk] = useState('');
+  const [kategori_id, setKategoriId] = useState('');
+  const [harga_modal, setHargaModal] = useState('');
+  const [harga_jual, setHargaJual] = useState('');
+  const [stok, setStok] = useState('');
+  const [gambar, setGambar] = useState('');
+  const [expired_date, setExpiredDate] = useState('');
+  const date_created = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  const handleCategoryChange = (event) => {
+    setKategoriId(event.target.value);
+  }
+
+  const handleSubmit = async (event) => {
+
+    event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8080/produk/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api_key': 'e3fd6b146fcb65f7419e3531a0a84f4d700b8210'
+        },
+        body: JSON.stringify({ kode_produk, nama_produk, kategori_id, harga_modal, harga_jual, stok, gambar, expired_date, date_created })
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +64,13 @@ function Product() {
           },
         });
         setStockProducts(stockRes.data.data);
+
+        const categoryRes = await axios.get("http://localhost:8080/kategori", {
+          headers: {
+            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+          },
+        });
+        setCategory(categoryRes.data.data);
 
         const productRes = await axios.get("http://localhost:8080/produk/kategori", {
           headers: {
@@ -88,12 +130,13 @@ function Product() {
     };
   }, []);
 
+
+
   if (loading) {
     return <div className="loading-container"><p>Loading...</p></div>;
-  }
+  } else {
+    return (
 
-  return (
-    <>
       <div classname="wrapper">
         <Header />
         <Sidebar activePage="product" />
@@ -169,6 +212,7 @@ function Product() {
                     </div>
                   </div>
                 </div>
+
                 <div className="col-lg-6">
                   <div
                     className="card"
@@ -254,15 +298,13 @@ function Product() {
                     </div>
                   </div>
                 </div>
+
                 <div className="col-lg-12">
-                  <div
-                    className="card"
-                    style={{
-                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                      borderRadius: 10,
-                      height: "auto",
-                    }}
-                  >
+                  <div className="card" style={{
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    borderRadius: 10,
+                    height: "auto",
+                  }}>
                     <div className="card-header border-0">
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
@@ -274,185 +316,198 @@ function Product() {
                             <iconify-icon icon="oi:plus" />
                             Add Product
                           </button>
-                          <div
-                            className="modal fade bd-example-modal-sm"
-                            tabIndex={-1}
-                            role="dialog"
-                            aria-labelledby="mySmallModalLabel"
-                            aria-hidden="true"
-                            id="myModal"
-                          >
-                            <div
-                              className="modal-dialog modal-sm"
-                              role="document"
-                            >
-                              <div className="modal-content">
-                                <div className="modal-header">
-                                  <h5 className="modal-title">Add Product</h5>
-                                </div>
-                                <div className="modal-body">
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Image
-                                    </label>
-                                    <input
-                                      type="file"
-                                      className="form-control"
-                                      id="productImage"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Image's src"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="productName">
-                                      Product Name
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="productName"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Input Product Name"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Brand
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="productBrand"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Input Brand"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="productExpireDate">
-                                      Expire Date
-                                    </label>
-                                    <div id="sandbox-container">
-                                      <div className="input-group date">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          id="productExpireDate"
-                                        />
-                                        <span className="input-group-addon">
-                                          <i className="glyphicon glyphicon-th" />
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Stocks
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="productStocksAmount"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Eg. 200"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Capital Price
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="productCapitalPrice"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Eg. IDR 25,000.00"
-                                    />
-                                  </div>
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Price
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="productPrice"
-                                      aria-describedby="emailHelp"
-                                      placeholder="Eg. IDR 35,000.00"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="modal-footer">
-                                  <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    style={{
-                                      backgroundColor: "white",
-                                      color: "black",
-                                      fontWeight: "normal",
-                                      fontSize: "smaller",
-                                      width: 100,
-                                      height: 35,
-                                      border: "none",
-                                    }}
-                                    data-dismiss="modal"
-                                  >
-                                    Close
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="btn btn-primary"
-                                    style={{
-                                      backgroundColor: "#5B7CFD",
-                                      color: "white",
-                                      fontWeight: "normal",
-                                      fontSize: "smaller",
-                                      width: 125,
-                                      height: 35,
-                                    }}
-                                    id="saveBtn"
-                                  >
-                                    Save changes
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          {/* <button
-                            className="btn bg-transparent table-product-button"
-                            onclick="window.print()"
-                          >
-                            <iconify-icon icon="oi:share-boxed" />
-                            Export Product
-                          </button> */}
                         </div>
-
-                        {/* <div>
-                          <div className="input-group">
-                            <div className="form-outline">
-                              <input
-                                type="search"
-                                id="form1"
-                                className="form-control"
-                              />
-                            </div>
-                            <button type="button" className="btn btn-primary">
-                              <i className="fas fa-search" />
-                            </button>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
-                    <Table products={products} />
+
+                    <div
+                      className="modal fade bd-example-modal-sm"
+                      tabIndex={-1}
+                      role="dialog"
+                      aria-labelledby="mySmallModalLabel"
+                      aria-hidden="true"
+                      id="myModal"
+                    >
+                      <div
+                        className="modal-dialog modal-sm"
+                        role="document"
+                      >
+                        <form onSubmit={handleSubmit}>
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title">Add Product</h5>
+                            </div>
+                            <div className="modal-body">
+                              <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">
+                                  Image
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="productImage"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Image's src"
+                                  onChange={e => setGambar(e.target.files[0])}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="productCode">
+                                  Product Code
+                                </label>
+                                <input
+                                  type="number"
+                                  name="kode_produk"
+                                  className="form-control"
+                                  id="productCode"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Input Product Code"
+                                  value={kode_produk} onChange={e => setKodeProduk(e.target.value)}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="productName">
+                                  Product Name
+                                </label>
+                                <input
+                                  type="text"
+                                  name="nama_produk"
+                                  className="form-control"
+                                  id="productName"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Input Product Name"
+                                  value={nama_produk} onChange={e => setNamaProduk(e.target.value)}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="category">
+                                  Category
+                                </label>
+                                <select name="id_kategori" className="form-control" id="category" value={kategori_id} onChange={handleCategoryChange}>
+                                  <option value="">Select Category</option>
+                                  {category.map((category) => (
+                                    <option value={category.kategori_id}>{category.nama_kategori}</option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="productExpireDate">
+                                  Expire Date
+                                </label>
+                                <div id="sandbox-container">
+                                  <div className="input-group date">
+                                    <input
+                                      type="date"
+                                      name="expired_date"
+                                      className="form-control"
+                                      id="productExpireDate"
+                                      value={expired_date} onChange={e => setExpiredDate(e.target.value)}
+                                    />
+                                    <span className="input-group-addon">
+                                      <i className="glyphicon glyphicon-th" />
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">
+                                  Stocks
+                                </label>
+                                <input
+                                  type="number"
+                                  name="stok"
+                                  className="form-control"
+                                  id="productStocksAmount"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Eg. 200"
+                                  value={stok} onChange={e => setStok(e.target.value)}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">
+                                  Capital Price
+                                </label>
+                                <input
+                                  type="number"
+                                  name="harga_modal"
+                                  className="form-control"
+                                  id="productCapitalPrice"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Eg. IDR 25,000.00"
+                                  value={harga_modal} onChange={e => setHargaModal(e.target.value)}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">
+                                  Price
+                                </label>
+                                <input
+                                  type="number"
+                                  name="harga_jual"
+                                  className="form-control"
+                                  id="productPrice"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Eg. IDR 35,000.00"
+                                  value={harga_jual} onChange={e => setHargaJual(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                            <div className="modal-footer">
+                              <button
+                                type="button"
+                                className="btn btn-secondary"
+                                style={{
+                                  backgroundColor: "white",
+                                  color: "black",
+                                  fontWeight: "normal",
+                                  fontSize: "smaller",
+                                  width: 100,
+                                  height: 35,
+                                  border: "none",
+                                }}
+                                data-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="submit"
+                                className="btn btn-primary"
+                                style={{
+                                  backgroundColor: "#5B7CFD",
+                                  color: "white",
+                                  fontWeight: "normal",
+                                  fontSize: "smaller",
+                                  width: 125,
+                                  height: 35,
+                                }}
+                                id="saveBtn"
+                              >
+                                Save changes
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    <Table
+                      products={products}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </div>
-        <aside className="control-sidebar control-sidebar-dark"></aside>
-      </div>
-    </>
-  );
+
+        </div >
+      </div >
+
+
+
+    );
+  }
+
+
 }
 
 export default Product;
