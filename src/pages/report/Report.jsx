@@ -1,6 +1,7 @@
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Table from "./Table";
 
 function Report() {
   return (
@@ -9,55 +10,43 @@ function Report() {
       <div className="wrapper">
         <Header />
         <Sidebar activePage="report" />
-        <div className="row text-center h-100">
-          <div className="col-md-6 text-center my-auto">
-            <div className="card card-block d-flex">
-              <div className="card-body align-items-center d-flex flex-column justify-content-center">
-                Transaction
-                <div>
-                  <button className="btn">
-                    <i class="fas fa-file-export"></i>
-                  </button>
+        <div className="content-wrapper row">
+          <section className="content col">
+            <div className="container-fluid">
+              <div className="row content-card">
+                <div className="col-lg-12">
+                  <div
+                    className="card"
+                    style={{
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: 10,
+                      height: 755,
+                    }}
+                  >
+                    <div className="card-body" style={{ padding: "0px 24px" }}>
+                      <Table />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row content-card">
+                <div className="col-lg-12">
+                  <div
+                    className="card"
+                    style={{
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: 10,
+                      height: 755,
+                    }}
+                  >
+                    <div className="card-body" style={{ padding: "0px 24px" }}>
+                      <Table />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-6 text-center my-auto">
-            <div className="card card-block d-flex">
-              <div className="card-body align-items-center d-flex flex-column justify-content-center">
-                Employees
-                <div>
-                  <button className="btn">
-                    <i class="fas fa-file-export"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 text-center my-auto">
-            <div className="card card-block d-flex">
-              <div className="card-body align-items-center d-flex flex-column justify-content-center">
-                Product
-                <div>
-                  <button className="btn">
-                    <i class="fas fa-file-export"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 text-center my-auto">
-            <div className="card card-block d-flex">
-              <div className="card-body align-items-center d-flex flex-column justify-content-center">
-                Category
-                <div>
-                  <button className="btn">
-                    <i class="fas fa-file-export"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </>
