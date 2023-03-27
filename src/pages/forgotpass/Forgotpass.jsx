@@ -122,9 +122,6 @@ return (
                 >
                   Login
                 </button>
-                <button className="btn btn-link forgot-password" onClick={handleForgotPassword}>
-                    Forgot Password
-                </button>
               </div>
             </form>
           </div>
