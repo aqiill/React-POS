@@ -11,38 +11,57 @@ function Product() {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [kode_produk, setKodeProduk] = useState('');
-  const [nama_produk, setNamaProduk] = useState('');
-  const [kategori_id, setKategoriId] = useState('');
-  const [harga_modal, setHargaModal] = useState('');
-  const [harga_jual, setHargaJual] = useState('');
-  const [stok, setStok] = useState('');
-  const [gambar, setGambar] = useState('');
-  const [expired_date, setExpiredDate] = useState('');
-  const date_created = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const [formData, setFormData] = useState({
+    kode_produk: "",
+    nama_produk: "",
+    kategori_id: "",
+    harga_modal: "",
+    harga_jual: "",
+    stok: "",
+    gambar: null,
+    expired_date: "",
+  });
 
-  const handleCategoryChange = (event) => {
-    setKategoriId(event.target.value);
-  }
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  const handleSubmit = async (event) => {
+  const handleFileChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.files[0],
+    });
+  };
 
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/produk/', {
-        method: 'POST',
+
+    const data = new FormData();
+    data.append("kode_produk", formData.kode_produk);
+    data.append("nama_produk", formData.nama_produk);
+    data.append("kategori_id", formData.kategori_id);
+    data.append("harga_modal", formData.harga_modal);
+    data.append("harga_jual", formData.harga_jual);
+    data.append("stok", formData.stok);
+    data.append("gambar", formData.gambar);
+    data.append("expired_date", formData.expired_date);
+    axios
+      .post("http://localhost:8080/produk/", data, {
         headers: {
-          'Content-Type': 'application/json',
-          'api_key': 'e3fd6b146fcb65f7419e3531a0a84f4d700b8210'
+          "Content-Type": "multipart/form-data",
+          api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
         },
-        body: JSON.stringify({ kode_produk, nama_produk, kategori_id, harga_modal, harga_jual, stok, gambar, expired_date, date_created })
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  };
 
 
   useEffect(() => {
@@ -343,12 +362,13 @@ function Product() {
                                   Image
                                 </label>
                                 <input
-                                  type="text"
+                                  type="file"
                                   className="form-control"
                                   id="productImage"
                                   aria-describedby="emailHelp"
                                   placeholder="Image's src"
-                                  onChange={e => setGambar(e.target.files[0])}
+                                  name="gambar"
+                                  onChange={handleFileChange}
                                 />
                               </div>
                               <div className="form-group">
@@ -362,7 +382,7 @@ function Product() {
                                   id="productCode"
                                   aria-describedby="emailHelp"
                                   placeholder="Input Product Code"
-                                  value={kode_produk} onChange={e => setKodeProduk(e.target.value)}
+                                  onChange={handleChange}
                                 />
                               </div>
                               <div className="form-group">
@@ -376,14 +396,14 @@ function Product() {
                                   id="productName"
                                   aria-describedby="emailHelp"
                                   placeholder="Input Product Name"
-                                  value={nama_produk} onChange={e => setNamaProduk(e.target.value)}
+                                  onChange={handleChange}
                                 />
                               </div>
                               <div className="form-group">
                                 <label htmlFor="category">
                                   Category
                                 </label>
-                                <select name="id_kategori" className="form-control" id="category" value={kategori_id} onChange={handleCategoryChange}>
+                                <select name="kategori_id" className="form-control" id="category" onChange={handleChange}>
                                   <option value="">Select Category</option>
                                   {category.map((category) => (
                                     <option value={category.kategori_id}>{category.nama_kategori}</option>
@@ -401,7 +421,7 @@ function Product() {
                                       name="expired_date"
                                       className="form-control"
                                       id="productExpireDate"
-                                      value={expired_date} onChange={e => setExpiredDate(e.target.value)}
+                                      onChange={handleChange}
                                     />
                                     <span className="input-group-addon">
                                       <i className="glyphicon glyphicon-th" />
@@ -420,7 +440,7 @@ function Product() {
                                   id="productStocksAmount"
                                   aria-describedby="emailHelp"
                                   placeholder="Eg. 200"
-                                  value={stok} onChange={e => setStok(e.target.value)}
+                                  onChange={handleChange}
                                 />
                               </div>
                               <div className="form-group">
@@ -434,7 +454,7 @@ function Product() {
                                   id="productCapitalPrice"
                                   aria-describedby="emailHelp"
                                   placeholder="Eg. IDR 25,000.00"
-                                  value={harga_modal} onChange={e => setHargaModal(e.target.value)}
+                                  onChange={handleChange}
                                 />
                               </div>
                               <div className="form-group">
@@ -448,7 +468,7 @@ function Product() {
                                   id="productPrice"
                                   aria-describedby="emailHelp"
                                   placeholder="Eg. IDR 35,000.00"
-                                  value={harga_jual} onChange={e => setHargaJual(e.target.value)}
+                                  onChange={handleChange}
                                 />
                               </div>
                             </div>
