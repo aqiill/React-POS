@@ -1,9 +1,9 @@
 import axios from "axios";
 import CommonComponent from "../../components/common/CommonComponent";
-// import EmployeeTable from "./EmployeeTable";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
+import Table from "./Table";
 
 function Employee() {
   const [employee, setEmployee] = useState([]);
@@ -119,122 +119,407 @@ function Employee() {
         <Header />
         <Sidebar activePage="employee" />
         <div className="content-wrapper row">
-          <div className="col-6">
-            <h2>Data Employee</h2>
-            <div id="employee-table">
-              {/* <EmployeeTable employee={employee} /> */}
+          <section className="content col">
+            <div className="container-fluid">
+              <div className="row content-card">
+                <div className="col-lg-12">
+                  <div
+                    className="card"
+                    style={{
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: 10,
+                      height: 755,
+                    }}
+                  >
+                    <div className="card-header border-0">
+                      <div className="d-flex justify-content-between">
+                        <div className="add-export" style={{ display: "flex" }}>
+                          <button
+                            className="btn bg-transparent table-cashier-button"
+                            data-toggle="modal"
+                            data-target=".bd-example-modal-sm"
+                          >
+                            <iconify-icon icon="oi:plus" />
+                            Add Cashier
+                          </button>
+                          <div
+                            className="modal fade bd-example-modal-sm"
+                            id="myModal"
+                            tabIndex={-1}
+                            role="dialog"
+                            aria-labelledby="mySmallModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div
+                              className="modal-dialog modal-sm"
+                              role="document"
+                            >
+                              <div className="modal-content">
+                                <div
+                                  className="modal-header"
+                                  style={{ border: "none" }}
+                                >
+                                  <h5 className="modal-title">Add Cashier</h5>
+                                </div>
+                                <div className="modal-body">
+                                  <div className="form-group">
+                                    <label htmlFor="nameCashier1">
+                                      Cashier Name
+                                    </label>
+                                    <input
+                                      type="name"
+                                      className="form-control"
+                                      id="nameCashier1"
+                                      aria-describedby="name"
+                                      placeholder="Input Cashier Name"
+                                    />
+                                  </div>
+                                  <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">
+                                      Email Address
+                                    </label>
+                                    <input
+                                      type="email"
+                                      className="form-control"
+                                      id="exampleInputEmail1"
+                                      aria-describedby="examplHelp"
+                                      placeholder="Input Email Address"
+                                    />
+                                  </div>
+                                </div>
+                                <div
+                                  className="modal-footer d-flex justify-content-between"
+                                  style={{ border: "none" }}
+                                >
+                                  <button
+                                    type="button"
+                                    className="btn"
+                                    data-dismiss="modal"
+                                    style={{
+                                      backgroundColor: "white",
+                                      color: "black",
+                                      fontWeight: "normal",
+                                      fontSize: "smaller",
+                                      width: 100,
+                                      height: 35,
+                                      border: "none",
+                                    }}
+                                  >
+                                    Cancel
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="btn ms-auto"
+                                    style={{
+                                      backgroundColor: "#5B7CFD",
+                                      color: "white",
+                                      fontWeight: "normal",
+                                      fontSize: "smaller",
+                                      width: 100,
+                                      height: 35,
+                                    }}
+                                    id="saveBtn"
+                                  >
+                                    Add Cashier
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            className="btn bg-transparent table-cashier-button"
+                            onclick="window.print()"
+                          >
+                            <iconify-icon icon="oi:share-boxed" />
+                            Export Cashier
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card-body" style={{ padding: "0px 24px" }}>
+                      {/* <table
+                        className="table"
+                        id="myTable"
+                        data-page-length={10}
+                        style={{ width: "100%" }}
+                      >
+                        <thead>
+                          <tr className="text-muted fs-10">
+                            <td scope="col" style={{ width: "10%" }}>
+                              No
+                            </td>
+                            <td scope="col" style={{ width: "40%" }}>
+                              Cashier Name
+                            </td>
+                            <td scope="col" style={{ width: "40%" }}>
+                              Email{" "}
+                            </td>
+                            <td scope="col" style={{ width: "10%" }}>
+                              Actions
+                            </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {employee.map((item) => (
+                            <tr key={item.id_user} className="fs-10">
+                              <td scope="row">{item.id_user}</td>
+                              <td>{item.nama_user}</td>
+                              <td>{item.email_user}</td>
+                              <td>
+                                <button
+                                  onClick={() => handleDelete(item.id_user)}
+                                  className="btn table-actions-button bg-transparent border drop-shadow"
+                                  data-toggle="modal"
+                                  data-target=".bd-example-modal-sm2"
+                                  style={{ borderRadius: "50%" }}
+                                >
+                                  <iconify-icon
+                                    icon="oi:trash"
+                                    style={{ marginLeft: 2 }}
+                                  />
+                                </button>
+                                <button
+                                  onClick={() => setSelectedEmployee(item)}
+                                  className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
+                                  style={{ borderRadius: "50%" }}
+                                >
+                                  <iconify-icon icon="oi:pencil" />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table> */}
+                      <Table employee={employee} />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </section>
+        </div>
+        <div className="col-6">
+          <h2>Data Employee</h2>
+          <div id="employee-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employee.map((item) => {
+                  if (item.role === "Kasir") {
+                    return (
+                      <tr key={item.id_user}>
+                        <td>{item.id_user}</td>
+                        <td>{item.nama_user}</td>
+                        <td>{item.email_user}</td>
+                        <td>{item.role}</td>
+                        <td>
+                          <button onClick={() => handleDelete(item.id_user)}>
+                            Delete
+                          </button>
+                          <button onClick={() => setSelectedEmployee(item)}>
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
           </div>
-          <div className="col-6">
-            {selectedEmployee ? (
-              <>
-                <h2>Edit Karyawan</h2>
-                <form onSubmit={handleUpdate}>
-                  <div>
-                    <label htmlFor="nama_user">Nama:</label>
-                    <input
-                      type="text"
-                      id="nama_user"
-                      name="nama_user"
-                      value={selectedEmployee.nama_user}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email_user">Email:</label>
-                    <input
-                      type="email"
-                      id="email_user"
-                      name="email_user"
-                      value={selectedEmployee.email_user}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={selectedEmployee.password}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="role">Role:</label>
-                    <select
-                      id="role"
-                      name="role"
-                      value={selectedEmployee.role}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Pilih Role</option>
-                      <option value="admin">Admin</option>
-                      <option value="user">Kasir</option>
-                    </select>
-                  </div>
-                  <div>
-                    <button type="submit">Simpan</button>
-                  </div>
-                </form>
-              </>
-            ) : (
-              <>
-                <h2>Tambah Karyawan Baru</h2>
-                <form onSubmit={handleSubmit}>
-                  <div>
-                    <label htmlFor="nama_user">Nama:</label>
-                    <input
-                      type="text"
-                      id="nama_user"
-                      name="nama_user"
-                      value={formValues.nama_user}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email_user">Email:</label>
-                    <input
-                      type="email"
-                      id="email_user"
-                      name="email_user"
-                      value={formValues.email_user}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={formValues.password}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="role">Role:</label>
-                    <select
-                      id="role"
-                      name="role"
-                      value={formValues.role}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Pilih Role</option>
-                      <option value="admin">Admin</option>
-                      <option value="user">Kasir</option>
-                    </select>
-                  </div>
-                  <div>
-                    <button type="submit">Tambah Karyawan Baru</button>
-                  </div>
-                </form>
-                {successMessage && (
-                  <div className="success">{successMessage}</div>
-                )}
-                {errorMessage && <div className="error">{errorMessage}</div>}
-              </>
-            )}
+        </div>
+
+        <div className="col-6">
+          {selectedEmployee ? (
+            <>
+              <h2>Edit Karyawan</h2>
+              <form onSubmit={handleUpdate}>
+                <div>
+                  <label htmlFor="nama_user">Nama:</label>
+                  <input
+                    type="text"
+                    id="nama_user"
+                    name="nama_user"
+                    value={selectedEmployee.nama_user}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email_user">Email:</label>
+                  <input
+                    type="email"
+                    id="email_user"
+                    name="email_user"
+                    value={selectedEmployee.email_user}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={selectedEmployee.password}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="role">Role:</label>
+                  <select
+                    id="role"
+                    name="role"
+                    value={selectedEmployee.role}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Pilih Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">Kasir</option>
+                  </select>
+                </div>
+                <div>
+                  <button type="submit">Simpan</button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <>
+              <h2>Tambah Karyawan Baru</h2>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="nama_user">Nama:</label>
+                  <input
+                    type="text"
+                    id="nama_user"
+                    name="nama_user"
+                    value={formValues.nama_user}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email_user">Email:</label>
+                  <input
+                    type="email"
+                    id="email_user"
+                    name="email_user"
+                    value={formValues.email_user}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formValues.password}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="role">Role:</label>
+                  <select
+                    id="role"
+                    name="role"
+                    value={formValues.role}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Pilih Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">Kasir</option>
+                  </select>
+                </div>
+                <div>
+                  <button type="submit">Tambah Karyawan Baru</button>
+                </div>
+              </form>
+              {successMessage && (
+                <div className="success">{successMessage}</div>
+              )}
+              {errorMessage && <div className="error">{errorMessage}</div>}
+            </>
+          )}
+        </div>
+      </div>
+
+      <div
+        className="modal fade bd-example-modal-sm2"
+        id="myModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-sm" role="document">
+          <div className="modal-content">
+            <div className="modal-header" style={{ border: "none" }}>
+              <h5 className="modal-title">Update Cashier</h5>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label htmlFor="nameCashier1">Cashier Name</label>
+                <input
+                  type="name"
+                  className="form-control"
+                  id="nameCashier1"
+                  aria-describedby="name"
+                  placeholder="Input Cashier Name"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email Address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="examplHelp"
+                  placeholder="Input Email Address"
+                />
+              </div>
+            </div>
+            <div
+              className="modal-footer d-flex justify-content-between"
+              style={{ border: "none" }}
+            >
+              <button
+                type="button"
+                className="btn"
+                data-dismiss="modal"
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  fontWeight: "normal",
+                  fontSize: "smaller",
+                  width: 100,
+                  height: 35,
+                  border: "none",
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn ms-auto"
+                style={{
+                  backgroundColor: "#5B7CFD",
+                  color: "white",
+                  fontWeight: "normal",
+                  fontSize: "smaller",
+                  width: 100,
+                  height: 35,
+                }}
+                id="saveBtn"
+              >
+                Update
+              </button>
+            </div>
           </div>
         </div>
       </div>
