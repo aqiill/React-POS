@@ -6,6 +6,12 @@ import "datatables.net-buttons/js/buttons.colVis.js";
 import "datatables.net-buttons/js/buttons.flash.js";
 import "datatables.net-buttons/js/buttons.html5.js";
 import "datatables.net-buttons/js/buttons.print.js";
+import "pdfmake/build/pdfmake.min.js";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import 'jspdf-font';
+
+
 import $ from "jquery";
 import React, { Component } from "react";
 
@@ -22,15 +28,35 @@ class Table extends Component {
             scrollCollapse: true,
             paging: false,
             processing: true,
-            dom: "Bfrtip",
+            dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
+                "<'row'<'col-md-12't>>" +
+                "<'row'<'col-md-6'l><'col-md-6'p>>",
+
             select: {
               style: "single",
             },
 
             buttons: [
               {
-                extend: "copy",
-                className: "btn btn-secondary",
+                extend: "pdfHtml5",
+                text: "PDF",
+                
+                exportOptions: {
+                  columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                },
+                customize: function (doc) {
+                  doc.content[1].table.widths = Array(
+                    doc.content[1].table.body[0].length + 1
+                  )
+                    .join("*")
+                    .split("");
+                },
+                orientation: "landscape",
+                pageSize: "A4",
+                title: "Contoh PDF",
+                filename: "contoh.pdf",
+                titleAttr: "PDF",
+                className: "btn btn-secondary bg-secondary",
                 style: {
                   backgroundColor: "white",
                   color: "black",
