@@ -90,7 +90,7 @@ class Table extends Component {
           <tr>
             <td className="">{index + 1}</td>
             <td className="">
-              <img class="table-product-img" src={item.gambar} alt="product" />
+              <img class="table-product-img" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`} alt="product" />
             </td>
             <td className="">{item.nama_produk}</td>
             <td className="">{item.nama_kategori}</td>

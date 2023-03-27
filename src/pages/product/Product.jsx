@@ -184,7 +184,7 @@ function Product() {
                         <div className="card-columns">
                           {expiredProducts.map((product) => (
                             <div className="card-susu float-right mb-2">
-                              <img src={product.gambar} alt="Product" />
+                              <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product" />
                               <div
                                 className="card-text mt-1 p-0 ml-1"
                                 style={{ fontWeight: "bold" }}
@@ -264,7 +264,7 @@ function Product() {
                           >
                             <img
                               className="card-img-top"
-                              src={product.gambar}
+                              src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
                               alt="Product"
                             />
                             <div
