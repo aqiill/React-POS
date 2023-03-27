@@ -86,30 +86,32 @@ class Table extends Component {
   showTable = () => {
     try {
       return this.props.employee.map((item, index) => {
-        return (
-          <tr>
-            <td className="">{index + 1}</td>
-            <td className="">{item.id_user}</td>
-            <td className="">{item.nama_user}</td>
-            <td className="">{item.email_user}</td>
-            <td>
-              <button
-                className="btn table-actions-button bg-transparent border drop-shadow"
-                data-toggle="modal"
-                data-target=".bd-example-modal-sm2"
-                style={{ borderRadius: "50%", alignItems: "center" }}
-              >
-                <iconify-icon icon="oi:pencil" />
-              </button>
-              <button
-                className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                style={{ borderRadius: "50%" }}
-              >
-                <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
-              </button>
-            </td>
-          </tr>
-        );
+        if (item.role === "Kasir") {
+          return (
+            <tr>
+              <td className="">{index + 1}</td>
+              <td className="">{item.id_user}</td>
+              <td className="">{item.nama_user}</td>
+              <td className="">{item.email_user}</td>
+              <td>
+                <button
+                  className="btn table-actions-button bg-transparent border drop-shadow"
+                  data-toggle="modal"
+                  data-target=".bd-example-modal-sm2"
+                  style={{ borderRadius: "50%", alignItems: "center" }}
+                >
+                  <iconify-icon icon="oi:pencil" />
+                </button>
+                <button
+                  className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
+                  style={{ borderRadius: "50%" }}
+                >
+                  <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
+                </button>
+              </td>
+            </tr>
+          );
+        }
       });
     } catch (e) {
       alert(e.message);

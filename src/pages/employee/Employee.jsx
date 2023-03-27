@@ -11,7 +11,7 @@ function Employee() {
     nama_user: "",
     email_user: "",
     password: "",
-    role: "",
+    role: "Kasir",
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -161,68 +161,87 @@ function Employee() {
                                 >
                                   <h5 className="modal-title">Add Cashier</h5>
                                 </div>
-                                <div className="modal-body">
-                                  <div className="form-group">
-                                    <label htmlFor="nameCashier1">
-                                      Cashier Name
-                                    </label>
-                                    <input
-                                      type="name"
-                                      className="form-control"
-                                      id="nameCashier1"
-                                      aria-describedby="name"
-                                      placeholder="Input Cashier Name"
-                                    />
+                                <form onSubmit={handleSubmit}>
+                                  <div className="modal-body">
+                                    <div className="form-group">
+                                      <label htmlFor="name">Cashier Name</label>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        id="nama_user"
+                                        name="nama_user"
+                                        value={formValues.nama_user}
+                                        onChange={handleInputChange}
+                                        aria-describedby="name"
+                                        placeholder="Input Cashier Name"
+                                      />
+                                    </div>
+                                    <div className="form-group">
+                                      <label htmlFor="email">
+                                        Email Address
+                                      </label>
+                                      <input
+                                        type="email"
+                                        className="form-control"
+                                        id="email_user"
+                                        name="email_user"
+                                        value={formValues.email_user}
+                                        onChange={handleInputChange}
+                                        aria-describedby="examplHelp"
+                                        placeholder="Input Email Address"
+                                      />
+                                    </div>
+                                    <div className="form-group">
+                                      <label htmlFor="password">Password</label>
+                                      <input
+                                        type="password"
+                                        className="form-control"
+                                        id="password"
+                                        name="password"
+                                        value={formValues.password}
+                                        onChange={handleInputChange}
+                                        aria-describedby="examplHelp"
+                                        placeholder="Input Email Address"
+                                      />
+                                    </div>
                                   </div>
-                                  <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">
-                                      Email Address
-                                    </label>
-                                    <input
-                                      type="email"
-                                      className="form-control"
-                                      id="exampleInputEmail1"
-                                      aria-describedby="examplHelp"
-                                      placeholder="Input Email Address"
-                                    />
+                                  <div
+                                    className="modal-footer d-flex justify-content-between"
+                                    style={{ border: "none" }}
+                                  >
+                                    <button
+                                      type="button"
+                                      className="btn"
+                                      data-dismiss="modal"
+                                      style={{
+                                        backgroundColor: "white",
+                                        color: "black",
+                                        fontWeight: "normal",
+                                        fontSize: "smaller",
+                                        width: 100,
+                                        height: 35,
+                                        border: "none",
+                                      }}
+                                    >
+                                      Cancel
+                                    </button>
+                                    <button
+                                      type="submit"
+                                      className="btn ms-auto"
+                                      style={{
+                                        backgroundColor: "#5B7CFD",
+                                        color: "white",
+                                        fontWeight: "normal",
+                                        fontSize: "smaller",
+                                        width: 100,
+                                        height: 35,
+                                      }}
+                                      id="saveBtn"
+                                    >
+                                      Add Cashier
+                                    </button>
                                   </div>
-                                </div>
-                                <div
-                                  className="modal-footer d-flex justify-content-between"
-                                  style={{ border: "none" }}
-                                >
-                                  <button
-                                    type="button"
-                                    className="btn"
-                                    data-dismiss="modal"
-                                    style={{
-                                      backgroundColor: "white",
-                                      color: "black",
-                                      fontWeight: "normal",
-                                      fontSize: "smaller",
-                                      width: 100,
-                                      height: 35,
-                                      border: "none",
-                                    }}
-                                  >
-                                    Cancel
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="btn ms-auto"
-                                    style={{
-                                      backgroundColor: "#5B7CFD",
-                                      color: "white",
-                                      fontWeight: "normal",
-                                      fontSize: "smaller",
-                                      width: 100,
-                                      height: 35,
-                                    }}
-                                    id="saveBtn"
-                                  >
-                                    Add Cashier
-                                  </button>
-                                </div>
+                                </form>
                               </div>
                             </div>
                           </div>
