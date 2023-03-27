@@ -109,8 +109,8 @@ const Content = () => {
                     <div className="row">
                         {/* Revenue */}
                         <div className="col-12 col-sm-6 col-md-3">
-                            <div className="small-box bg-light drop-shadow flex-row">
-                                <div className="dropdown d-flex flex-row-reverse">
+                            <div className="small-box bg-light drop-shadow flex-row mb-3">
+                                {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Today
                                     </button>
@@ -119,11 +119,11 @@ const Content = () => {
                                         <a className="dropdown-item" href="#">This Month</a>
                                         <a className="dropdown-item" href="#">This Year</a>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="d-flex flex-row">
                                     <img className="top-card-icon" src="./docs/assets/img/revenue_icon.png" alt />
                                     <div className="top-card-text">
-                                        <span className="up-down">▲ 100%</span>
+                                        {/* <span className="up-down">▲ 100%</span> */}
                                         <span className="card-amount">{formatPrice(pendapatan.total_pendapatan)}</span>
                                         <span className="card-desc">TOTAL REVENUE</span>
                                     </div>
@@ -133,8 +133,8 @@ const Content = () => {
                         {/* /.revenue */}
                         {/* Profit */}
                         <div className="col-12 col-sm-6 col-md-3">
-                            <div className="small-box bg-light drop-shadow flex-row" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
-                                <div className="dropdown d-flex flex-row-reverse">
+                            <div className="small-box bg-light drop-shadow flex-row mb-3" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
+                                {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Today
                                     </button>
@@ -143,12 +143,12 @@ const Content = () => {
                                         <a className="dropdown-item" href="#">This Month</a>
                                         <a className="dropdown-item" href="#">This Year</a>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="d-flex flex-row">
                                     <img className="top-card-icon" src="./docs/assets/img/profit_icon.png" alt />
                                     <div className="top-card-text">
-                                        <span className="up-down">▲ 100%</span>
-                                        <span className="card-amount">IDR 520.000,00</span>
+                                        {/* <span className="up-down">▲ 100%</span> */}
+                                        <span className="card-amount">{formatPrice(pendapatan.total_profit)}</span>
                                         <span className="card-desc">TOTAL PROFIT</span>
                                     </div>
                                 </div>
