@@ -30,9 +30,7 @@ function App() {
           <Route
             path="/forgotpass"
             element={
-              <ProtectedRouter>
                 <Forgotpass />
-              </ProtectedRouter>
             }
           />
           <Route

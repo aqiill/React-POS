@@ -157,6 +157,15 @@ function Login() {
                   Login
                 </button>
               </div>
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="text-primary btn btn-link"
+                  onClick={() => navigate("/forgotpass")}
+                >
+                  Forgot Password?
+                </button>
+              </div>
             </form>
           </div>
         </div>
