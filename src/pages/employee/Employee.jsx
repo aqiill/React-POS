@@ -237,59 +237,6 @@ function Employee() {
                       </div>
                     </div>
                     <div className="card-body" style={{ padding: "0px 24px" }}>
-                      {/* <table
-                        className="table"
-                        id="myTable"
-                        data-page-length={10}
-                        style={{ width: "100%" }}
-                      >
-                        <thead>
-                          <tr className="text-muted fs-10">
-                            <td scope="col" style={{ width: "10%" }}>
-                              No
-                            </td>
-                            <td scope="col" style={{ width: "40%" }}>
-                              Cashier Name
-                            </td>
-                            <td scope="col" style={{ width: "40%" }}>
-                              Email{" "}
-                            </td>
-                            <td scope="col" style={{ width: "10%" }}>
-                              Actions
-                            </td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {employee.map((item) => (
-                            <tr key={item.id_user} className="fs-10">
-                              <td scope="row">{item.id_user}</td>
-                              <td>{item.nama_user}</td>
-                              <td>{item.email_user}</td>
-                              <td>
-                                <button
-                                  onClick={() => handleDelete(item.id_user)}
-                                  className="btn table-actions-button bg-transparent border drop-shadow"
-                                  data-toggle="modal"
-                                  data-target=".bd-example-modal-sm2"
-                                  style={{ borderRadius: "50%" }}
-                                >
-                                  <iconify-icon
-                                    icon="oi:trash"
-                                    style={{ marginLeft: 2 }}
-                                  />
-                                </button>
-                                <button
-                                  onClick={() => setSelectedEmployee(item)}
-                                  className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                                  style={{ borderRadius: "50%" }}
-                                >
-                                  <iconify-icon icon="oi:pencil" />
-                                </button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table> */}
                       <Table employee={employee} />
                     </div>
                   </div>
