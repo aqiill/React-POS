@@ -11,6 +11,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import 'jspdf-font';
 import React, { Component } from "react";
+import axios from 'axios';
 
 import $ from "jquery";
 class Table extends Component {
@@ -36,16 +37,6 @@ class Table extends Component {
               {
                 extend: "pdfHtml5",
                 text: "PDF",
-                
-                // exportOptions: {
-                //   columns: [0, 2, 3, 4, 5, 6, 7],
-                //   exclude: [1, 8]
-                // },
-                // customize: function (doc) {
-                //   doc.content[1].table.widths = Array(
-                //     doc.content[1].table.body[0].length + 1
-                //   ).join('*').split('');
-                // },
                 orientation: "landscape",
                 pageSize: "A4",
                 titleAttr: "PDF",
@@ -167,10 +158,14 @@ class Table extends Component {
     try {
       return this.props.products.map((item, index) => {
         return (
-          <tr>
+          <tr key={index}>
             <td className="">{index + 1}</td>
             <td className="">
-              <img class="table-product-img" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`} alt="product" />
+              <img
+                className="table-product-img"
+                src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`}
+                alt="product"
+              />
             </td>
             <td className="">{item.nama_produk}</td>
             <td className="">{item.nama_kategori}</td>
@@ -190,6 +185,11 @@ class Table extends Component {
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
                 style={{ borderRadius: "50%" }}
+                onClick={() => {
+                  if (window.confirm("Are you sure want to delete this product?")) {
+                    this.handleDelete(index);
+                  }
+                }}
               >
                 <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
               </button>
@@ -199,6 +199,28 @@ class Table extends Component {
       });
     } catch (e) {
       alert(e.message);
+    }
+  };
+  
+  // handleDelete = (index) => {
+  //   const { products } = this.props;
+  //   const newProducts = [...products];
+  //   newProducts.splice(index, 1);
+  //   // call the API to delete the product from the database
+  //   // and update the state to re-render the table
+  //   this.setState({ products: newProducts });
+  // };
+
+  handleDelete = async (index) => {
+    const { products } = this.props;
+    const newProducts = [...products];
+    newProducts.splice(index, 1);
+  
+    try {
+      await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
+      this.setState({ products: newProducts });
+    } catch (error) {
+      console.error('Error deleting product:', error);
     }
   };
 
