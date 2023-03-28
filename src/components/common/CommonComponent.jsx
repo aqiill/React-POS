@@ -13,6 +13,7 @@ const CommonComponent = ({ pageTitle, backgroundStyle }) => {
       "sidebar-mini-xs"
     );
     document.body.style.background = backgroundStyle;
+    document.body.style.overflowX = "hidden";
 
     return () => {
       document.body.classList.remove(
@@ -25,6 +26,7 @@ const CommonComponent = ({ pageTitle, backgroundStyle }) => {
         "sidebar-mini-xs"
       );
       document.body.style.background = null;
+      document.body.style.overflowX = null;
     };
   }, [pageTitle, backgroundStyle]);
 
