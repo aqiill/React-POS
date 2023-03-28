@@ -27,12 +27,7 @@ function App() {
               </ProtectedRouter>
             }
           />
-          <Route
-            path="/forgotpass"
-            element={
-              <Forgotpass />
-            }
-          />
+          <Route path="/forgotpass" element={<Forgotpass />} />
           <Route
             path="/product"
             element={
@@ -81,10 +76,14 @@ function App() {
               </ProtectedRouter>
             }
           />
-          <Route path="/help-and-support" element={
-          <ProtectedRouter>
-            <HelpAndSupport />
-            </ProtectedRouter>} />
+          <Route
+            path="/help-and-support"
+            element={
+              <ProtectedRouter>
+                <HelpAndSupport />
+              </ProtectedRouter>
+            }
+          />
           <Route
             path="/profile"
             element={
