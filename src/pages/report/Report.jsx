@@ -1,7 +1,9 @@
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Table from "./Table";
+import TableProf from "./TableProf";
+import TableRev from "./TableRev";
+
 
 function Report() {
   return (
@@ -20,28 +22,33 @@ function Report() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 755,
+                      height: 300,
                     }}
                   >
-                    <div className="card-body" style={{ padding: "0px 24px" }}>
-                      <Table />
+                    <div className="card-header border-0">
+                      <div className="d-flex justify-content-between">
+                        <h3 className="card-title">Revenue</h3>
+                      </div>
                     </div>
+                    <TableRev />
                   </div>
                 </div>
-              </div>
-              <div className="row content-card">
+              
                 <div className="col-lg-12">
                   <div
                     className="card"
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 755,
+                      height: 300,
                     }}
-                  >
-                    <div className="card-body" style={{ padding: "0px 24px" }}>
-                      <Table />
-                    </div>
+                  >                    
+                  <div className="card-header border-0">
+                      <div className="d-flex justify-content-between">
+                        <h3 className="card-title">Profit</h3>
+                      </div>
+                  </div>
+                  <TableProf />
                   </div>
                 </div>
               </div>
