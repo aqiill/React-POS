@@ -35,13 +35,14 @@ const Content = () => {
                 });
                 setStockProducts(stockRes.data.data);
 
-                const transaksiRes = await axios.get("http://localhost:8080/transaksi", {
+                const transaksiRes = await axios.get("http://localhost:8080/transaksi/today", {
                     headers: {
                         api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
                     },
                 });
 
                 setTransaksi(transaksiRes.data.data);
+                // console.log(transaksiRes.data.data);
 
                 const bestSellingRes = await axios.get("http://localhost:8080/transaksi/best_selling", {
                     headers: {
@@ -176,8 +177,8 @@ const Content = () => {
                                 <div className="d-flex flex-row">
                                     <img className="top-card-icon" src="./docs/assets/img/member_icon.png" alt />
                                     <div className="top-card-text">
-                                        <span className="card-amount">5</span>
-                                        <span className="card-desc">MEMBERS</span>
+                                        <span className="card-amount">{pendapatan.total_transaksi}</span>
+                                        <span className="card-desc">TOTAL TRANSACTION</span>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +192,7 @@ const Content = () => {
                             <div className="card drop-shadow" style={{ borderRadius: 10, height: 390 }}>
                                 <div className="card-header">
                                     <h5 className="card-title">Statistic of Best Selling</h5>
-                                    <div className="card-tools">
+                                    {/* <div className="card-tools">
                                         <div className="btn-group">
                                             <div className="dropdown">
                                                 <button className="btn btn-secondary dropdown-toggle bg-white border-0" type="button" data-toggle="dropdown">
@@ -203,7 +204,7 @@ const Content = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {/* /.card-header */}
                                 <div className="card-body">
@@ -259,7 +260,7 @@ const Content = () => {
                                         <h3 className="card-title">Today's Transaction</h3>
                                     </div>
                                 </div>
-                                <div className="card-body" style={{ padding: '0px 24px', margin:'15px', overflowY: 'scroll' }}>
+                                <div className="card-body" style={{ padding: '0px 24px', margin: '15px', overflowY: 'scroll' }}>
                                     <table className="table">
                                         <thead>
                                             <tr>
@@ -274,7 +275,7 @@ const Content = () => {
                                                     <td scope="row">{transaksi.tgl_pembayaran}</td>
                                                     <td>{formatPrice(transaksi.total_pembayaran)}</td>
                                                     <td>
-                                                        <button className="btn fas fa-eye" type="button" data-toggle="modal" data-target="#invoiceModal">
+                                                        <button className="btn fas fa-eye" type="button" data-toggle="modal" data-target={`#invoiceModal${transaksi.id_pembayaran}`}>
                                                         </button>
                                                     </td>
                                                 </tr>
