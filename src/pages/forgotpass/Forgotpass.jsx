@@ -1,61 +1,27 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+function Forgotpass(){
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    document.title = "Login | BLEVEN";
-    document.body.classList.add("login-page", "hold-transition");
-    document.body.style.background = "#e7eef8";
-    return () => {
-      document.body.style.background = null;
-      document.body.classList.remove("login-page", "hold-transition");
+    useEffect(() => {
+        document.title = "Forgot Password | BLEVEN";
+        document.body.classList.add("forgotpass-page", "hold-transition");
+        document.body.style.background = "#e7eef8";
+        return () => {
+          document.body.style.background = null;
+          document.body.classList.remove("forgotpass-page", "hold-transition");
+        };
+      }, []);
+
+      const handleSubmit = async (event) => {
+      };
+      const handleForgotPassword = async (event) => {
     };
-  }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem("email_user")) {
-      navigate("/home");
-    }
-  }, [navigate]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/login/auth",
-        {
-          email_user: email,
-          password: password,
-        },
-        {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
-        }
-      );
-      if (response.data.status === 200) {
-        localStorage.setItem("nama_user", response.data.data.nama_user);
-        localStorage.setItem("email_user", response.data.data.email_user);
-        navigate("/home");
-      } else {
-        throw new Error("Invalid email or password");
-      }
-    } catch (error) {
-      console.error("Error while processing form submission: ", error);
-      console.error(
-        "Error response data: ",
-        error.response && error.response.data
-      );
-      alert("Failed to login. Please check your email and password.");
-    }
-  };
-
-  return (
+return (
     <>
       <div className="login-box">
         <div className="card">
@@ -157,15 +123,6 @@ function Login() {
                   Login
                 </button>
               </div>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="text-primary btn btn-link"
-                  onClick={() => navigate("/forgotpass")}
-                >
-                  Forgot Password?
-                </button>
-              </div>
             </form>
           </div>
         </div>
@@ -174,4 +131,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Forgotpass;

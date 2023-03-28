@@ -11,6 +11,7 @@ import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
 import Report from "./pages/report/Report";
 import Settings from "./pages/settings/Settings";
+import Forgotpass from "./pages/forgotpass/Forgotpass";
 
 function App() {
   return (
@@ -24,6 +25,12 @@ function App() {
               <ProtectedRouter>
                 <Dashboard />
               </ProtectedRouter>
+            }
+          />
+          <Route
+            path="/forgotpass"
+            element={
+                <Forgotpass />
             }
           />
           <Route
