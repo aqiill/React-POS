@@ -259,7 +259,7 @@ const Content = () => {
                                         <h3 className="card-title">Today's Transaction</h3>
                                     </div>
                                 </div>
-                                <div className="card-body" style={{ padding: '0px 24px', margin:'4px', overflowY: 'scroll' }}>
+                                <div className="card-body" style={{ padding: '0px 24px', margin:'15px', overflowY: 'scroll' }}>
                                     <table className="table">
                                         <thead>
                                             <tr>
