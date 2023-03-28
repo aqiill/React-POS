@@ -222,7 +222,7 @@ const Content = () => {
                         </div>
                         {/* Stock Alerts */}
                         <div className="col-lg-6">
-                            <div className="card" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: 0, height: 390 }}>
+                            <div className="card" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: 10, height: 390 }}>
                                 <div className="card-header">
                                     <div className="d-flex justify-content-between">
                                         <h3 className="card-title">Stock Alerts</h3>
@@ -231,7 +231,7 @@ const Content = () => {
                                 <div className="card-body pl-4 pr-4 mr-4 ml-4" style={{ marginBottom: 20, overflowX: 'scroll' }}>
                                     <div className="card-deck">
                                         {stockProducts.map((product) => (
-                                            <div className="card-dash float-right mb-2" style={{ minWidth: 200, maxWidth: 200, height: 250, fontSize: 'small', backgroundColor: '#F6F6F6', borderRadius: 20 }}>
+                                            <div className="card-dash float-right mb-2 m-2" style={{ minWidth: 200, maxWidth: 200, height: 250, fontSize: 'small', backgroundColor: '#F6F6F6', borderRadius: 20 }}>
                                                 <img className="card-img-top" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product Image" />
                                                 <div className="card-body p-0 ml-1" style={{ fontWeight: 'bold' }}> {product.nama_produk}
                                                     <div className="progress" style={{ height: 6, width: 162, backgroundColor: 'red', borderRadius: 10 }}>
@@ -259,7 +259,7 @@ const Content = () => {
                                         <h3 className="card-title">Today's Transaction</h3>
                                     </div>
                                 </div>
-                                <div className="card-body" style={{ padding: '0px 24px' }}>
+                                <div className="card-body" style={{ padding: '0px 24px', margin:'4px', overflowY: 'scroll' }}>
                                     <table className="table">
                                         <thead>
                                             <tr>
