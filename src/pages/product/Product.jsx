@@ -149,8 +149,6 @@ function Product() {
     };
   }, []);
 
-
-
   if (loading) {
     return <div className="loading-container"><p>Loading...</p></div>;
   } else {

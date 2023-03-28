@@ -146,6 +146,17 @@ class Table extends Component {
                 },
               },
             ],
+            columns: [
+              { width: "10px" }, // column No
+              { width: "50px" }, // column Photo
+              { width: "140px" }, // column Product Name
+              { width: "100px" }, // column Category
+              { width: "80px" }, // column Expire Date
+              { width: "50px" }, // column Stock
+              { width: "100px" }, // column Capital Price
+              { width: "75px" }, // column Price
+              { width: "75px" }, // column Action
+            ],
           });
         }, 1000);
       });
@@ -194,7 +205,7 @@ class Table extends Component {
   render() {
     return (
       <div class="card-body">
-        <div className=" scrollable-table" style={{ overflowY: "hidden" }}>
+        <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
           <table
             id="table"
             className="table align-items-center justify-content-center mb-0"
