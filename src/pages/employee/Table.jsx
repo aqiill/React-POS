@@ -91,7 +91,7 @@ class Table extends Component {
                       styles: { overflow: "linebreak" },
                       columnStyles: { 0: { cellWidth: 120 } },
                       addPageContent: function (data) {
-                        doc.text("Product Management POS", 40, 30);
+                        doc.text("Employee Management POS", 40, 30);
                       },
                     }
                   );
@@ -147,7 +147,7 @@ class Table extends Component {
             ],
             columns: [
               { width: "10px" }, // column No
-              { width: "50px" }, // column Photo
+              { width: "50px" }, // column ID
               { width: "140px" }, // column Product Name
               { width: "100px" }, // column Category
               { width: "80px" }, // column Expire Date
@@ -217,25 +217,101 @@ class Table extends Component {
 
   render() {
     return (
-      <div class="card-body">
-        <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
-          <table
-            id="table"
-            className="table align-items-center justify-content-center mb-0"
-          >
-            <thead>
-              <tr>
-                <th className="">No</th>
-                <th className="">ID</th>
-                <th className="">Name</th>
-                <th className="">Email</th>
-                <th className="">Action</th>
-              </tr>
-            </thead>
-            <tbody>{this.showTable()}</tbody>
-          </table>
+      <>
+        <div class="card-body">
+          <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
+            <table
+              id="table"
+              className="table align-items-center justify-content-center mb-0"
+            >
+              <thead>
+                <tr>
+                  <th className="">No</th>
+                  <th className="">ID</th>
+                  <th className="">Name</th>
+                  <th className="">Email</th>
+                  <th className="">Action</th>
+                </tr>
+              </thead>
+              <tbody>{this.showTable()}</tbody>
+            </table>
+          </div>
         </div>
-      </div>
+        <div
+          className="modal fade bd-example-modal-sm2"
+          id="myModal"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="mySmallModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-sm" role="document">
+            <div className="modal-content">
+              <div className="modal-header" style={{ border: "none" }}>
+                <h5 className="modal-title">Update Cashier</h5>
+              </div>
+              <div className="modal-body">
+                <div className="form-group">
+                  <label htmlFor="nameCashier1">Cashier Name</label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    id="nameCashier1"
+                    aria-describedby="name"
+                    placeholder="Input Cashier Name"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Email Address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="examplHelp"
+                    placeholder="Input Email Address"
+                  />
+                </div>
+              </div>
+              <div
+                className="modal-footer d-flex justify-content-between"
+                style={{ border: "none" }}
+              >
+                <button
+                  type="button"
+                  className="btn"
+                  data-dismiss="modal"
+                  style={{
+                    backgroundColor: "white",
+                    color: "black",
+                    fontWeight: "normal",
+                    fontSize: "smaller",
+                    width: 100,
+                    height: 35,
+                    border: "none",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="btn ms-auto"
+                  style={{
+                    backgroundColor: "#5B7CFD",
+                    color: "white",
+                    fontWeight: "normal",
+                    fontSize: "smaller",
+                    width: 100,
+                    height: 35,
+                  }}
+                  id="saveBtn"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
