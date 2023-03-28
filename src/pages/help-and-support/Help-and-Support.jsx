@@ -19,14 +19,14 @@ function HelpAndSupport() {
     <>
       <CommonComponent pageTitle="Help & Support" backgroundStyle="#e7eef8" />
 
-      <div classname="wrapper">
+      <div className="wrapper" style={{overflow: 'hidden'}}>
         <Header />
         <Sidebar activePage="help-and-support" />
-        <div classname="content-wrapper row">
-          <section classname="content col">
-            <section classname="container-fluid">
+        <div className="content-wrapper row">
+          <section className="content col">
+            <section className="container-fluid">
               <div className="col-lg-12">
-                <div className="card" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10, height: "auto" }}>
+                <div className="card mb-0" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10, height: 'auto' }}>
                   <div className="card-header border-0">
                     <h5>Get in touch</h5>
                   </div>
