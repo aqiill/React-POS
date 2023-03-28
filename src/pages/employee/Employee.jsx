@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
 import Table from "./Table";
+import { Button, Modal, Alert } from "react-bootstrap";
 
 function Employee() {
   const [employee, setEmployee] = useState([]);
@@ -11,7 +12,7 @@ function Employee() {
     nama_user: "",
     email_user: "",
     password: "",
-    role: "Kasir",
+    role: "Employee",
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,6 +23,7 @@ function Employee() {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },
   };
+  const [showModal, setShowModal] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -46,55 +48,15 @@ function Employee() {
         nama_user: "",
         email_user: "",
         password: "",
-        role: "",
+        role: "Employee",
       });
+      setShowModal(true);
       setErrorMessage("");
       fetchData();
     } catch (error) {
       console.error(error);
       setSuccessMessage("");
       setErrorMessage("Gagal menambahkan data karyawan baru");
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      if (selectedEmployee && selectedEmployee.id_user === id) {
-        setSelectedEmployee(null);
-      }
-      const response = await axios.delete(`/users/${id}`, apiConfig);
-      setSuccessMessage("Data karyawan berhasil dihapus");
-      setErrorMessage("");
-      fetchData();
-    } catch (error) {
-      console.error(error);
-      setSuccessMessage("");
-      setErrorMessage("Gagal menghapus data karyawan");
-    }
-  };
-
-  const handleUpdate = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.put(
-        `/users/${selectedEmployee.id_user}`,
-        selectedEmployee,
-        apiConfig
-      );
-      setSuccessMessage("Data karyawan berhasil diperbarui");
-      setErrorMessage("");
-      setSelectedEmployee(null);
-      setFormValues({
-        nama_user: "",
-        email_user: "",
-        password: "",
-        role: "",
-      });
-      fetchData();
-    } catch (error) {
-      console.error(error);
-      setSuccessMessage("");
-      setErrorMessage("Gagal memperbarui data karyawan");
     }
   };
 
@@ -166,14 +128,14 @@ function Employee() {
                                     <div className="form-group">
                                       <label htmlFor="name">Cashier Name</label>
                                       <input
-                                        type="text"
+                                        type="name"
                                         className="form-control"
                                         id="nama_user"
                                         name="nama_user"
-                                        value={formValues.nama_user}
                                         onChange={handleInputChange}
                                         aria-describedby="name"
                                         placeholder="Input Cashier Name"
+                                        autoComplete="off"
                                       />
                                     </div>
                                     <div className="form-group">
@@ -185,10 +147,10 @@ function Employee() {
                                         className="form-control"
                                         id="email_user"
                                         name="email_user"
-                                        value={formValues.email_user}
                                         onChange={handleInputChange}
                                         aria-describedby="examplHelp"
                                         placeholder="Input Email Address"
+                                        autoComplete="off"
                                       />
                                     </div>
                                     <div className="form-group">
@@ -198,10 +160,10 @@ function Employee() {
                                         className="form-control"
                                         id="password"
                                         name="password"
-                                        value={formValues.password}
                                         onChange={handleInputChange}
                                         aria-describedby="examplHelp"
-                                        placeholder="Input Email Address"
+                                        placeholder="Input Password"
+                                        autoComplete="off"
                                       />
                                     </div>
                                   </div>
@@ -242,16 +204,28 @@ function Employee() {
                                     </button>
                                   </div>
                                 </form>
+                                <Modal
+                                  show={showModal}
+                                  onHide={() => setShowModal(false)}
+                                >
+                                  <Modal.Header closeButton>
+                                    <Modal.Title>Sukses!</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    Data karyawan baru berhasil ditambahkan.
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button
+                                      variant="primary"
+                                      onClick={() => setShowModal(false)}
+                                    >
+                                      OK
+                                    </Button>
+                                  </Modal.Footer>
+                                </Modal>
                               </div>
                             </div>
                           </div>
-                          <button
-                            className="btn bg-transparent table-cashier-button"
-                            onclick="window.print()"
-                          >
-                            <iconify-icon icon="oi:share-boxed" />
-                            Export Cashier
-                          </button>
                         </div>
                       </div>
                     </div>
@@ -263,155 +237,6 @@ function Employee() {
               </div>
             </div>
           </section>
-        </div>
-        <div className="col-6">
-          <h2>Data Employee</h2>
-          <div id="employee-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {employee.map((item) => {
-                  if (item.role === "Kasir") {
-                    return (
-                      <tr key={item.id_user}>
-                        <td>{item.id_user}</td>
-                        <td>{item.nama_user}</td>
-                        <td>{item.email_user}</td>
-                        <td>{item.role}</td>
-                        <td>
-                          <button onClick={() => handleDelete(item.id_user)}>
-                            Delete
-                          </button>
-                          <button onClick={() => setSelectedEmployee(item)}>
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  }
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="col-6">
-          {selectedEmployee ? (
-            <>
-              <h2>Edit Karyawan</h2>
-              <form onSubmit={handleUpdate}>
-                <div>
-                  <label htmlFor="nama_user">Nama:</label>
-                  <input
-                    type="text"
-                    id="nama_user"
-                    name="nama_user"
-                    value={selectedEmployee.nama_user}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email_user">Email:</label>
-                  <input
-                    type="email"
-                    id="email_user"
-                    name="email_user"
-                    value={selectedEmployee.email_user}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={selectedEmployee.password}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="role">Role:</label>
-                  <select
-                    id="role"
-                    name="role"
-                    value={selectedEmployee.role}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">Pilih Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="user">Kasir</option>
-                  </select>
-                </div>
-                <div>
-                  <button type="submit">Simpan</button>
-                </div>
-              </form>
-            </>
-          ) : (
-            <>
-              <h2>Tambah Karyawan Baru</h2>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="nama_user">Nama:</label>
-                  <input
-                    type="text"
-                    id="nama_user"
-                    name="nama_user"
-                    value={formValues.nama_user}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email_user">Email:</label>
-                  <input
-                    type="email"
-                    id="email_user"
-                    name="email_user"
-                    value={formValues.email_user}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formValues.password}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="role">Role:</label>
-                  <select
-                    id="role"
-                    name="role"
-                    value={formValues.role}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">Pilih Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="user">Kasir</option>
-                  </select>
-                </div>
-                <div>
-                  <button type="submit">Tambah Karyawan Baru</button>
-                </div>
-              </form>
-              {successMessage && (
-                <div className="success">{successMessage}</div>
-              )}
-              {errorMessage && <div className="error">{errorMessage}</div>}
-            </>
-          )}
         </div>
       </div>
 
