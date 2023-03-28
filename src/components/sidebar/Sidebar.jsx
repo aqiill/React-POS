@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { MD5 } from "crypto-js";
 
 const NavItem = ({ to, iconSrc, altText, text, isActive }) => (
   <li className="nav-item menu-open">
@@ -81,6 +82,9 @@ const Sidebar = ({ activePage }) => {
     },
   ];
 
+  const email = localStorage.getItem("email_user");
+  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+
   return (
     <aside
       className="main-sidebar sidebar-base sidebar-no-expand"
@@ -132,7 +136,7 @@ const Sidebar = ({ activePage }) => {
           >
             <div className="image">
               <img
-                src="dist/img/user2-160x160.jpg"
+                src={avatar}
                 className="img-circle elevation-2"
                 alt="Gambar Pengguna"
               />
