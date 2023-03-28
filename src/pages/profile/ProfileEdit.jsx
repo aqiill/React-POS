@@ -100,7 +100,7 @@ const ProfileEdit = () => {
                   <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
                     <a href="https://gravatar.com/" target="v_blank"><img src={avatar} alt="Profile" /></a>
                   </div>
-                  <div className="form-group" style={{ marginTop: 56 }}>
+                  <div className="form-group" style={{ marginTop: 25}}>
                     <label
                       className="font-weight-light"
                       htmlFor="name"
@@ -197,7 +197,7 @@ const ProfileEdit = () => {
                       }}
                       onChange={handleChange}
                     />
-                    <div className="mt-5 mb-5 d-flex justify-content-left">
+                    <div className="mt-3 d-flex justify-content-left">
                       <button
                         type="submit"
                         className="btn btn-primary btn-rounded"
