@@ -149,17 +149,15 @@ function Product() {
     };
   }, []);
 
-
-
   if (loading) {
     return <div className="loading-container"><p>Loading...</p></div>;
   } else {
     return (
 
-      <div classname="wrapper">
+      <div className="wrapper">
         <Header />
         <Sidebar activePage="product" />
-        <div className="content-wrapper row">
+        <div className="content-wrapper ">
           <section className="content col">
             <div className="container-fluid">
               <div className="row content-card">
