@@ -39,6 +39,7 @@ function Login() {
         }
       );
       if (response.data.status === 200) {
+        localStorage.setItem("id_user", response.data.data.id_user);
         localStorage.setItem("nama_user", response.data.data.nama_user);
         localStorage.setItem("email_user", response.data.data.email_user);
         navigate("/home");

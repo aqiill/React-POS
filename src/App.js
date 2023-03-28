@@ -30,7 +30,7 @@ function App() {
           <Route
             path="/forgotpass"
             element={
-                <Forgotpass />
+              <Forgotpass />
             }
           />
           <Route
@@ -86,7 +86,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRouter>
-                <HelpAndSupport />
+                <Profile />
               </ProtectedRouter>
             }
           />

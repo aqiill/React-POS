@@ -3,9 +3,12 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import CommonComponent from "../../components/common/CommonComponent";
 import axios from "axios";
+import { MD5 } from "crypto-js";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [profile, setProfile] = useState([]);
+  const id_user = localStorage.getItem("id_user");
   const apiConfig = {
     baseURL: "http://localhost:8080",
     headers: {
@@ -16,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/users/1", apiConfig);
+        const response = await axios.get("/users/" + id_user, apiConfig);
         setProfile(response.data.data);
         console.log(response.data.data);
       } catch (error) {
@@ -28,6 +31,10 @@ const Profile = () => {
 
     fetchData();
   }, []);
+
+  const email = localStorage.getItem("email_user");
+  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+
   return (
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
@@ -47,8 +54,7 @@ const Profile = () => {
             <div className="card" style={{ height: 755, width: 750 }}>
               <div className="card-body">
                 <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
-                  <img src="https://via.placeholder.com/150" alt="Profile" />
-                  <input type="file" className="file-upload" />
+                  <a href="https://gravatar.com/" target="v_blank"><img src={avatar} alt="Profile" /></a>
                 </div>
                 <div className="form-group" style={{ marginTop: 56 }}>
                   <label
@@ -68,27 +74,18 @@ const Profile = () => {
                         borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                         fontSize: "larger",
                       }}
-                      readOnly
+                      readOnly disabled
                     />
-                    <button
-                      className="btn btn-secondary input-group-text"
-                      style={{
-                        borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
-                        backgroundColor: "rgba(1, 1, 1, 0)",
-                        borderTop: "none",
-                        borderLeft: "none",
-                        borderRight: "none",
-                        borderRadius: 0,
-                      }}
-                      type="button"
-                      id="editButton"
-                    >
-                      <i
-                        className="bi bi-pencil-fill"
-                        style={{ color: "black" }}
-                        data-target="#name"
-                      />
-                    </button>
+                    <Link to="/profileedit" className="btn btn-secondary input-group-text" style={{
+                      borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
+                      backgroundColor: "rgba(1, 1, 1, 0)",
+                      borderTop: "none",
+                      borderLeft: "none",
+                      borderRight: "none",
+                      borderRadius: 0,
+                    }} id="editButton">
+                      <i className="bi bi-pencil-fill" style={{ color: "black" }} />
+                    </Link>
                   </div>
                   <label
                     className="font-weight-light"
@@ -126,46 +123,6 @@ const Profile = () => {
                     }}
                     readOnly
                   />
-                  <label
-                    className="font-weight-light"
-                    htmlFor="pw"
-                    style={{ color: "grey", marginTop: 45 }}
-                  >
-                    Password
-                  </label>
-                  <div className="input-group">
-                    <input
-                      type="password"
-                      className="form-control-plaintext"
-                      id="pw"
-                      defaultValue={profile.password}
-                      style={{
-                        borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
-                        fontSize: "larger",
-                      }}
-                      readOnly
-                    />
-                    <button
-                      className="btn btn-secondary input-group-text"
-                      style={{
-                        borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
-                        backgroundColor: "rgba(1, 1, 1, 0)",
-                        borderTop: "none",
-                        borderLeft: "none",
-                        borderRight: "none",
-                        borderRadius: 0,
-                      }}
-                      type="button"
-                      id="editButton2"
-                    >
-                      <a href="/profileEdit">
-                        <i
-                          className="bi bi-pencil-fill"
-                          style={{ color: "black" }}
-                        />
-                      </a>
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
