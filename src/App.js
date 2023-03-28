@@ -81,7 +81,10 @@ function App() {
               </ProtectedRouter>
             }
           />
-          <Route path="/help-and-support" element={<HelpAndSupport />} />
+          <Route path="/help-and-support" element={
+          <ProtectedRouter>
+            <HelpAndSupport />
+            </ProtectedRouter>} />
           <Route
             path="/profile"
             element={
