@@ -57,7 +57,7 @@ function Forgotpass() {
 
   return (
     <>
-      <div className="login-box">
+      <div className="login-box" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', margin: '0 auto'}}>
         <div className="card">
           <div className="login-logo mt mb-5" style={{ marginTop: 50 }}>
             <img
@@ -122,9 +122,9 @@ function Forgotpass() {
                 <button
                   type="button"
                   className="text-primary btn btn-link"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/forgotpass")}
                 >
-                  Back to Login?
+                  Back to Login
                 </button>
               </div>
             </form>
