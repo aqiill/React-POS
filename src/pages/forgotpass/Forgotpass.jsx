@@ -122,7 +122,7 @@ function Forgotpass() {
                 <button
                   type="button"
                   className="text-primary btn btn-link"
-                  onClick={() => navigate("/forgotpass")}
+                  onClick={() => navigate("/login")}
                 >
                   Back to Login
                 </button>
