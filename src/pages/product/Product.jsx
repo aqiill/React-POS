@@ -5,6 +5,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Table from "./Tabel";
 import CommonComponent from "../../components/common/CommonComponent";
 import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -61,6 +64,7 @@ function Product() {
       .then((response) => {
         console.log(response.data);
         // navigate('/product')
+        Toast({ message: "Product created!", type: "success" });
         window.location.reload();
       })
       .catch((error) => {
@@ -127,39 +131,13 @@ function Product() {
     return formatter.format(price);
   };
 
-  useEffect(() => {
-    document.title = "Product Management | POS";
-    document.body.classList.add(
-      "hold-transition",
-      "light-mode",
-      "sidebar-mini",
-      "layout-fixed",
-      "layout-navbar-fixed",
-      "layout-footer-fixed",
-      "sidebar-mini-xs"
-    );
-    document.body.style.background = "#e7eef8";
-    document.body.style.overflowX = "hidden";
-    return () => {
-      document.body.classList.remove(
-        "hold-transition",
-        "light-mode",
-        "sidebar-mini",
-        "layout-fixed",
-        "layout-navbar-fixed",
-        "layout-footer-fixed",
-        "sidebar-mini-xs"
-      );
-      document.body.style.background = null;
-    };
-  }, []);
-
   if (loading) {
     return <div className="loading-container"><p>Loading...</p></div>;
   } else {
     return (
       <>
       <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
+      <ToastContainer />
       <div className="wrapper">
         <Header />
         <Sidebar activePage="product" />

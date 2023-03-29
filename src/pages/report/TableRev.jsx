@@ -20,7 +20,7 @@ class TableRev extends Component {
         setTimeout(function () {
           $("#tableRev").DataTable({
             destroy: true,
-            scrollY: "210px",
+            scrollY: "500px",
             scrollCollapse: true,
             paging: false,
             processing: true,
@@ -53,7 +53,7 @@ class TableRev extends Component {
                   var headers = dt.columns().header().to$().map(function () {
                     return this.innerText;
                   }).get();
-                  var excludedColumns = [1, 8];
+                  var excludedColumns = [];
                   var columnIndexes = headers
                     .map(function (column, index) {
                       if (excludedColumns.includes(index)) {
@@ -81,32 +81,20 @@ class TableRev extends Component {
                       styles: { overflow: 'linebreak' },
                       columnStyles: { 0: { cellWidth: 120 } },
                       addPageContent: function (data) {
-                        doc.text('Product Management POS', 40, 30);
+                        doc.text('Report Profit POS', 40, 30);
                       },
                     }
                   );
-                  doc.save('Product Report POS.pdf');
+                  doc.save('Report Profit POS.pdf');
                 },
               },
               {
                 extend: "csv",
                 text: "Excel",
-                exportOptions: {
-                  columns: [0, 2, 3, 4, 5, 6, 7],
-                  modifier: {
-                    selected: false
-                  },
-                },
                 className: "btn btn-secondary bg-secondary",
               },
               {
                 extend: "print",
-                exportOptions: {
-                  columns: [0, 2, 3, 4, 5, 6, 7],
-                  modifier: {
-                    selected: false
-                  },
-                },
                 customize: function (win) {
                   $(win.document.body).css("font-size", "10pt");
                   $(win.document.body)
@@ -135,25 +123,6 @@ class TableRev extends Component {
                 },
               },
             ],
-
-            fnRowCallback: function (
-              nRow,
-              aData,
-              iDisplayIndex,
-              iDisplayIndexFull
-            ) {
-              var index = iDisplayIndexFull + 1;
-              $("td:first", nRow).html(index);
-              return nRow;
-            },
-            columnDefs: [
-              {
-                targets: 0,
-                render: function (data, type, row, meta) {
-                  return type === "export" ? meta.row + 1 : data;
-                },
-              },
-            ],
           });
         }, 1000);
       });
@@ -164,7 +133,7 @@ class TableRev extends Component {
     try {
       return this.props.transaksi.map((item, index) => {
         return (
-          <tr>
+          <tr key={index}>
             <td className="">{index + 1}</td>
             <td className="">{item.no_pembayaran}</td>
             <td className="">{item.nama_user}</td>
