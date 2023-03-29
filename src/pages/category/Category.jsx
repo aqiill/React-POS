@@ -4,59 +4,55 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
 import Table from "./Table";
-import { Button, Modal} from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
   const [category, setCategory] = useState([]);
   const [formValues, setFormValues] = useState({
-    nama_kategori: ""
+    nama_kategori: "",
   });
-  // const [successMessage, setSuccessMessage] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const apiConfig = {
     baseURL: "http://localhost:8080",
     headers: {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },
   };
-  const [showModal, setShowModal] = useState(false);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-    if (selectedCategory && selectedCategory[name] !== value) {
-      setSelectedCategory({
-        ...selectedCategory,
-        [name]: value,
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("/kategori", formValues, apiConfig);
+      setFormValues({
+        nama_kategori: "",
+      });
+      toast.success("Category created", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      fetchData();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to create category", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
   };
 
-  const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // try {
-    //   const response = await axios.post("/", formValues, apiConfig);
-    //   setSuccessMessage("Data kategori baru berhasil ditambahkan");
-    //   setFormValues({
-    //     nama_kategori: ""
-    //   });
-    //   setShowModal(true);
-    //   setErrorMessage("");
-    //   fetchData();
-    // } catch (error) {
-    //   console.error(error);
-    //   setSuccessMessage("");
-    //   setErrorMessage("Gagal menambahkan data kategori baru");
-    // }
-  };
-
   const fetchData = async () => {
     try {
-      const response = await axios.get("/", apiConfig);
+      const response = await axios.get("/kategori", apiConfig);
       setCategory(response.data.data);
     } catch (error) {
       console.error(error);
@@ -98,6 +94,8 @@ function Category() {
                             <iconify-icon icon="oi:plus" />
                             Add Category
                           </button>
+
+                          {/* MODAL */}
                           <div
                             className="modal fade bd-example-modal-sm"
                             id="myModal"
@@ -124,12 +122,12 @@ function Category() {
                                       <input
                                         type="name"
                                         className="form-control"
-                                        id="nama_user"
-                                        name="nama_user"
-                                        onChange={handleInputChange}
+                                        id="kategori_id"
+                                        name="nama_kategori"
                                         aria-describedby="name"
                                         placeholder="Input Category Name"
                                         autoComplete="off"
+                                        required
                                       />
                                     </div>
                                   </div>
@@ -170,31 +168,13 @@ function Category() {
                                     </button>
                                   </div>
                                 </form>
-                                <Modal
-                                  show={showModal}
-                                  onHide={() => setShowModal(false)}
-                                >
-                                  <Modal.Header closeButton>
-                                    <Modal.Title>Sukses!</Modal.Title>
-                                  </Modal.Header>
-                                  <Modal.Body>
-                                    Data kategori baru berhasil ditambahkan.
-                                  </Modal.Body>
-                                  <Modal.Footer>
-                                    <Button
-                                      variant="primary"
-                                      onClick={() => setShowModal(false)}
-                                    >
-                                      OK
-                                    </Button>
-                                  </Modal.Footer>
-                                </Modal>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    {/* TABLE */}
                     <div className="card-body" style={{ padding: "0px 24px" }}>
                       <Table category={category} />
                     </div>
@@ -204,71 +184,7 @@ function Category() {
             </div>
           </section>
         </div>
-      </div>
-
-      <div
-        className="modal fade bd-example-modal-sm2"
-        id="myModal"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="mySmallModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-sm" role="document">
-          <div className="modal-content">
-            <div className="modal-header" style={{ border: "none" }}>
-              <h5 className="modal-title">Update Category</h5>
-            </div>
-            <div className="modal-body">
-              <div className="form-group">
-                <label htmlFor="nameCashier1">Category Name</label>
-                <input
-                  type="name"
-                  className="form-control"
-                  id="nameCashier1"
-                  aria-describedby="name"
-                  placeholder="Input Category Name"
-                />
-              </div>
-            </div>
-            <div
-              className="modal-footer d-flex justify-content-between"
-              style={{ border: "none" }}
-            >
-              <button
-                type="button"
-                className="btn"
-                data-dismiss="modal"
-                style={{
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: "normal",
-                  fontSize: "smaller",
-                  width: 100,
-                  height: 35,
-                  border: "none",
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn ms-auto"
-                style={{
-                  backgroundColor: "#5B7CFD",
-                  color: "white",
-                  fontWeight: "normal",
-                  fontSize: "smaller",
-                  width: 100,
-                  height: 35,
-                }}
-                id="saveBtn"
-              >
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
+        <ToastContainer />
       </div>
     </>
   );
