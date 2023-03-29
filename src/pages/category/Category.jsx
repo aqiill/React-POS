@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
+
+  const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState([]);
   const [formValues, setFormValues] = useState({
     nama_kategori: "",
@@ -54,6 +56,7 @@ function Category() {
     try {
       const response = await axios.get("/kategori", apiConfig);
       setCategory(response.data.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
       setCategory([]);
@@ -64,130 +67,135 @@ function Category() {
     fetchData();
   }, []);
 
-  return (
-    <>
-      <CommonComponent pageTitle="Category" backgroundStyle="#e7eef8" />
-      <div className="wrapper">
-        <Header />
-        <Sidebar activePage="category" />
-        <div className="content-wrapper row">
-          <section className="content col">
-            <div className="container-fluid">
-              <div className="row content-card">
-                <div className="col-lg-12">
-                  <div
-                    className="card"
-                    style={{
-                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                      borderRadius: 10,
-                      height: 755,
-                    }}
-                  >
-                    <div className="card-header border-0">
-                      <div className="d-flex justify-content-between">
-                        <div className="add-export" style={{ display: "flex" }}>
-                          <button
-                            className="btn bg-transparent table-cashier-button"
-                            data-toggle="modal"
-                            data-target=".bd-example-modal-sm"
-                          >
-                            <iconify-icon icon="oi:plus" />
-                            Add Category
-                          </button>
-
-                          {/* MODAL */}
-                          <div
-                            className="modal fade bd-example-modal-sm"
-                            id="myModal"
-                            tabIndex={-1}
-                            role="dialog"
-                            aria-labelledby="mySmallModalLabel"
-                            aria-hidden="true"
-                          >
-                            <div
-                              className="modal-dialog modal-sm"
-                              role="document"
+  if (loading) {
+    return <div className="loading-container"><p>Loading...</p></div>;
+  } else {
+    return (
+      <>
+        <CommonComponent pageTitle="Category" backgroundStyle="#e7eef8" />
+        <ToastContainer />
+        <div className="wrapper">
+          <Header />
+          <Sidebar activePage="category" />
+          <div className="content-wrapper row">
+            <section className="content col">
+              <div className="container-fluid">
+                <div className="row content-card">
+                  <div className="col-lg-12">
+                    <div
+                      className="card"
+                      style={{
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        borderRadius: 10,
+                        height: 600,
+                      }}
+                    >
+                      <div className="card-header border-0 mb-0 pb-0">
+                        <div className="d-flex justify-content-between">
+                          <div className="add-export" style={{ display: "flex" }}>
+                            <button
+                              className="btn bg-transparent table-cashier-button"
+                              data-toggle="modal"
+                              data-target=".bd-example-modal-sm"
+                            
                             >
-                              <div className="modal-content">
-                                <div
-                                  className="modal-header"
-                                  style={{ border: "none" }}
-                                >
-                                  <h5 className="modal-title">Add Category</h5>
-                                </div>
-                                <form onSubmit={handleSubmit}>
-                                  <div className="modal-body">
-                                    <div className="form-group">
-                                      <label htmlFor="name">Category Name</label>
-                                      <input
-                                        type="name"
-                                        className="form-control"
-                                        id="kategori_id"
-                                        name="nama_kategori"
-                                        aria-describedby="name"
-                                        placeholder="Input Category Name"
-                                        autoComplete="off"
-                                        required
-                                      />
-                                    </div>
-                                  </div>
+                              <iconify-icon icon="oi:plus" />
+                              Add Category
+                            </button>
+
+                            {/* MODAL */}
+                            <div
+                              className="modal fade bd-example-modal-sm"
+                              id="myModal"
+                              tabIndex={-1}
+                              role="dialog"
+                              aria-labelledby="mySmallModalLabel"
+                              aria-hidden="true"
+                            >
+                              <div
+                                className="modal-dialog modal-sm"
+                                role="document"
+                              >
+                                <div className="modal-content">
                                   <div
-                                    className="modal-footer d-flex justify-content-between"
+                                    className="modal-header"
                                     style={{ border: "none" }}
                                   >
-                                    <button
-                                      type="button"
-                                      className="btn"
-                                      data-dismiss="modal"
-                                      style={{
-                                        backgroundColor: "white",
-                                        color: "black",
-                                        fontWeight: "normal",
-                                        fontSize: "smaller",
-                                        width: 100,
-                                        height: 35,
-                                        border: "none",
-                                      }}
-                                    >
-                                      Cancel
-                                    </button>
-                                    <button
-                                      type="submit"
-                                      className="btn ms-auto"
-                                      style={{
-                                        backgroundColor: "#5B7CFD",
-                                        color: "white",
-                                        fontWeight: "normal",
-                                        fontSize: "smaller",
-                                        width: 100,
-                                        height: 35,
-                                      }}
-                                      id="saveBtn"
-                                    >
-                                      Add
-                                    </button>
+                                    <h5 className="modal-title">Add Category</h5>
                                   </div>
-                                </form>
+                                  <form onSubmit={handleSubmit}>
+                                    <div className="modal-body">
+                                      <div className="form-group">
+                                        <label htmlFor="name">Category Name</label>
+                                        <input
+                                          type="name"
+                                          className="form-control"
+                                          id="kategori_id"
+                                          name="nama_kategori"
+                                          aria-describedby="name"
+                                          placeholder="Input Category Name"
+                                          autoComplete="off"
+                                          required
+                                        />
+                                      </div>
+                                    </div>
+                                    <div
+                                      className="modal-footer d-flex justify-content-between"
+                                      style={{ border: "none" }}
+                                    >
+                                      <button
+                                        type="button"
+                                        className="btn"
+                                        data-dismiss="modal"
+                                        style={{
+                                          backgroundColor: "white",
+                                          color: "black",
+                                          fontWeight: "normal",
+                                          fontSize: "smaller",
+                                          width: 100,
+                                          height: 35,
+                                          border: "none",
+                                        }}
+                                      >
+                                        Cancel
+                                      </button>
+                                      <button
+                                        type="submit"
+                                        className="btn ms-auto"
+                                        style={{
+                                          backgroundColor: "#5B7CFD",
+                                          color: "white",
+                                          fontWeight: "normal",
+                                          fontSize: "smaller",
+                                          width: 100,
+                                          height: 35,
+                                        }}
+                                        id="saveBtn"
+                                      >
+                                        Add
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    {/* TABLE */}
-                    <div className="card-body" style={{ padding: "0px 24px" }}>
-                      <Table category={category} />
+                      {/* TABLE */}
+                      <div className="card-body" style={{ padding: "0px 24px" }}>
+                        <Table category={category} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
-        <ToastContainer />
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default Category;

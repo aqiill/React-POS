@@ -233,7 +233,7 @@ const Content = () => {
                                     <div className="card-deck">
                                         {stockProducts.map((product) => (
                                             <div className="card-dash float-right mb-2 m-2" style={{ minWidth: 200, maxWidth: 200, height: 250, fontSize: 'small', backgroundColor: '#F6F6F6', borderRadius: 20 }}>
-                                                <img className="card-img-top" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product Image" />
+                                                <img className="card-img-top" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product Image" style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 0 0'}}/>
                                                 <div className="card-body p-0 ml-1" style={{ fontWeight: 'bold' }}> {product.nama_produk}
                                                     <div className="progress" style={{ height: 6, width: 162, backgroundColor: 'red', borderRadius: 10 }}>
                                                         <div className="progress-bar" role="progressbar" aria-valuenow={0} aria-valuemin={0} aria-valuemax={100} />

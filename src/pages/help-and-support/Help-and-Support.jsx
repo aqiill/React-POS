@@ -93,7 +93,7 @@ function HelpAndSupport() {
                             </div>
                             <div className="social-media-contact">
                               <img className="d-inline mr-2" src="../dist/img/whatsapp.svg" alt="whatsappLogo" style={{ height: 20 }} />
-                              <p className="d-inline">08765432101</p>
+                              <p className="d-inline">089612744649</p>
                             </div>
                           </div>
                           <div className="social-media mb-4">
@@ -102,8 +102,10 @@ function HelpAndSupport() {
                               <p className="mb-1 text-muted">Follow us on Instagram!</p>
                             </div>
                             <div className="social-media-contact">
-                              <img className="d-inline mr-2" src="../dist/img/instagram.svg" alt="instagramLogo" style={{ height: 20 }} />
-                              <p className="d-inline">08765432101</p>
+                              <a href="http://instagram.com/blevenpos" target="_blank" style={{ hover: "black" }}>
+                                <img className="d-inline mr-2" src="../dist/img/instagram.svg" alt="instagramLogo" style={{ height: 20 }} />
+                                <p className="d-inline">@blevenpos</p>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -116,38 +118,50 @@ function HelpAndSupport() {
           </section>
         </div>
       </div>
-      {/* email sent modal */}
-      <div className={`modal fade ${isEmailSentModalOpen ? "show" : ""}`} tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: isEmailSentModalOpen ? "block" : "none" }}>
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Email has been sent
-              </h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setIsEmailSentModalOpen(false)}>
-                <span aria-hidden="true">&times;</span>
-              </button>
+      {isEmailSentModalOpen && (
+        <div className="modal fade show" style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Email Sent</h5>
+                <button type="button" className="close" onClick={() => setIsEmailSentModalOpen(false)}>
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Your message has been sent successfully!</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setIsEmailSentModalOpen(false)}>
+                  Close
+                </button>
+              </div>
             </div>
-            <div className="modal-body">Please kindly wait for our response in 24 hours.</div>
           </div>
         </div>
-      </div>
-      {/* email failed sent modal */}
-      <div className={`modal fade ${isEmailFailedModalOpen ? "show" : ""}`} tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: isEmailSentModalOpen ? "block" : "none" }}>
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Email has failed to be sent
-              </h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setIsEmailSentModalOpen(false)}>
-                <span aria-hidden="true">&times;</span>
-              </button>
+      )}
+      {isEmailFailedModalOpen && (
+        <div className="modal fade show" style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Email Sending Failed</h5>
+                <button type="button" className="close" onClick={() => setIsEmailFailedModalOpen(false)}>
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>There was an error sending your message. Please try again later.</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setIsEmailFailedModalOpen(false)}>
+                  Close
+                </button>
+              </div>
             </div>
-            <div className="modal-body">Sorry, looks like something unexpected happened. Please kindly rewrite the form and resend your message.</div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

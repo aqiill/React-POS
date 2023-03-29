@@ -5,6 +5,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Table from "./Tabel";
 import CommonComponent from "../../components/common/CommonComponent";
 import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -12,7 +15,19 @@ function Product() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/produk').then((response) => {
+      setProducts(response.data);
+    });
+  }, []);
+
+  const deleteProduct = (id) => {
+    axios.delete(`http://localhost:8080/produk/${id}`).then(() => {
+      setProducts(products.filter((product) => product.id !== id));
+    });
+  };
 
   const [formData, setFormData] = useState({
     kode_produk: "",
@@ -61,6 +76,7 @@ function Product() {
       .then((response) => {
         console.log(response.data);
         // navigate('/product')
+        Toast({ message: "Product created!", type: "success" });
         window.location.reload();
       })
       .catch((error) => {
@@ -127,39 +143,13 @@ function Product() {
     return formatter.format(price);
   };
 
-  useEffect(() => {
-    document.title = "Product Management | POS";
-    document.body.classList.add(
-      "hold-transition",
-      "light-mode",
-      "sidebar-mini",
-      "layout-fixed",
-      "layout-navbar-fixed",
-      "layout-footer-fixed",
-      "sidebar-mini-xs"
-    );
-    document.body.style.background = "#e7eef8";
-    document.body.style.overflowX = "hidden";
-    return () => {
-      document.body.classList.remove(
-        "hold-transition",
-        "light-mode",
-        "sidebar-mini",
-        "layout-fixed",
-        "layout-navbar-fixed",
-        "layout-footer-fixed",
-        "sidebar-mini-xs"
-      );
-      document.body.style.background = null;
-    };
-  }, []);
-
   if (loading) {
     return <div className="loading-container"><p>Loading...</p></div>;
   } else {
     return (
       <>
       <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
+      <ToastContainer />
       <div className="wrapper">
         <Header />
         <Sidebar activePage="product" />
@@ -221,7 +211,7 @@ function Product() {
                                   }}
                                 >
                                   <div className="col-md-6">
-                                    {calculateDays(product.expired_date)}
+                                    {calculateDays(product.expired_date)} Days Left
                                   </div>
                                   <div className="col-md-6 text-right">
                                     {product.expired_date}
@@ -242,6 +232,7 @@ function Product() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
+                      height: 373
                     }}
                   >
                     <div className="card-header">
@@ -327,7 +318,7 @@ function Product() {
                   <div className="card" style={{
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     borderRadius: 10,
-                    height: "auto",
+                    height: 610,
                   }}>
                     <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">

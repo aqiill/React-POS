@@ -12,6 +12,11 @@ import 'jspdf-autotable';
 import 'jspdf-font';
 import React, { Component } from "react";
 import axios from 'axios';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
+
+
 
 import $ from "jquery";
 
@@ -23,7 +28,7 @@ class Table extends Component {
         setTimeout(function () {
           $("#table").DataTable({
             destroy: true,
-            scrollY: "210px",
+            scrollY: "430px",
             scrollCollapse: true,
             paging: false,
             processing: true,
@@ -42,17 +47,34 @@ class Table extends Component {
                 orientation: "landscape",
                 pageSize: "A4",
                 titleAttr: "PDF",
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
                 style: {
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: "normal",
-                  fontSize: "smaller",
-                  width: 100,
-                  height: 35,
-                  border: "none",
+                  boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
+                  backgroundColor: "red",
+                  margin: "1rem",
                 },
-                action: function (e, dt, button, config) {
+                
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                },
+                  action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
                       return this.innerText;
@@ -101,7 +123,27 @@ class Table extends Component {
                     selected: false
                   },
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
               {
                 extend: "print",
@@ -118,7 +160,27 @@ class Table extends Component {
                     .addClass("compact")
                     .css("font-size", "inherit");
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
             ],
             fnRowCallback: function (
@@ -166,6 +228,7 @@ class Table extends Component {
               <img
                 className="table-product-img"
                 src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`}
+                style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 20px 20px'}}
                 alt="product"
               />
             </td>
@@ -180,9 +243,6 @@ class Table extends Component {
                 className="btn table-actions-button bg-transparent border drop-shadow"
                 data-toggle="modal"
                 data-target=".bd-example-modal-sm2"
-                onClick={() => {
-                  this.props.updateProducts(item);
-                }}
                 style={{ borderRadius: "50%", alignItems: "center" }}
               >
                 <iconify-icon icon="oi:pencil" />
@@ -192,7 +252,8 @@ class Table extends Component {
                 style={{ borderRadius: "50%" }}
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
-                    this.handleDelete(index);
+                    this.handleDelete(item.produk_id);
+                    
                   }
                 }}
               >
@@ -207,44 +268,21 @@ class Table extends Component {
     }
   };
   
-
-  // handleDelete = async (index) => {
-  //   const { products } = this.props;
-  //   const newProducts = [...products];
-  //   newProducts.splice(index, 1);
-  
-  //   try {
-  //     await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
-  //     this.setState({ products: newProducts });
-  //   } catch (error) {
-  //     console.error('Error deleting product:', error);
-  //   }
-  // };
-
-  handleDelete = async (index) => {
-    const productId = this.props.products[index].id;
-    const apiUrl = `http://localhost:8080/produk/${productId}`;
-    const headers = { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" };
-  
-    try {
-      const response = await fetch(apiUrl, {
-        method: "DELETE",
-        headers: headers
-      });
-  
-      if (response.ok) {
-        // Remove the deleted product from the state
-        const updatedProducts = [...this.props.products];
-        updatedProducts.splice(index, 1);
-        this.props.updateProducts(updatedProducts);
-      } else {
-        throw new Error("Failed to delete product");
+  handleDelete = (id) => {
+    axios.delete(`http://localhost:8080/produk/${id}`, {
+      headers: {
+        'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
       }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-  
+    })
+      .then(response => {
+        console.log(response.data);
+        Toast({ message: "Product Delete Succesfully!", type: "success" });
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };  
 
   render() {
     return (
