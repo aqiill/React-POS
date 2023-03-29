@@ -521,6 +521,7 @@ function Product() {
 
                     <Table
                       products={products}
+                      
                     />
                   </div>
                 </div>
