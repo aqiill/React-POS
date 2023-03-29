@@ -4,8 +4,9 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
 import Table from "./Table";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 function Employee() {
   const [employee, setEmployee] = useState([]);
@@ -47,27 +48,11 @@ function Employee() {
         password: "",
         role: "Employee",
       });
-      toast.success("Employee created", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      Toast({ message: "Employee create.", type: "success" });
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to create employee", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      Toast({ message: "Failed to create employee", type: "error" });
     }
   };
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,15 +23,6 @@ function Login() {
   useEffect(() => {
     if (localStorage.getItem("email_user")) {
       navigate("/home");
-      toast.success("Login success", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
   }, [navigate]);
 
@@ -54,24 +46,17 @@ function Login() {
         localStorage.setItem("nama_user", response.data.data.nama_user);
         localStorage.setItem("email_user", response.data.data.email_user);
         navigate("/home");
+        Toast({ message: "Login success.", type: "success" });
       } else {
         throw new Error("Invalid email or password");
       }
     } catch (error) {
-      console.error("Error while processing form submission: ", error);
-      console.error(
-        "Error response data: ",
-        error.response && error.response.data
-      );
-      toast.error("Email or password wrong", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      // console.error("Error while processing form submission: ", error);
+      // console.error(
+      //   "Error response data: ",
+      //   error.response && error.response.data
+      // );
+      Toast({ message: "Invalid email or password.", type: "error" });
     }
   };
 
