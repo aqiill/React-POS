@@ -248,7 +248,7 @@ class Table extends Component {
 
   render() {
     return (
-      <div class="card-body">
+      <div class="card-body mt-0 pt-1">
         <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
           <table
             id="table"
