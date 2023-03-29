@@ -28,7 +28,7 @@ class Table extends Component {
         setTimeout(function () {
           $("#table").DataTable({
             destroy: true,
-            pageLength: 5,
+            pageLength: 4,
             scrollY: "430px",
             scrollCollapse: true,
             processing: true,
