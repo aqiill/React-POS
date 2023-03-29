@@ -23,7 +23,7 @@ class Table extends Component {
         setTimeout(function () {
           $("#table").DataTable({
             destroy: true,
-            scrollY: "210px",
+            scrollY: "430px",
             scrollCollapse: true,
             paging: false,
             processing: true,
@@ -68,9 +68,8 @@ class Table extends Component {
                       });
                     }
                   );
-                }
-              
-                ,action: function (e, dt, button, config) {
+                },
+                  action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
                       return this.innerText;
@@ -248,11 +247,11 @@ class Table extends Component {
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
                 style={{ borderRadius: "50%" }}
-                onClick={() => {
-                  if (window.confirm("Are you sure want to delete this product?")) {
-                    this.handleDelete(index);
-                  }
-                }}
+                // onClick={() => {
+                //   if (window.confirm("Are you sure want to delete this product?")) {
+                //     this.handleDelete(index);
+                //   }
+                // }}
               >
                 <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
               </button>
@@ -279,34 +278,35 @@ class Table extends Component {
   //   }
   // };
 
-  handleDelete = async (index) => {
-    const productId = this.props.products[index].id;
-    const apiUrl = `http://localhost:8080/produk/${productId}`;
-    const headers = { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" };
+  // handleDelete = async (index) => {
+  //   const productId = this.props.products[index].id;
+  //   const apiUrl = `http://localhost:8080/produk/${productId}`;
+  //   const headers = { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" };
   
-    try {
-      const response = await fetch(apiUrl, {
-        method: "DELETE",
-        headers: headers
-      });
+  //   try {
+  //     const response = await fetch(apiUrl, {
+  //       method: "DELETE",
+  //       headers: headers
+  //     });
   
-      if (response.ok) {
-        // Remove the deleted product from the state
-        const updatedProducts = [...this.props.products];
-        updatedProducts.splice(index, 1);
-        this.props.updateProducts(updatedProducts);
-      } else {
-        throw new Error("Failed to delete product");
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
+  //     if (response.ok) {
+  //       // Remove the deleted product from the state
+  //       const updatedProducts = [...this.props.products];
+  //       updatedProducts.splice(index, 1);
+  //       this.props.updateProducts(updatedProducts);
+  //     } else {
+  //       throw new Error("Failed to delete product");
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // }
+  
   
 
   render() {
     return (
-      <div class="card-body mt-0 pt-1">
+      <div class="card-body">
         <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
           <table
             id="table"

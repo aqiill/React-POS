@@ -15,7 +15,19 @@ function Product() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/produk').then((response) => {
+      setProducts(response.data);
+    });
+  }, []);
+
+  const deleteProduct = (id) => {
+    axios.delete(`http://localhost:8080/produk/${id}`).then(() => {
+      setProducts(products.filter((product) => product.id !== id));
+    });
+  };
 
   const [formData, setFormData] = useState({
     kode_produk: "",
@@ -220,6 +232,7 @@ function Product() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
+                      height: 373
                     }}
                   >
                     <div className="card-header">
@@ -305,7 +318,7 @@ function Product() {
                   <div className="card" style={{
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     borderRadius: 10,
-                    height: "auto",
+                    height: 610,
                   }}>
                     <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">

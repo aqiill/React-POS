@@ -21,7 +21,7 @@ class TableProf extends Component {
         setTimeout(function () {
           $("#tableProf").DataTable({
             destroy: true,
-            scrollY: "500px",
+            scrollY: "430px",
             scrollCollapse: true,
             paging: false,
             processing: true,

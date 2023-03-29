@@ -20,7 +20,7 @@ class TableRev extends Component {
         setTimeout(function () {
           $("#tableRev").DataTable({
             destroy: true,
-            scrollY: "500px",
+            scrollY: "430px",
             scrollCollapse: true,
             paging: false,
             processing: true,
