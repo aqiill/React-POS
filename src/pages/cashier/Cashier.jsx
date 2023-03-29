@@ -2,10 +2,15 @@ import Header from "../../components/header/Header";
 import SidebarCashier from "../../components/sidebar/SidebarCashier";
 import OrderList from "../../components/content/orderList";
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const Cashier = () => {
   const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
+  const [kodeProduk, setKodeProduk] = useState('');
+  const [total, setTotal] = useState(0);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     document.title = "POS | Cashier";
@@ -15,32 +20,89 @@ const Cashier = () => {
       document.body.classList.remove("hold-transition", "light-mode", "sidebar-mini", "layout-fixed", "layout-navbar-fixed", "layout-footer-fixed", "sidebar-mini-xs");
     };
   }, []);
+
+  const handleTambahProduk = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/produk/${kodeProduk}`, {
+        headers: {
+          api_key: 'e3fd6b146fcb65f7419e3531a0a84f4d700b8210'
+        }
+      });
+
+      if (response.data) {
+        const produk = response.data;
+        const produkSudahAda = cart.find(p => p.id === produk.data.produk_id);
+        // console.log(produkSudahAda);
+        if (produkSudahAda) {
+          // Jika produk sudah ada di dalam cart, tambahkan jumlahnya
+          setCart(cart.map(p => {
+            if (p.id === produk.data.produk_id) {
+              return {
+                ...p,
+                jumlah: p.jumlah + 1
+              };
+            }
+            return p;
+          }));
+        } else {
+          // Jika produk belum ada di dalam cart, tambahkan produk baru
+          setCart([...cart, {
+            id: produk.data.produk_id,
+            nama: produk.data.nama_produk,
+            harga: produk.data.harga_jual,
+            expired: produk.data.expired_date,
+            gambar: produk.data.gambar,
+            jumlah: 1
+          }]);
+        }
+
+
+        // Kosongkan input kode_produk setelah berhasil menambahkan produk ke cart
+        setKodeProduk('');
+      } else {
+        alert('Produk tidak ditemukan');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Terjadi kesalahan pada server');
+    }
+  };
+  // Hitung total harga produk yang ada di cart
+  useEffect(() => {
+    let total = 0;
+    cart.forEach(p => {
+      total += p.harga * p.jumlah;
+    });
+    setTotal(total);
+  }, [cart]);
+
+  // console.log(total);
   return (
     <>
-      <div className="wrapper" style={{overflow: 'hidden'}}>
+      <div className="wrapper" style={{ overflow: 'hidden' }}>
         <Header />
         <SidebarCashier activePage="Cashier" />
         <div className="content-wrapper row">
           <section className="content col">
             <section className="container-fluid">
               <div className="col-lg-12">
-              <div
-                    className="card"
-                    style={{
-                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                      borderRadius: 10,
-                      height: "auto",
-                    }}
-                  >
-                  <div style={{display:'flex', justifyContent: 'flex-end'}}>
-                    <input type="search" placeholder="input kode produk" style={{borderRadius: '10px', margin: '10px', width: '25%', padding: '3px'}}/>
-                    <button class="btn bg-transparent table-category-button" style={{marginRight: '15px', marginLeft: '0px'}}>
+                <div
+                  className="card"
+                  style={{
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    borderRadius: 10,
+                    height: "auto",
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <input autoFocus type="search" value={kodeProduk} onChange={e => setKodeProduk(e.target.value)} placeholder="input kode produk" style={{ borderRadius: '10px', margin: '10px', width: '25%', padding: '3px' }} />
+                    <button class="btn bg-transparent table-category-button" style={{ marginRight: '15px', marginLeft: '0px' }} onClick={handleTambahProduk}>
                       <iconify-icon icon="oi:plus"></iconify-icon>
                     </button>
                   </div>
-                  <div className="card-body" style={{padding: '0px 24px', margin:'10px', overflowY: 'scroll', minHeight: '300px', maxHeight: '300px'}}>
+                  <div className="card-body" style={{ padding: '0px 24px', margin: '10px', overflowY: 'scroll', minHeight: '300px', maxHeight: '300px' }}>
                     <table className="table">
-                      <thead style={{position: 'sticky', top: '0', backgroundColor: '#fff'}}>
+                      <thead style={{ position: 'sticky', top: '0', backgroundColor: '#fff' }}>
                         <tr className="text-muted fs-10">
                           <td scope="col">No</td>
                           <td scope="col">Photo</td>
@@ -49,72 +111,36 @@ const Cashier = () => {
                           <td scope="col">Price</td>
                           <td scope="col">Quantity</td>
                           <td scope="col">Sub Total</td>
-                          <td scope="col">Actions</td>
+                          {/* <td scope="col">Actions</td> */}
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="fs-10">
-                          <td scope="row">1</td>
-                          <td>
-                            <img className="table-product-img" src="../dist/img/susu.png" alt=""/>
-                          </td>
-                          <td>Susu Ultra Milk Coklat 200ml</td>
-                          <td>22/02/2023</td>
-                          <td>IDR 25,500.00</td>
-                          <td>1</td>
-                          <td>IDR 25,500.00</td>
-                          <td>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:minus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:plus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr className="fs-10">
-                          <td scope="row">1</td>
-                          <td>
-                            <img className="table-product-img" src="../dist/img/susu.png" alt=""/>
-                          </td>
-                          <td>Susu Ultra Milk Coklat 200ml</td>
-                          <td>22/02/2023</td>
-                          <td>IDR 25,500.00</td>
-                          <td>1</td>
-                          <td>IDR 25,500.00</td>
-                          <td>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:minus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:plus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr className="fs-10">
-                          <td scope="row">1</td>
-                          <td>
-                            <img className="table-product-img" src="../dist/img/susu.png" alt=""/>
-                          </td>
-                          <td>Susu Ultra Milk Coklat 200ml</td>
-                          <td>22/02/2023</td>
-                          <td>IDR 25,500.00</td>
-                          <td>1</td>
-                          <td>IDR 25,500.00</td>
-                          <td>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:minus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                            <button className="btn table-actions-button bg-transparent">
-                              <iconify-icon icon="mdi:plus-circle-outline" style={{color: 'black', width: '20'}}></iconify-icon>
-                            </button>
-                          </td>
-                        </tr>
+                        {cart.map((product, i) => (
+                          <tr className="fs-10">
+                            <td scope="row">{i + 1}</td>
+                            <td>
+                              <img className="table-product-img" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="" />
+                            </td>
+                            <td>{product.nama}</td>
+                            <td>{product.expired}</td>
+                            <td>{product.harga}</td>
+                            <td>{product.jumlah}</td>
+                            <td>{product.harga * product.jumlah}</td>
+                            {/* <td>
+                              <button className="btn table-actions-button bg-transparent">
+                                <iconify-icon icon="mdi:minus-circle-outline" style={{ color: 'black', width: '20' }}></iconify-icon>
+                              </button>
+                              <button className="btn table-actions-button bg-transparent">
+                                <iconify-icon icon="mdi:plus-circle-outline" style={{ color: 'black', width: '20' }}></iconify-icon>
+                              </button>
+                            </td> */}
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
-                  </div>  
+                  </div>
                 </div>
-                <OrderList />
+                <OrderList total={total} cart={cart} />
               </div>
             </section>
           </section>

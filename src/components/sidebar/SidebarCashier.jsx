@@ -5,7 +5,7 @@ import { MD5 } from "crypto-js";
 const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
   const nama_user = localStorage.getItem("nama_user");
-  console.log(activePage);
+  // console.log(activePage);
 
   const handleLogout = () => {
     localStorage.removeItem("nama_user");
