@@ -270,6 +270,7 @@ function Product() {
                               className="card-img-top"
                               src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
                               alt="Product"
+                              style={{height:'155.54px', width: '200px', borderRadius:'20px 20px 0 0'}}
                             />
                             <div
                               className="card-body p-0 ml-1"
