@@ -25,8 +25,8 @@ class TableProf extends Component {
             paging: false,
             processing: true,
             dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'l><'col-md-6'p>>",
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'l><'col-md-6'p>>",
             select: {
               style: "single",
             },
@@ -51,39 +51,39 @@ class TableProf extends Component {
                 action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
-                      return this.innerText;
+                    return this.innerText;
                   }).get();
                   var excludedColumns = [1, 8];
                   var columnIndexes = headers
-                      .map(function(column, index) { 
-                          if (excludedColumns.includes(index)) {
-                              return null;
-                          }
-                          return index;
-                      })
-                      .filter(function(columnIndex) {
-                          return columnIndex !== null;
-                      });
+                    .map(function (column, index) {
+                      if (excludedColumns.includes(index)) {
+                        return null;
+                      }
+                      return index;
+                    })
+                    .filter(function (columnIndex) {
+                      return columnIndex !== null;
+                    });
                   data = JSON.parse(JSON.stringify(data).replace(/<[^>]*>/g, ''));
                   var doc = new jsPDF('l', 'pt', this.pageSize);
                   doc.autoTable(
-                      columnIndexes.map(function(columnIndex) {
-                          return headers[columnIndex];
-                      }), 
-                      data.body.map(function(row) {
-                          return columnIndexes.map(function(columnIndex) {
-                              return row[columnIndex];
-                          });
-                      }), 
-                      {
-                          startY: 60,
-                          margin: { top: 60 },
-                          styles: { overflow: 'linebreak' },
-                          columnStyles: { 0: { cellWidth: 120 } },
-                          addPageContent: function (data) {
-                              doc.text('Product Management POS', 40, 30);
-                          },
-                      }
+                    columnIndexes.map(function (columnIndex) {
+                      return headers[columnIndex];
+                    }),
+                    data.body.map(function (row) {
+                      return columnIndexes.map(function (columnIndex) {
+                        return row[columnIndex];
+                      });
+                    }),
+                    {
+                      startY: 60,
+                      margin: { top: 60 },
+                      styles: { overflow: 'linebreak' },
+                      columnStyles: { 0: { cellWidth: 120 } },
+                      addPageContent: function (data) {
+                        doc.text('Product Management POS', 40, 30);
+                      },
+                    }
                   );
                   doc.save('Product Report POS.pdf');
                 },
@@ -162,13 +162,13 @@ class TableProf extends Component {
 
   showTable = () => {
     try {
-      return this.props.products.map((item, index) => {
+      return this.props.profit.map((item, index) => {
         return (
           <tr>
             <td className="">{index + 1}</td>
             <td className="">{item.nama_produk}</td>
-            <td className="">{item.nama_kategori}</td>
-            <td className="">{item.expired_date}</td>
+            <td className="">{item.total_terjual}</td>
+            <td className="">{item.keuntungan}</td>
           </tr>
         );
       });
