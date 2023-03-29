@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 function Forgotpass() {
   const [email, setEmail] = useState("");
@@ -39,6 +42,7 @@ function Forgotpass() {
         }
       );
       if (response.data.status === 200) {
+        // Toast({ message: "Process failed: Email not found", type: "success" });
         navigate("/login");
       } else {
         throw new Error("Email not found");
@@ -49,7 +53,8 @@ function Forgotpass() {
         "Error response data: ",
         error.response && error.response.data
       );
-      alert("Failed to send email. Please check your email");
+      // alert("Failed to send email. Please check your email");
+      Toast({ message: "Process failed: Email not found", type: "error" });
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +62,16 @@ function Forgotpass() {
 
   return (
     <>
-      <div className="login-box" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', margin: '0 auto'}}>
+      <div
+        className="login-box"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          margin: "0 auto",
+        }}
+      >
         <div className="card">
           <div className="login-logo mt mb-5" style={{ marginTop: 50 }}>
             <img
@@ -131,6 +145,7 @@ function Forgotpass() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
