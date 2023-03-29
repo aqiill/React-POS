@@ -15,9 +15,6 @@ import axios from 'axios';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/toast/Toast";
-
-
-
 import $ from "jquery";
 
 
@@ -29,7 +26,7 @@ class Table extends Component {
           $("#table").DataTable({
             destroy: true,
             pageLength: 4,
-            scrollY: "430px",
+            scrollY: "400px",
             scrollCollapse: true,
             processing: true,
             dom: 
@@ -42,6 +39,7 @@ class Table extends Component {
             },
 
             buttons: [
+              
               {
                 extend: "pdfHtml5",
                 text: "PDF",
@@ -287,11 +285,11 @@ class Table extends Component {
 
   render() {
     return (
-      <div class="card-body mt-0 pt-1">
-        <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
+      <div class="card-body mt-0 pt-1 mb-4">
+        <div className=" scrollable-table" style={{ overflowX: "hidden", }}>
           <table
             id="table"
-            className="table align-items-center justify-content-center mb-0"
+            className="table align-items-center justify-content-center"
           >
             <thead>
               <tr>
