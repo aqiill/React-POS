@@ -228,6 +228,7 @@ class Table extends Component {
               <img
                 className="table-product-img"
                 src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`}
+                style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 20px 20px'}}
                 alt="product"
               />
             </td>
@@ -276,8 +277,7 @@ class Table extends Component {
       .then(response => {
         console.log(response.data);
         Toast({ message: "Product Delete Succesfully!", type: "success" });
-        // window.location.reload();
-        this.fetchProduk();
+        window.location.reload();
       })
       .catch(error => {
         console.log(error);
