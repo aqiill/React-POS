@@ -79,7 +79,7 @@ function Login() {
         <div className="card">
           <div className="login-logo mt mb-5" style={{ marginTop: 50 }}>
             <img
-              src={process.env.PUBLIC_URL + "/assets/img/SimpleLogo.svg"}
+              src={process.env.PUBLIC_URL + "/assets/img/bleven_logo.png"}
               style={{ width: "80%", height: "80%" }}
               alt="logo"
             />

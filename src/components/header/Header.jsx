@@ -19,10 +19,10 @@ const Header = () => {
         {/* Brand Logo */}
         <Link to="/home" className="brand-link-custom" style={{ height: 90 }}>
           <img
-            src="./docs/assets/img/POS_logo.png"
+            src="./docs/assets/img/bleven_logo.png"
             alt="POS Logo"
             className="brand-image"
-            style={{ height: 43, width: 197 }}
+            style={{ height: 43, width: 230 }}
           />
           <span className="brand-text font-weight-light" />
         </Link>
