@@ -73,6 +73,7 @@ function Category() {
     return (
       <>
         <CommonComponent pageTitle="Category" backgroundStyle="#e7eef8" />
+        <ToastContainer />
         <div className="wrapper">
           <Header />
           <Sidebar activePage="category" />
@@ -86,7 +87,7 @@ function Category() {
                       style={{
                         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                         borderRadius: 10,
-                        height: 755,
+                        height: 600,
                       }}
                     >
                       <div className="card-header border-0">
@@ -190,7 +191,6 @@ function Category() {
               </div>
             </section>
           </div>
-          <ToastContainer />
         </div>
       </>
     );

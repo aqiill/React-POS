@@ -2,7 +2,10 @@ import React, { Component, useState, useEffect, useRef } from 'react'
 import axios from "axios";
 // import simpleLogo from "%PUBLIC_URL%/../../public/assets/img/SimpleLogo.svg";
 import { useReactToPrint } from 'react-to-print';
-
+import Table from "./Table";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 
 const EditModal = () => {
@@ -59,7 +62,7 @@ const EditModal = () => {
             .then((response) => {
                 console.log(response.data);
                 // navigate('/product')
-                // Toast({ message: "Category Updated!", type: "success" });
+                Toast({ message: "Category Updated!", type: "success" });
                 // window.location.reload();
             })
             .catch((error) => {
@@ -76,6 +79,7 @@ const EditModal = () => {
     };
     return (
         <div>
+            <ToastContainer />
             {kategori.map((kategori) => (
                 <div
                     className="modal fade bd-example-modal-sm2"
