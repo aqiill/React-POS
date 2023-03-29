@@ -3,6 +3,8 @@ import axios from "axios";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Table from "./Tabel";
+import CommonComponent from "../../components/common/CommonComponent";
+import { useNavigate } from "react-router";
 
 function Product() {
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -10,6 +12,7 @@ function Product() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     kode_produk: "",
@@ -57,6 +60,8 @@ function Product() {
       })
       .then((response) => {
         console.log(response.data);
+        // navigate('/product')
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -153,11 +158,12 @@ function Product() {
     return <div className="loading-container"><p>Loading...</p></div>;
   } else {
     return (
-
+      <>
+      <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
         <Sidebar activePage="product" />
-        <div className="content-wrapper ">
+        <div className="content-wrapper row">
           <section className="content col">
             <div className="container-fluid">
               <div className="row content-card">
@@ -264,6 +270,7 @@ function Product() {
                               className="card-img-top"
                               src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
                               alt="Product"
+                              style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 0 0'}}
                             />
                             <div
                               className="card-body p-0 ml-1"
@@ -322,7 +329,7 @@ function Product() {
                     borderRadius: 10,
                     height: "auto",
                   }}>
-                    <div className="card-header border-0">
+                    <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
@@ -487,7 +494,9 @@ function Product() {
                               >
                                 Close
                               </button>
-                              <button
+                              <a href="/product">
+                                <button
+                            
                                 type="submit"
                                 className="btn btn-primary"
                                 style={{
@@ -499,9 +508,12 @@ function Product() {
                                   height: 35,
                                 }}
                                 id="saveBtn"
+                                
                               >
                                 Save changes
                               </button>
+                              </a>
+                              
                             </div>
                           </div>
                         </form>
@@ -510,6 +522,7 @@ function Product() {
 
                     <Table
                       products={products}
+                      
                     />
                   </div>
                 </div>
@@ -520,7 +533,7 @@ function Product() {
         </div >
       </div >
 
-
+      </>
 
     );
   }

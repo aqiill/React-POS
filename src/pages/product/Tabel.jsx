@@ -14,6 +14,8 @@ import React, { Component } from "react";
 import axios from 'axios';
 
 import $ from "jquery";
+
+
 class Table extends Component {
   componentDidMount() {
     if (!$.fn.DataTable.isDataTable("#myTable")) {
@@ -178,6 +180,9 @@ class Table extends Component {
                 className="btn table-actions-button bg-transparent border drop-shadow"
                 data-toggle="modal"
                 data-target=".bd-example-modal-sm2"
+                onClick={() => {
+                  this.props.updateProducts(item);
+                }}
                 style={{ borderRadius: "50%", alignItems: "center" }}
               >
                 <iconify-icon icon="oi:pencil" />
@@ -202,31 +207,48 @@ class Table extends Component {
     }
   };
   
-  // handleDelete = (index) => {
+
+  // handleDelete = async (index) => {
   //   const { products } = this.props;
   //   const newProducts = [...products];
   //   newProducts.splice(index, 1);
-  //   // call the API to delete the product from the database
-  //   // and update the state to re-render the table
-  //   this.setState({ products: newProducts });
+  
+  //   try {
+  //     await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
+  //     this.setState({ products: newProducts });
+  //   } catch (error) {
+  //     console.error('Error deleting product:', error);
+  //   }
   // };
 
   handleDelete = async (index) => {
-    const { products } = this.props;
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
+    const productId = this.props.products[index].id;
+    const apiUrl = `http://localhost:8080/produk/${productId}`;
+    const headers = { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" };
   
     try {
-      await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
-      this.setState({ products: newProducts });
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+        headers: headers
+      });
+  
+      if (response.ok) {
+        // Remove the deleted product from the state
+        const updatedProducts = [...this.props.products];
+        updatedProducts.splice(index, 1);
+        this.props.updateProducts(updatedProducts);
+      } else {
+        throw new Error("Failed to delete product");
+      }
     } catch (error) {
-      console.error('Error deleting product:', error);
+      alert(error.message);
     }
-  };
+  }
+  
 
   render() {
     return (
-      <div class="card-body">
+      <div class="card-body mt-0 pt-1">
         <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
           <table
             id="table"

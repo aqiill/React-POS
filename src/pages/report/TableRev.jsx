@@ -25,8 +25,8 @@ class TableRev extends Component {
             paging: false,
             processing: true,
             dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'l><'col-md-6'p>>",
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'l><'col-md-6'p>>",
             select: {
               style: "single",
             },
@@ -51,39 +51,39 @@ class TableRev extends Component {
                 action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
-                      return this.innerText;
+                    return this.innerText;
                   }).get();
                   var excludedColumns = [1, 8];
                   var columnIndexes = headers
-                      .map(function(column, index) { 
-                          if (excludedColumns.includes(index)) {
-                              return null;
-                          }
-                          return index;
-                      })
-                      .filter(function(columnIndex) {
-                          return columnIndex !== null;
-                      });
+                    .map(function (column, index) {
+                      if (excludedColumns.includes(index)) {
+                        return null;
+                      }
+                      return index;
+                    })
+                    .filter(function (columnIndex) {
+                      return columnIndex !== null;
+                    });
                   data = JSON.parse(JSON.stringify(data).replace(/<[^>]*>/g, ''));
                   var doc = new jsPDF('l', 'pt', this.pageSize);
                   doc.autoTable(
-                      columnIndexes.map(function(columnIndex) {
-                          return headers[columnIndex];
-                      }), 
-                      data.body.map(function(row) {
-                          return columnIndexes.map(function(columnIndex) {
-                              return row[columnIndex];
-                          });
-                      }), 
-                      {
-                          startY: 60,
-                          margin: { top: 60 },
-                          styles: { overflow: 'linebreak' },
-                          columnStyles: { 0: { cellWidth: 120 } },
-                          addPageContent: function (data) {
-                              doc.text('Product Management POS', 40, 30);
-                          },
-                      }
+                    columnIndexes.map(function (columnIndex) {
+                      return headers[columnIndex];
+                    }),
+                    data.body.map(function (row) {
+                      return columnIndexes.map(function (columnIndex) {
+                        return row[columnIndex];
+                      });
+                    }),
+                    {
+                      startY: 60,
+                      margin: { top: 60 },
+                      styles: { overflow: 'linebreak' },
+                      columnStyles: { 0: { cellWidth: 120 } },
+                      addPageContent: function (data) {
+                        doc.text('Product Management POS', 40, 30);
+                      },
+                    }
                   );
                   doc.save('Product Report POS.pdf');
                 },
@@ -162,35 +162,14 @@ class TableRev extends Component {
 
   showTable = () => {
     try {
-      return this.props.products.map((item, index) => {
+      return this.props.transaksi.map((item, index) => {
         return (
           <tr>
             <td className="">{index + 1}</td>
-            <td className="">
-              <img class="table-product-img" src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`} alt="product" />
-            </td>
-            <td className="">{item.nama_produk}</td>
-            <td className="">{item.nama_kategori}</td>
-            <td className="">{item.expired_date}</td>
-            <td className="">{item.stok}</td>
-            <td className="">{item.harga_modal}</td>
-            <td className="">{item.harga_jual}</td>
-            <td>
-              <button
-                className="btn table-actions-button bg-transparent border drop-shadow"
-                data-toggle="modal"
-                data-target=".bd-example-modal-sm2"
-                style={{ borderRadius: "50%", alignItems: "center" }}
-              >
-                <iconify-icon icon="oi:pencil" />
-              </button>
-              <button
-                className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                style={{ borderRadius: "50%" }}
-              >
-                <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
-              </button>
-            </td>
+            <td className="">{item.no_pembayaran}</td>
+            <td className="">{item.nama_user}</td>
+            <td className="">{item.total_pembayaran}</td>
+            <td className="">{item.tgl_pembayaran}</td>
           </tr>
         );
       });
