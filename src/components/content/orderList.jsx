@@ -5,33 +5,16 @@ function orderList() {
     <div>
       <div>
         <div className="card" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10 }}>
-          <div className="card-header border-0 d-flex justify-content-between">
-            <h6>Payment Method</h6>
+          <div className="card-header border-0" style={{display: 'flex', justifyContent: 'flex-end'}} >
             <h6>Payment Details</h6>
           </div>
-          <div className="card-body d-flex justify-content-between" style={{ padding: "0px 24px" }}>
+          <div className="card-body d-flex justify-content-between" style={{ padding: "0px 24px", }}>
             <div>
-              <form action>
-                <div className="form-group">
-                  <label htmlFor="inputMemberId" />
-                  <input type="email" className="form-control" id="memberId" aria-describedby="emailHelp" placeholder="Input Member ID" />
-                </div>
-                <div className="form-group">
-                  <select className="form-control" id="exampleFormControlSelect1" placeholder="Select Payment Method">
-                    <option>Method 1</option>
-                    <option>Method 2</option>
-                    <option>Method 3</option>
-                    <option>Method 4</option>
-                    <option>Method 5</option>
-                  </select>
-                </div>
-              </form>
             </div>
-            <div className="d-flex payment-details">
+            <div className="d-flex payment-details" >
               <div>
                 <p>Sub Total :</p>
                 <p>Tax :</p>
-                <p>Discount :</p>
                 <p>Total :</p>
               </div>
               <div>
