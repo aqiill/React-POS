@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
-
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState([]);
   const [formValues, setFormValues] = useState({
@@ -19,6 +18,22 @@ function Category() {
     headers: {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+    if (selectedCategory && selectedCategory[name] !== value) {
+      setSelectedCategory({
+        ...selectedCategory,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -68,7 +83,11 @@ function Category() {
   }, []);
 
   if (loading) {
-    return <div className="loading-container"><p>Loading...</p></div>;
+    return (
+      <div className="loading-container">
+        <p>Loading...</p>
+      </div>
+    );
   } else {
     return (
       <>
@@ -92,12 +111,14 @@ function Category() {
                     >
                       <div className="card-header border-0 mb-0 pb-0">
                         <div className="d-flex justify-content-between">
-                          <div className="add-export" style={{ display: "flex" }}>
+                          <div
+                            className="add-export"
+                            style={{ display: "flex" }}
+                          >
                             <button
                               className="btn bg-transparent table-cashier-button"
                               data-toggle="modal"
                               data-target=".bd-example-modal-sm"
-                            
                             >
                               <iconify-icon icon="oi:plus" />
                               Add Category
@@ -121,18 +142,24 @@ function Category() {
                                     className="modal-header"
                                     style={{ border: "none" }}
                                   >
-                                    <h5 className="modal-title">Add Category</h5>
+                                    <h5 className="modal-title">
+                                      Add Category
+                                    </h5>
                                   </div>
                                   <form onSubmit={handleSubmit}>
                                     <div className="modal-body">
                                       <div className="form-group">
-                                        <label htmlFor="name">Category Name</label>
+                                        <label htmlFor="name">
+                                          Category Name
+                                        </label>
                                         <input
                                           type="name"
                                           className="form-control"
                                           id="kategori_id"
                                           name="nama_kategori"
                                           aria-describedby="name"
+                                          value={formValues.nama_kategori}
+                                          onChange={handleInputChange}
                                           placeholder="Input Category Name"
                                           autoComplete="off"
                                           required
@@ -183,7 +210,10 @@ function Category() {
                         </div>
                       </div>
                       {/* TABLE */}
-                      <div className="card-body" style={{ padding: "0px 24px" }}>
+                      <div
+                        className="card-body"
+                        style={{ padding: "0px 24px" }}
+                      >
                         <Table category={category} />
                       </div>
                     </div>
