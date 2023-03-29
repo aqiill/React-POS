@@ -5,6 +5,8 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { Link } from "react-router-dom";
 import { MD5 } from "crypto-js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfileEdit = () => {
   const [profile, setProfile] = useState([]);
@@ -50,9 +52,27 @@ const ProfileEdit = () => {
       })
       .then((response) => {
         console.log(response.data);
+        toast.success("Profile updated", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Failed to update profile", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 
@@ -73,7 +93,8 @@ const ProfileEdit = () => {
   }, []);
 
   const email = localStorage.getItem("email_user");
-  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+  const avatar =
+    "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
   return (
     <>
@@ -92,15 +113,21 @@ const ProfileEdit = () => {
         >
           <div className="box">
             <div className="card" style={{ height: 755, width: 750 }}>
-              <Link to="/profile" className="btn btn-secondary position-absolute top-0 start-0 m-3" style={{ backgroundColor: "rgba(1, 1, 1, 0)", border: "none" }}>
+              <Link
+                to="/profile"
+                className="btn btn-secondary position-absolute top-0 start-0 m-3"
+                style={{ backgroundColor: "rgba(1, 1, 1, 0)", border: "none" }}
+              >
                 <i className="fas fa-arrow-left" style={{ color: "black" }} />
               </Link>
               <form onSubmit={handleSubmit}>
                 <div className="card-body">
                   <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
-                    <a href="https://gravatar.com/" target="v_blank"><img src={avatar} alt="Profile" /></a>
+                    <a href="https://gravatar.com/" target="v_blank">
+                      <img src={avatar} alt="Profile" />
+                    </a>
                   </div>
-                  <div className="form-group" style={{ marginTop: 25}}>
+                  <div className="form-group" style={{ marginTop: 25 }}>
                     <label
                       className="font-weight-light"
                       htmlFor="name"
@@ -218,6 +245,7 @@ const ProfileEdit = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -22,6 +22,15 @@ function Login() {
   useEffect(() => {
     if (localStorage.getItem("email_user")) {
       navigate("/home");
+      toast.success("Login success", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }, [navigate]);
 
@@ -44,15 +53,6 @@ function Login() {
         localStorage.setItem("id_user", response.data.data.id_user);
         localStorage.setItem("nama_user", response.data.data.nama_user);
         localStorage.setItem("email_user", response.data.data.email_user);
-        toast.success("Login success", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
         navigate("/home");
       } else {
         throw new Error("Invalid email or password");
