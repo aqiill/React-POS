@@ -46,17 +46,28 @@ class Table extends Component {
                 orientation: "landscape",
                 pageSize: "A4",
                 titleAttr: "PDF",
-                className: "btn btn-secondary bg-secondary",
-                style: {
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: "normal",
-                  fontSize: "smaller",
-                  width: 100,
-                  height: 35,
-                  border: "none",
-                },
-                action: function (e, dt, button, config) {
+                className: "btn",
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
+                ,action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt
                     .columns()
@@ -112,7 +123,27 @@ class Table extends Component {
                     selected: false,
                   },
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
               {
                 extend: "print",
@@ -129,7 +160,27 @@ class Table extends Component {
                     .addClass("compact")
                     .css("font-size", "inherit");
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function(api, node, config) {
+                  $(node).hover(
+                    function() {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function() {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
             ],
             fnRowCallback: function (
@@ -224,7 +275,7 @@ class Table extends Component {
     return (
       <>
 
-        <div class="card-body">
+        <div class="card-body mt-0 pt-1">
           <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
             <table
               id="table"

@@ -90,13 +90,14 @@ function Category() {
                         height: 600,
                       }}
                     >
-                      <div className="card-header border-0">
+                      <div className="card-header border-0 mb-0 pb-0">
                         <div className="d-flex justify-content-between">
                           <div className="add-export" style={{ display: "flex" }}>
                             <button
                               className="btn bg-transparent table-cashier-button"
                               data-toggle="modal"
                               data-target=".bd-example-modal-sm"
+                            
                             >
                               <iconify-icon icon="oi:plus" />
                               Add Category
