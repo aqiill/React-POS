@@ -12,6 +12,11 @@ import 'jspdf-autotable';
 import 'jspdf-font';
 import React, { Component } from "react";
 import axios from 'axios';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
+
+
 
 import $ from "jquery";
 
@@ -237,9 +242,6 @@ class Table extends Component {
                 className="btn table-actions-button bg-transparent border drop-shadow"
                 data-toggle="modal"
                 data-target=".bd-example-modal-sm2"
-                onClick={() => {
-                  this.props.updateProducts(item);
-                }}
                 style={{ borderRadius: "50%", alignItems: "center" }}
               >
                 <iconify-icon icon="oi:pencil" />
@@ -247,11 +249,12 @@ class Table extends Component {
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
                 style={{ borderRadius: "50%" }}
-                // onClick={() => {
-                //   if (window.confirm("Are you sure want to delete this product?")) {
-                //     this.handleDelete(index);
-                //   }
-                // }}
+                onClick={() => {
+                  if (window.confirm("Are you sure want to delete this product?")) {
+                    this.handleDelete(item.produk_id);
+                    
+                  }
+                }}
               >
                 <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
               </button>
@@ -264,45 +267,22 @@ class Table extends Component {
     }
   };
   
-
-  // handleDelete = async (index) => {
-  //   const { products } = this.props;
-  //   const newProducts = [...products];
-  //   newProducts.splice(index, 1);
-  
-  //   try {
-  //     await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
-  //     this.setState({ products: newProducts });
-  //   } catch (error) {
-  //     console.error('Error deleting product:', error);
-  //   }
-  // };
-
-  // handleDelete = async (index) => {
-  //   const productId = this.props.products[index].id;
-  //   const apiUrl = `http://localhost:8080/produk/${productId}`;
-  //   const headers = { api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210" };
-  
-  //   try {
-  //     const response = await fetch(apiUrl, {
-  //       method: "DELETE",
-  //       headers: headers
-  //     });
-  
-  //     if (response.ok) {
-  //       // Remove the deleted product from the state
-  //       const updatedProducts = [...this.props.products];
-  //       updatedProducts.splice(index, 1);
-  //       this.props.updateProducts(updatedProducts);
-  //     } else {
-  //       throw new Error("Failed to delete product");
-  //     }
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // }
-  
-  
+  handleDelete = (id) => {
+    axios.delete(`http://localhost:8080/produk/${id}`, {
+      headers: {
+        'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        Toast({ message: "Product Delete Succesfully!", type: "success" });
+        // window.location.reload();
+        this.fetchProduk();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };  
 
   render() {
     return (
