@@ -62,8 +62,8 @@ const EditModal = () => {
             .then((response) => {
                 console.log(response.data);
                 // navigate('/product')
-                Toast({ message: "Category Updated!", type: "success" });
-                // window.location.reload();
+                Toast({ message: "Category Updated Succesfully!", type: "success" });
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error);

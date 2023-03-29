@@ -13,6 +13,9 @@ import "jspdf-font";
 import React, { Component } from "react";
 import axios from "axios";
 import EditModal from "./EditModal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/toast/Toast";
 
 import $ from "jquery";
 import { Modal } from "bootstrap";
@@ -209,6 +212,8 @@ class Table extends Component {
     })
       .then(response => {
         console.log(response.data);
+        Toast({ message: "Category Deleted Succesfully!", type: "success" });
+        window.location.reload();
       })
       .catch(error => {
         console.log(error);
