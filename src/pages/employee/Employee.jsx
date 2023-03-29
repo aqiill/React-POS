@@ -21,6 +21,21 @@ function Employee() {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },
   };
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+    if (selectedEmployee && selectedEmployee[name] !== value) {
+      setSelectedEmployee({
+        ...selectedEmployee,
+        [name]: value,
+      });
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -130,6 +145,8 @@ function Employee() {
                                         className="form-control"
                                         id="nama_user"
                                         name="nama_user"
+                                        value={formValues.nama_user}
+                                        onChange={handleInputChange}
                                         aria-describedby="name"
                                         placeholder="Input Cashier Name"
                                         autoComplete="off"
@@ -148,6 +165,8 @@ function Employee() {
                                         aria-describedby="examplHelp"
                                         placeholder="Input Email Address"
                                         autoComplete="off"
+                                        value={formValues.email_user}
+                                        onChange={handleInputChange}
                                         required
                                       />
                                     </div>
@@ -161,6 +180,8 @@ function Employee() {
                                         aria-describedby="examplHelp"
                                         placeholder="Input Password"
                                         autoComplete="off"
+                                        value={formValues.password}
+                                        onChange={handleInputChange}
                                         required
                                       />
                                     </div>
