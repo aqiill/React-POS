@@ -46,7 +46,7 @@ function Employee() {
       console.error(error);
       toast.error("Failed to create employee", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -218,7 +218,7 @@ function Employee() {
             </div>
           </section>
         </div>
-        <ToastContainer position="top-right" />
+        <ToastContainer />
       </div>
     </>
   );

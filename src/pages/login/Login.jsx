@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -42,6 +44,15 @@ function Login() {
         localStorage.setItem("id_user", response.data.data.id_user);
         localStorage.setItem("nama_user", response.data.data.nama_user);
         localStorage.setItem("email_user", response.data.data.email_user);
+        toast.success("Login success", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         navigate("/home");
       } else {
         throw new Error("Invalid email or password");
@@ -52,7 +63,15 @@ function Login() {
         "Error response data: ",
         error.response && error.response.data
       );
-      alert("Failed to login. Please check your email and password.");
+      toast.error("Email or password wrong", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -171,6 +190,7 @@ function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
