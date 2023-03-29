@@ -17,6 +17,7 @@
     "datatables.net": "^1.13.4",
     "datatables.net-buttons": "^2.3.6",
     "datatables.net-dt": "^1.13.4",
+    "emailjs": "^4.0.1",
     "jquery": "^3.6.4",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",

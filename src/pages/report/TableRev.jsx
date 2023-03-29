@@ -20,13 +20,14 @@ class TableRev extends Component {
         setTimeout(function () {
           $("#tableRev").DataTable({
             destroy: true,
+            pageLength: 10,
             scrollY: "430px",
             scrollCollapse: true,
-            paging: false,
             processing: true,
-            dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-              "<'row'<'col-md-12't>>" +
-              "<'row'<'col-md-6'l><'col-md-6'p>>",
+            dom: 
+                "<'row'<'col-md-6'B><'col-md-6'f>>" +
+                "<'row'<'col-md-12't>>" +
+                "<'row'<'col-md-6'i><'col-md-6'p>>",
             select: {
               style: "single",
             },
