@@ -6,8 +6,6 @@ import TableRev from "./TableRev";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
-
 function Report() {
   const [transaksi, setTransaksi] = useState([]);
   const [profit, setProfit] = useState([]);
@@ -61,7 +59,7 @@ function Report() {
                       style={{
                         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                         borderRadius: 10,
-                        height: 300,
+                        height: 610,
                       }}
                     >
                       <div className="card-header border-0">
@@ -79,7 +77,7 @@ function Report() {
                       style={{
                         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                         borderRadius: 10,
-                        height: 300,
+                        height: 600,
                       }}
                     >
                       <div className="card-header border-0">
