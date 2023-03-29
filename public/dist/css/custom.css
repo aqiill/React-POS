@@ -307,6 +307,7 @@
   min-width: 310px;
   max-width: 310px;
   overflow: hidden;
+  box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2)
 }
 
 .card-susu img {
