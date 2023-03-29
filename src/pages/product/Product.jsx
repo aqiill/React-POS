@@ -360,6 +360,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="file"
+                                  required= "true"
                                   className="form-control"
                                   id="productImage"
                                   aria-describedby="emailHelp"
@@ -374,6 +375,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="number"
+                                  required= "true"
                                   name="kode_produk"
                                   className="form-control"
                                   id="productCode"
@@ -388,6 +390,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="text"
+                                  required= "true"
                                   name="nama_produk"
                                   className="form-control"
                                   id="productName"
@@ -400,7 +403,7 @@ function Product() {
                                 <label htmlFor="category">
                                   Category
                                 </label>
-                                <select name="kategori_id" className="form-control" id="category" onChange={handleChange}>
+                                <select required= "true" name="kategori_id" className="form-control" id="category" onChange={handleChange}>
                                   <option value="">Select Category</option>
                                   {category.map((category) => (
                                     <option value={category.kategori_id}>{category.nama_kategori}</option>
@@ -415,6 +418,7 @@ function Product() {
                                   <div className="input-group date">
                                     <input
                                       type="date"
+                                      required= "true"
                                       name="expired_date"
                                       className="form-control"
                                       id="productExpireDate"
@@ -432,6 +436,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="number"
+                                  required= "true"
                                   name="stok"
                                   className="form-control"
                                   id="productStocksAmount"
@@ -446,6 +451,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="number"
+                                  required= "true"
                                   name="harga_modal"
                                   className="form-control"
                                   id="productCapitalPrice"
@@ -460,6 +466,7 @@ function Product() {
                                 </label>
                                 <input
                                   type="number"
+                                  required= "true"
                                   name="harga_jual"
                                   className="form-control"
                                   id="productPrice"
@@ -502,7 +509,7 @@ function Product() {
                                 id="saveBtn"
                                 
                               >
-                                Save changes
+                                Add Item
                               </button>
                               </a>
                               
