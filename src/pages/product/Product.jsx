@@ -328,7 +328,7 @@ function Product() {
                     borderRadius: 10,
                     height: "auto",
                   }}>
-                    <div className="card-header border-0">
+                    <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
