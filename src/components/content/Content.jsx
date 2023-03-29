@@ -121,7 +121,7 @@ const Content = () => {
                 to="/report"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <div className="small-box bg-light drop-shadow flex-row mb-3">
+                <div className="small-box drop-shadow flex-row mb-3" style={{ backgroundColor: "white"  }}> 
                   {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Today
@@ -157,8 +157,8 @@ const Content = () => {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div
-                  className="small-box bg-light drop-shadow flex-row mb-3"
-                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                  className="small-box drop-shadow flex-row mb-3"
+                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white"  }}
                 >
                   {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -193,8 +193,8 @@ const Content = () => {
             {/* Employee */}
             <div className="col-12 col-sm-6 col-md-3">
               <div
-                className="small-box bg-light drop-shadow flex-row mb-3"
-                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                className="small-box drop-shadow flex-row mb-3"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white"   }}
               >
                 <div className="d-flex flex-row">
                   <img
@@ -213,8 +213,8 @@ const Content = () => {
             {/* Member */}
             <div className="col-12 col-sm-6 col-md-3">
               <div
-                className="small-box bg-light drop-shadow flex-row mb-3"
-                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+                className="small-box drop-shadow flex-row mb-3"
+                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white" }}
               >
                 <div className="d-flex flex-row">
                   <img
@@ -291,7 +291,7 @@ const Content = () => {
                   </div>
                 </div>
                 <div
-                  className="card-body pl-4 pr-4 mr-4 ml-4"
+                  className="card-body card-med pl-4 pr-4 mr-4 ml-4"
                   style={{ marginBottom: 20, overflowX: "scroll" }}
                 >
                   <div className="card-deck">
@@ -387,7 +387,7 @@ const Content = () => {
                   </div>
                 </div>
                 <div
-                  className="card-body"
+                  className="card-body card-med"
                   style={{
                     padding: "0px 24px",
                     margin: "15px",
@@ -438,7 +438,7 @@ const Content = () => {
                   </div>
                 </div>
                 <div
-                  className="card-body pl-4 pr-4 mr-4 ml-4"
+                  className="card-body card-med pl-4 pr-4 mr-4 ml-4"
                   style={{ marginBottom: 20, overflowX: "scroll" }}
                 >
                   <div className="card-deck">

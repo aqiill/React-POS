@@ -159,7 +159,7 @@ function Product() {
               <div className="row content-card">
                 <div className="col-lg-6">
                   <div
-                    className="card"
+                    className="bg-light card"
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
@@ -172,7 +172,7 @@ function Product() {
                       </div>
                     </div>
                     <div
-                      className="card-body pl-4 pr-4 mr-4 ml-4"
+                      className="card-body card-med pl-4 pr-4 mr-4 ml-4"
                       style={{ marginBottom: 20, overflowX: "scroll" }}
                     >
                       <div className="card-deck d-grid" style={{ gridTemplateRows: "auto auto", maxHeight: "258px" }}>
@@ -229,7 +229,7 @@ function Product() {
 
                 <div className="col-lg-6">
                   <div
-                    className="card"
+                    className="bg-light card"
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
@@ -242,7 +242,7 @@ function Product() {
                       </div>
                     </div>
                     <div
-                      className="card-body pl-4 pr-4 mr-4 ml-4"
+                      className="card-body card-med pl-4 pr-4 mr-4 ml-4"
                       style={{ marginBottom: 20, overflowX: "scroll", overflowY: "hidden" }}
                     >
                       <div className="card-deck">

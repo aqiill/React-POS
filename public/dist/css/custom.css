@@ -281,6 +281,10 @@
   padding-right: 20px;
 }
 
+.card-med{
+  padding-left: 0rem!important;
+}
+
 .chart {
   height: max-content;
 }
