@@ -163,6 +163,7 @@ function Product() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
+                      height: 373
                     }}
                   >
                     <div className="card-header border-0">
