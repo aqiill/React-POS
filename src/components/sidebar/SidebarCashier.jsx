@@ -48,14 +48,16 @@ const Sidebar = ({ activePage }) => {
             </li>
           </ul>
           <div className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4" style={{ borderRadius: 10 }}>
-            <div className="image">
-              <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
-            </div>
-            <div className="info">
-              <a href="#" className="d-block" style={{ color: "black" }}>
-                {nama_user}
-              </a>
-            </div>
+            <Link to="/profile" className={`nav-link ${activePage === "profile" ? "active" : ""}`}>
+              <div className="image">
+                <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
+              </div>
+              <div className="info">
+                <a href="#" className="d-block" style={{ color: "black" }}>
+                  {nama_user}
+                </a>
+              </div>
+            </Link>
           </div>
         </nav>
         {/* /.sidebar-menu */}
