@@ -3,7 +3,7 @@ import Cashier from "./pages/cashier/Cashier";
 import Category from "./pages/category/Category";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Employee from "./pages/employee/Employee";
-import HelpAndSupport from "./pages/help-and-support/Help-and-Support";
+import ContactUs from "./pages/contact-us/Contact-Us";
 import Login from "./pages/login/Login";
 import Member from "./pages/member/Member";
 import Product from "./pages/product/Product";
@@ -76,7 +76,7 @@ function App() {
               </ProtectedRouter>
             }
           />
-          <Route path="/help-and-support" element={<HelpAndSupport />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           <Route
             path="/profile"
             element={

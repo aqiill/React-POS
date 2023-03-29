@@ -73,17 +73,18 @@ const Sidebar = ({ activePage }) => {
         //   name: "settings",
         // },
         {
-          to: "/help-and-support",
+          to: "/contact-us",
           icon: "./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg",
-          title: "Help & Support",
-          name: "help-and-support",
+          title: "Contact Us",
+          name: "contact-us",
         },
       ],
     },
   ];
 
   const email = localStorage.getItem("email_user");
-  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+  const avatar =
+    "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
   return (
     <aside

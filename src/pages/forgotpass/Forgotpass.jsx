@@ -42,8 +42,11 @@ function Forgotpass() {
         }
       );
       if (response.data.status === 200) {
-        // Toast({ message: "Process failed: Email not found", type: "success" });
-        navigate("/login");
+        await Toast({
+          message: "Request successful, check your email",
+          type: "success",
+        });
+        await navigate("/login");
       } else {
         throw new Error("Email not found");
       }
@@ -54,7 +57,10 @@ function Forgotpass() {
         error.response && error.response.data
       );
       // alert("Failed to send email. Please check your email");
-      Toast({ message: "Process failed: Email not found", type: "error" });
+      await Toast({
+        message: "Process failed: Email not found",
+        type: "error",
+      });
     } finally {
       setIsLoading(false);
     }

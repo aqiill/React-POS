@@ -56,7 +56,7 @@ function Login() {
       //   "Error response data: ",
       //   error.response && error.response.data
       // );
-      Toast({ message: "Invalid email or password.", type: "error" });
+      Toast({ message: "Email or password wrong", type: "error" });
     }
   };
 
