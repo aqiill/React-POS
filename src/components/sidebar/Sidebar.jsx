@@ -16,6 +16,8 @@ const Sidebar = ({ activePage }) => {
   const nama_user = localStorage.getItem("nama_user");
 
   const handleLogout = () => {
+    localStorage.removeItem("id_user");
+    localStorage.removeItem("role");
     localStorage.removeItem("nama_user");
     localStorage.removeItem("email_user");
     navigate("/login");

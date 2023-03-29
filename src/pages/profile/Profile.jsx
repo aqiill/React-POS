@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
+import SidebarCashier from "../../components/sidebar/SidebarCashier";
 import CommonComponent from "../../components/common/CommonComponent";
 import axios from "axios";
 import { MD5 } from "crypto-js";
@@ -35,12 +36,18 @@ const Profile = () => {
   const email = localStorage.getItem("email_user");
   const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
 
+  const role = localStorage.getItem("role");
+  const sidebar = role === 'Administrator' ? <Sidebar /> : <SidebarCashier activePage="Cashier" />;
+
+
   return (
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
       <div className="wrapper">
-        <Header />
-        <Sidebar />
+
+        {sidebar}
+
+
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{

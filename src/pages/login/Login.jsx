@@ -42,11 +42,24 @@ function Login() {
         }
       );
       if (response.data.status === 200) {
-        localStorage.setItem("id_user", response.data.data.id_user);
-        localStorage.setItem("nama_user", response.data.data.nama_user);
-        localStorage.setItem("email_user", response.data.data.email_user);
-        navigate("/home");
-        Toast({ message: "Login success.", type: "success" });
+
+        if (response.data.data.role === "Administrator") {
+          localStorage.setItem("id_user", response.data.data.id_user);
+          localStorage.setItem("nama_user", response.data.data.nama_user);
+          localStorage.setItem("email_user", response.data.data.email_user);
+          localStorage.setItem("role", response.data.data.role);
+          navigate("/home");
+          Toast({ message: "Login success.", type: "success" });
+        }
+        else if (response.data.data.role === "Employee") {
+          localStorage.setItem("id_user", response.data.data.id_user);
+          localStorage.setItem("nama_user", response.data.data.nama_user);
+          localStorage.setItem("email_user", response.data.data.email_user);
+          localStorage.setItem("role", response.data.data.role);
+          navigate("/cashier");
+          Toast({ message: "Login success.", type: "success" });
+        }
+
       } else {
         throw new Error("Invalid email or password");
       }

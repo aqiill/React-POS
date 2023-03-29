@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, redirect as Redirect, Link } from "react-router-dom";
+import { MD5 } from "crypto-js";
 
 const Sidebar = ({ activePage }) => {
   const navigate = useNavigate();
@@ -11,6 +12,9 @@ const Sidebar = ({ activePage }) => {
     localStorage.removeItem("email_user");
     navigate("/login");
   };
+  const email = localStorage.getItem("email_user");
+  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+
   return (
     <aside className="main-sidebar sidebar-base sidebar-no-expand" style={{ marginTop: 90 }}>
       {/* Sidebar */}
@@ -50,7 +54,7 @@ const Sidebar = ({ activePage }) => {
           <div className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4" style={{ borderRadius: 10 }}>
             <Link to="/profile" className={`nav-link ${activePage === "profile" ? "active" : ""}`}>
               <div className="image">
-                <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
+                <img src={avatar} className="img-circle elevation-2" alt="User Image" />
               </div>
               <div className="info">
                 <a href="#" className="d-block" style={{ color: "black" }}>

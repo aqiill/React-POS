@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from "react";
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
+import SidebarCashier from "../../components/sidebar/SidebarCashier";
 import { Link } from "react-router-dom";
 import { MD5 } from "crypto-js";
 import { ToastContainer, toast } from "react-toastify";
@@ -96,12 +97,15 @@ const ProfileEdit = () => {
   const avatar =
     "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
+  const role = localStorage.getItem("role");
+  const sidebar = role === 'Administrator' ? <Sidebar /> : <SidebarCashier activePage="Cashier" />;
+
   return (
     <>
       <CommonComponent pageTitle={"Edit Profile"} backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
-        <Sidebar />
+        {sidebar}
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{
