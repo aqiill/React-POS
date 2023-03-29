@@ -243,7 +243,7 @@ function Product() {
                     </div>
                     <div
                       className="card-body pl-4 pr-4 mr-4 ml-4"
-                      style={{ marginBottom: 20, overflowX: "scroll" }}
+                      style={{ marginBottom: 20, overflowX: "scroll", overflowY: "hidden" }}
                     >
                       <div className="card-deck">
                         {stockProducts.map((product) => (
