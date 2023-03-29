@@ -211,7 +211,7 @@ function Product() {
                                   }}
                                 >
                                   <div className="col-md-6">
-                                    {calculateDays(product.expired_date)}
+                                    {calculateDays(product.expired_date)} Days Left
                                   </div>
                                   <div className="col-md-6 text-right">
                                     {product.expired_date}
