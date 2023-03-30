@@ -31,7 +31,7 @@ function Forgotpass() {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8080/login/forgot",
+        process.env.REACT_APP_BASE_API + "/login/forgot",
         {
           email_user: email,
         },

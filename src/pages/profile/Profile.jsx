@@ -11,7 +11,7 @@ const Profile = () => {
   const [profile, setProfile] = useState([]);
   const id_user = localStorage.getItem("id_user");
   const apiConfig = {
-    baseURL: "http://localhost:8080",
+    baseURL: process.env.REACT_APP_BASE_API,
     headers: {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },

@@ -14,7 +14,7 @@ function Report() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const transaksiRes = await axios.get("http://localhost:8080/transaksi/", {
+        const transaksiRes = await axios.get(process.env.REACT_APP_BASE_API + "/transaksi/", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
@@ -23,7 +23,7 @@ function Report() {
         setTransaksi(transaksiRes.data.data);
         console.log(transaksiRes.data.data);
 
-        const profitRes = await axios.get("http://localhost:8080/transaksi/profit", {
+        const profitRes = await axios.get(process.env.REACT_APP_BASE_API + "/transaksi/profit", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },

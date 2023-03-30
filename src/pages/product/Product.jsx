@@ -24,7 +24,7 @@ function Product() {
   }, []);
 
   const deleteProduct = (id) => {
-    axios.delete(`http://localhost:8080/produk/${id}`).then(() => {
+    axios.delete(process.env.REACT_APP_BASE_API + `/produk/${id}`).then(() => {
       setProducts(products.filter((product) => product.id !== id));
     });
   };
@@ -67,7 +67,7 @@ function Product() {
     data.append("gambar", formData.gambar);
     data.append("expired_date", formData.expired_date);
     axios
-      .post("http://localhost:8080/produk/", data, {
+      .post(process.env.REACT_APP_BASE_API + "/produk/", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -76,7 +76,7 @@ function Product() {
       .then((response) => {
         console.log(response.data);
         // navigate('/product')
-        Toast({ message: "Product created!", type: "success" });
+        Toast({ message: "Product created!", type: "success" });
         window.location.reload();
       })
       .catch((error) => {
@@ -89,7 +89,7 @@ function Product() {
     const fetchData = async () => {
       try {
         const expiredRes = await axios.get(
-          "http://localhost:8080/produk/expired",
+          process.env.REACT_APP_BASE_API + "/produk/expired",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -98,21 +98,21 @@ function Product() {
         );
         setExpiredProducts(expiredRes.data.data);
 
-        const stockRes = await axios.get("http://localhost:8080/produk/stok", {
+        const stockRes = await axios.get(process.env.REACT_APP_BASE_API + "/produk/stok", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
         });
         setStockProducts(stockRes.data.data);
 
-        const categoryRes = await axios.get("http://localhost:8080/kategori", {
+        const categoryRes = await axios.get(process.env.REACT_APP_BASE_API + "/kategori", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
         });
         setCategory(categoryRes.data.data);
 
-        const productRes = await axios.get("http://localhost:8080/produk/kategori", {
+        const productRes = await axios.get(process.env.REACT_APP_BASE_API + "/produk/kategori", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
@@ -148,6 +148,83 @@ function Product() {
   } else {
     return (
       <>
+<<<<<<< HEAD
+        <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
+        <ToastContainer />
+        <div className="wrapper">
+          <Header />
+          <Sidebar activePage="product" />
+          <div className="content-wrapper row">
+            <section className="content col">
+              <div className="container-fluid">
+                <div className="row content-card">
+                  <div className="col-lg-6">
+                    <div
+                      className="card"
+                      style={{
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        borderRadius: 10,
+                        height: 373
+                      }}
+                    >
+                      <div className="card-header border-0">
+                        <div className="d-flex justify-content-between">
+                          <h3 className="card-title">Expire Soon</h3>
+                        </div>
+                      </div>
+                      <div
+                        className="card-body pl-4 pr-4 mr-4 ml-4"
+                        style={{ marginBottom: 20, overflowX: "scroll" }}
+                      >
+                        <div className="card-deck d-grid" style={{ gridTemplateRows: "auto auto", maxHeight: "258px" }}>
+                          <div className="card-columns" style={{ rowCount: '2', columnGap: '1rem' }}>
+                            {expiredProducts.map((product) => (
+                              <div className="card-susu mb-2">
+                                <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product" />
+                                <div
+                                  className="card-text mt-1 p-0 ml-1"
+                                  style={{ fontWeight: "bold" }}
+                                >
+                                  {product.nama_produk}
+                                  <div
+                                    className="progress"
+                                    style={{
+                                      height: 6,
+                                      width: 162,
+                                      backgroundColor: "red",
+                                      marginTop: 35,
+                                      borderRadius: 10,
+                                    }}
+                                  >
+                                    <div
+                                      className="progress-bar"
+                                      role="progressbar"
+                                      aria-valuenow={0}
+                                      aria-valuemin={0}
+                                      aria-valuemax={100}
+                                    />
+                                  </div>
+                                  <div
+                                    className="row"
+                                    style={{
+                                      marginBottom: 5,
+                                      fontWeight: "normal",
+                                      fontSize: "small",
+                                    }}
+                                  >
+                                    <div className="col-md-6">
+                                      {calculateDays(product.expired_date)} Days Left
+                                    </div>
+                                    <div className="col-md-6 text-right">
+                                      {product.expired_date}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+=======
       <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
       <ToastContainer />
       <div className="wrapper">
@@ -169,19 +246,58 @@ function Product() {
                     <div className="card-header border-0">
                       <div className="d-flex justify-content-between">
                         <h3 className="card-title">Expire Soon</h3>
+>>>>>>> 6408ef03233fa566fcf4c912fc1b9924edefb0d7
                       </div>
                     </div>
+                  </div>
+
+                  <div className="col-lg-6">
                     <div
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                      className="card"
+                      style={{
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        borderRadius: 10,
+                        height: 373
+                      }}
+=======
+>>>>>>> Stashed changes
                       className="card-body card-med pl-4 pr-4 mr-4 ml-4"
                       style={{ marginBottom: 20, overflowX: "scroll" }}
+>>>>>>> 6408ef03233fa566fcf4c912fc1b9924edefb0d7
                     >
-                      <div className="card-deck d-grid" style={{ gridTemplateRows: "auto auto", maxHeight: "258px" }}>
-                        <div className="card-columns" style={{rowCount:'2', columnGap:'1rem'}}>
-                          {expiredProducts.map((product) => (
-                            <div className="card-susu mb-2">
-                              <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product" />
+                      <div className="card-header">
+                        <div className="d-flex justify-content-between">
+                          <h3 className="card-title">Stock Alerts</h3>
+                        </div>
+                      </div>
+                      <div
+                        className="card-body pl-4 pr-4 mr-4 ml-4"
+                        style={{ marginBottom: 20, overflowX: "scroll" }}
+                      >
+                        <div className="card-deck">
+                          {stockProducts.map((product) => (
+                            <div
+                              className="card float-right mb-2"
+                              style={{
+                                minWidth: 200,
+                                maxWidth: 200,
+                                height: 250,
+                                fontSize: "small",
+                                backgroundColor: "#F6F6F6",
+                                borderRadius: 20,
+                              }}
+                            >
+                              <img
+                                className="card-img-top"
+                                src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
+                                alt="Product"
+                                style={{ height: '155.54px', width: '200px', objectFit: 'cover', objectPosition: 'center center', borderRadius: '20px 20px 0 0' }}
+                              />
                               <div
-                                className="card-text mt-1 p-0 ml-1"
+                                className="card-body p-0 ml-1"
                                 style={{ fontWeight: "bold" }}
                               >
                                 {product.nama_produk}
@@ -191,7 +307,6 @@ function Product() {
                                     height: 6,
                                     width: 162,
                                     backgroundColor: "red",
-                                    marginTop: 35,
                                     borderRadius: 10,
                                   }}
                                 >
@@ -204,19 +319,25 @@ function Product() {
                                   />
                                 </div>
                                 <div
-                                  className="row"
-                                  style={{
-                                    marginBottom: 5,
-                                    fontWeight: "normal",
-                                    fontSize: "small",
-                                  }}
+                                  className="stock"
+                                  style={{ fontWeight: "normal" }}
                                 >
-                                  <div className="col-md-6">
-                                    {calculateDays(product.expired_date)} Days Left
-                                  </div>
-                                  <div className="col-md-6 text-right">
-                                    {product.expired_date}
-                                  </div>
+                                  Sisa {product.stok}
+                                </div>
+                                <div
+                                  className="details mt-3"
+                                  style={{ textAlign: "center" }}
+                                >
+                                  <a
+                                    href="#"
+                                    className="d-block"
+                                    style={{
+                                      color: "grey",
+                                      fontWeight: "lighter",
+                                    }}
+                                  >
+                                    Go to Product Details
+                                  </a>
                                 </div>
                               </div>
                             </div>
@@ -225,8 +346,22 @@ function Product() {
                       </div>
                     </div>
                   </div>
-                </div>
 
+<<<<<<< HEAD
+                  <div className="col-lg-12">
+                    <div className="card" style={{
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: 10,
+                      height: 610,
+                    }}>
+                      <div className="card-header border-0 mb-0 pb-0">
+                        <div className="d-flex justify-content-between">
+                          <div className="add-export" style={{ display: "flex" }}>
+                            <button
+                              className="btn bg-transparent table-product-button"
+                              data-toggle="modal"
+                              data-target=".bd-example-modal-sm"
+=======
                 <div className="col-lg-6">
                   <div
                     className="bg-light card"
@@ -267,270 +402,210 @@ function Product() {
                             <div
                               className="card-body p-0 ml-1"
                               style={{ fontWeight: "bold" }}
+>>>>>>> 6408ef03233fa566fcf4c912fc1b9924edefb0d7
                             >
-                              {product.nama_produk}
-                              <div
-                                className="progress"
-                                style={{
-                                  height: 6,
-                                  width: 162,
-                                  backgroundColor: "red",
-                                  borderRadius: 10,
-                                }}
-                              >
-                                <div
-                                  className="progress-bar"
-                                  role="progressbar"
-                                  aria-valuenow={0}
-                                  aria-valuemin={0}
-                                  aria-valuemax={100}
-                                />
-                              </div>
-                              <div
-                                className="stock"
-                                style={{ fontWeight: "normal" }}
-                              >
-                                Sisa {product.stok}
-                              </div>
-                              <div
-                                className="details mt-3"
-                                style={{ textAlign: "center" }}
-                              >
-                                <a
-                                  href="#"
-                                  className="d-block"
-                                  style={{
-                                    color: "grey",
-                                    fontWeight: "lighter",
-                                  }}
-                                >
-                                  Go to Product Details
-                                </a>
-                              </div>
-                            </div>
+                              <iconify-icon icon="oi:plus" />
+                              Add Product
+                            </button>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-lg-12">
-                  <div className="card" style={{
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                    borderRadius: 10,
-                    height: 610,
-                  }}>
-                    <div className="card-header border-0 mb-0 pb-0">
-                      <div className="d-flex justify-content-between">
-                        <div className="add-export" style={{ display: "flex" }}>
-                          <button
-                            className="btn bg-transparent table-product-button"
-                            data-toggle="modal"
-                            data-target=".bd-example-modal-sm"
-                          >
-                            <iconify-icon icon="oi:plus" />
-                            Add Product
-                          </button>
                         </div>
                       </div>
-                    </div>
 
-                    <div
-                      className="modal fade bd-example-modal-sm"
-                      tabIndex={-1}
-                      role="dialog"
-                      aria-labelledby="mySmallModalLabel"
-                      aria-hidden="true"
-                      id="myModal"
-                    >
                       <div
-                        className="modal-dialog modal-sm"
-                        role="document"
+                        className="modal fade bd-example-modal-sm"
+                        tabIndex={-1}
+                        role="dialog"
+                        aria-labelledby="mySmallModalLabel"
+                        aria-hidden="true"
+                        id="myModal"
                       >
-                        <form onSubmit={handleSubmit}>
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h5 className="modal-title">Add Product</h5>
-                            </div>
-                            <div className="modal-body">
-                              <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">
-                                  Image
-                                </label>
-                                <input
-                                  type="file"
-                                  required= "true"
-                                  className="form-control"
-                                  id="productImage"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Image's src"
-                                  name="gambar"
-                                  onChange={handleFileChange}
-                                />
+                        <div
+                          className="modal-dialog modal-sm"
+                          role="document"
+                        >
+                          <form onSubmit={handleSubmit}>
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title">Add Product</h5>
                               </div>
-                              <div className="form-group">
-                                <label htmlFor="productCode">
-                                  Product Code
-                                </label>
-                                <input
-                                  type="number"
-                                  required= "true"
-                                  name="kode_produk"
-                                  className="form-control"
-                                  id="productCode"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Input Product Code"
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group">
-                                <label htmlFor="productName">
-                                  Product Name
-                                </label>
-                                <input
-                                  type="text"
-                                  required= "true"
-                                  name="nama_produk"
-                                  className="form-control"
-                                  id="productName"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Input Product Name"
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group">
-                                <label htmlFor="category">
-                                  Category
-                                </label>
-                                <select required= "true" name="kategori_id" className="form-control" id="category" onChange={handleChange}>
-                                  <option value="">Select Category</option>
-                                  {category.map((category) => (
-                                    <option value={category.kategori_id}>{category.nama_kategori}</option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="form-group">
-                                <label htmlFor="productExpireDate">
-                                  Expire Date
-                                </label>
-                                <div id="sandbox-container">
-                                  <div className="input-group date">
-                                    <input
-                                      type="date"
-                                      required= "true"
-                                      name="expired_date"
-                                      className="form-control"
-                                      id="productExpireDate"
-                                      onChange={handleChange}
-                                    />
-                                    <span className="input-group-addon">
-                                      <i className="glyphicon glyphicon-th" />
-                                    </span>
+                              <div className="modal-body">
+                                <div className="form-group">
+                                  <label htmlFor="exampleInputEmail1">
+                                    Image
+                                  </label>
+                                  <input
+                                    type="file"
+                                    required="true"
+                                    className="form-control"
+                                    id="productImage"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Image's src"
+                                    name="gambar"
+                                    onChange={handleFileChange}
+                                  />
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="productCode">
+                                    Product Code
+                                  </label>
+                                  <input
+                                    type="number"
+                                    required="true"
+                                    name="kode_produk"
+                                    className="form-control"
+                                    id="productCode"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Input Product Code"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="productName">
+                                    Product Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    required="true"
+                                    name="nama_produk"
+                                    className="form-control"
+                                    id="productName"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Input Product Name"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="category">
+                                    Category
+                                  </label>
+                                  <select required="true" name="kategori_id" className="form-control" id="category" onChange={handleChange}>
+                                    <option value="">Select Category</option>
+                                    {category.map((category) => (
+                                      <option value={category.kategori_id}>{category.nama_kategori}</option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="productExpireDate">
+                                    Expire Date
+                                  </label>
+                                  <div id="sandbox-container">
+                                    <div className="input-group date">
+                                      <input
+                                        type="date"
+                                        required="true"
+                                        name="expired_date"
+                                        className="form-control"
+                                        id="productExpireDate"
+                                        onChange={handleChange}
+                                      />
+                                      <span className="input-group-addon">
+                                        <i className="glyphicon glyphicon-th" />
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
+                                <div className="form-group">
+                                  <label htmlFor="exampleInputEmail1">
+                                    Stocks
+                                  </label>
+                                  <input
+                                    type="number"
+                                    required="true"
+                                    name="stok"
+                                    className="form-control"
+                                    id="productStocksAmount"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Eg. 200"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="exampleInputEmail1">
+                                    Capital Price
+                                  </label>
+                                  <input
+                                    type="number"
+                                    required="true"
+                                    name="harga_modal"
+                                    className="form-control"
+                                    id="productCapitalPrice"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Eg. IDR 25,000.00"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="form-group">
+                                  <label htmlFor="exampleInputEmail1">
+                                    Price
+                                  </label>
+                                  <input
+                                    type="number"
+                                    required="true"
+                                    name="harga_jual"
+                                    className="form-control"
+                                    id="productPrice"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Eg. IDR 35,000.00"
+                                    onChange={handleChange}
+                                  />
+                                </div>
                               </div>
-                              <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">
-                                  Stocks
-                                </label>
-                                <input
-                                  type="number"
-                                  required= "true"
-                                  name="stok"
-                                  className="form-control"
-                                  id="productStocksAmount"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Eg. 200"
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">
-                                  Capital Price
-                                </label>
-                                <input
-                                  type="number"
-                                  required= "true"
-                                  name="harga_modal"
-                                  className="form-control"
-                                  id="productCapitalPrice"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Eg. IDR 25,000.00"
-                                  onChange={handleChange}
-                                />
-                              </div>
-                              <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">
-                                  Price
-                                </label>
-                                <input
-                                  type="number"
-                                  required= "true"
-                                  name="harga_jual"
-                                  className="form-control"
-                                  id="productPrice"
-                                  aria-describedby="emailHelp"
-                                  placeholder="Eg. IDR 35,000.00"
-                                  onChange={handleChange}
-                                />
-                              </div>
-                            </div>
-                            <div className="modal-footer">
-                              <button
-                                type="button"
-                                className="btn btn-secondary"
-                                style={{
-                                  backgroundColor: "white",
-                                  color: "black",
-                                  fontWeight: "normal",
-                                  fontSize: "smaller",
-                                  width: 100,
-                                  height: 35,
-                                  border: "none",
-                                }}
-                                data-dismiss="modal"
-                              >
-                                Close
-                              </button>
-                              <a href="/product">
+                              <div className="modal-footer">
                                 <button
-                            
-                                type="submit"
-                                className="btn btn-primary"
-                                style={{
-                                  backgroundColor: "#5B7CFD",
-                                  color: "white",
-                                  fontWeight: "normal",
-                                  fontSize: "smaller",
-                                  width: 125,
-                                  height: 35,
-                                }}
-                                id="saveBtn"
-                                
-                              >
-                                Add Item
-                              </button>
-                              </a>
-                              
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                                  type="button"
+                                  className="btn btn-secondary"
+                                  style={{
+                                    backgroundColor: "white",
+                                    color: "black",
+                                    fontWeight: "normal",
+                                    fontSize: "smaller",
+                                    width: 100,
+                                    height: 35,
+                                    border: "none",
+                                  }}
+                                  data-dismiss="modal"
+                                >
+                                  Close
+                                </button>
+                                <a href="/product">
+                                  <button
 
-                    <Table
-                      products={products}
-                      
-                    />
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    style={{
+                                      backgroundColor: "#5B7CFD",
+                                      color: "white",
+                                      fontWeight: "normal",
+                                      fontSize: "smaller",
+                                      width: 125,
+                                      height: 35,
+                                    }}
+                                    id="saveBtn"
+
+                                  >
+                                    Add Item
+                                  </button>
+                                </a>
+
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <Table
+                        products={products}
+
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
+          </div >
         </div >
-      </div >
 
       </>
 

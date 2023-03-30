@@ -25,10 +25,10 @@ class Table extends Component {
             scrollY: "210px",
             scrollCollapse: true,
             processing: true,
-            dom: 
-                "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'i><'col-md-6'p>>",
+            dom:
+              "<'row'<'col-md-6'B><'col-md-6'f>>" +
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'i><'col-md-6'p>>",
 
             select: {
               style: "single",
@@ -208,7 +208,7 @@ class Table extends Component {
     newProducts.splice(index, 1);
 
     try {
-      await axios.delete(`http://localhost:8080/produk/${products[index].id}`);
+      await axios.delete(process.env.REACT_APP_BASE_API + `/produk/${products[index].id}`);
       this.setState({ products: newProducts });
     } catch (error) {
       console.error("Error deleting product:", error);

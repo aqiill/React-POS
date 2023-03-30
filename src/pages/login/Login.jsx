@@ -30,7 +30,7 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/login/auth",
+        process.env.REACT_APP_BASE_API + "/login/auth",
         {
           email_user: email,
           password: password,

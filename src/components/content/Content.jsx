@@ -18,7 +18,7 @@ const Content = () => {
     const fetchData = async () => {
       try {
         const expiredRes = await axios.get(
-          "http://localhost:8080/produk/expired",
+          process.env.REACT_APP_BASE_API+"/produk/expired",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -27,7 +27,7 @@ const Content = () => {
         );
         setExpiredProducts(expiredRes.data.data);
 
-        const stockRes = await axios.get("http://localhost:8080/produk/stok", {
+        const stockRes = await axios.get(process.env.REACT_APP_BASE_API+"/produk/stok", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
@@ -35,7 +35,7 @@ const Content = () => {
         setStockProducts(stockRes.data.data);
 
         const transaksiRes = await axios.get(
-          "http://localhost:8080/transaksi/today",
+          process.env.REACT_APP_BASE_API+"/transaksi/today",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -47,7 +47,7 @@ const Content = () => {
         // console.log(transaksiRes.data.data);
 
         const bestSellingRes = await axios.get(
-          "http://localhost:8080/transaksi/best_selling",
+          process.env.REACT_APP_BASE_API+"/transaksi/best_selling",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -58,7 +58,7 @@ const Content = () => {
         setBestSelling(bestSellingRes.data.data);
 
         const pendapatan = await axios.get(
-          "http://localhost:8080/transaksi/pendapatan",
+          process.env.REACT_APP_BASE_API+"/transaksi/pendapatan",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -68,7 +68,7 @@ const Content = () => {
 
         setPendapatan(pendapatan.data.data);
 
-        const usersRes = await axios.get("http://localhost:8080/users", {
+        const usersRes = await axios.get(process.env.REACT_APP_BASE_API+"/users", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },

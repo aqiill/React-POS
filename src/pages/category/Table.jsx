@@ -30,10 +30,10 @@ class Table extends Component {
             scrollY: "430px",
             scrollCollapse: true,
             processing: true,
-            dom: 
-                "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'i><'col-md-6'p>>",
+            dom:
+              "<'row'<'col-md-6'B><'col-md-6'f>>" +
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'i><'col-md-6'p>>",
 
             select: {
               style: "single",
@@ -47,9 +47,9 @@ class Table extends Component {
                 pageSize: "A4",
                 titleAttr: "PDF",
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -58,7 +58,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -67,7 +67,7 @@ class Table extends Component {
                     }
                   );
                 }
-                ,action: function (e, dt, button, config) {
+                , action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt
                     .columns()
@@ -124,9 +124,9 @@ class Table extends Component {
                   },
                 },
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -135,7 +135,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -161,9 +161,9 @@ class Table extends Component {
                     .css("font-size", "inherit");
                 },
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -172,7 +172,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -256,7 +256,7 @@ class Table extends Component {
   };
 
   handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/kategori/${id}`, {
+    axios.delete(process.env.REACT_APP_BASE_API + `/kategori/${id}`, {
       headers: {
         'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
       }

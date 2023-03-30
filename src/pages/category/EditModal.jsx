@@ -20,7 +20,7 @@ const EditModal = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const kategoriRes = await axios.get("http://localhost:8080/kategori", {
+                const kategoriRes = await axios.get(process.env.REACT_APP_BASE_API + "/kategori", {
                     headers: {
                         api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
                     },
@@ -53,7 +53,7 @@ const EditModal = () => {
         const data = new FormData();
         data.append("nama_kategori", formData.nama_kategori);
         axios
-            .post(`http://localhost:8080/kategori/update/${id}`, data, {
+            .post(process.env.REACT_APP_BASE_API + `/kategori/update/${id}`, data, {
                 headers: {
                     "Content-Type": "application/json",
                     api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",

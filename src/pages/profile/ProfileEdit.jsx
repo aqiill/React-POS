@@ -13,7 +13,7 @@ const ProfileEdit = () => {
   const [profile, setProfile] = useState([]);
   const id_user = localStorage.getItem("id_user");
   const apiConfig = {
-    baseURL: "http://localhost:8080",
+    baseURL: process.env.REACT_APP_BASE_API,
     headers: {
       api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
     },
@@ -45,7 +45,7 @@ const ProfileEdit = () => {
     data.append("kon_password_baru", formData.kon_password_baru);
 
     axios
-      .post("http://localhost:8080/users/changepass", data, {
+      .post(process.env.REACT_APP_BASE_API + "/users/changepass", data, {
         headers: {
           "Content-Type": "application/json",
           api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",

@@ -29,17 +29,17 @@ class Table extends Component {
             scrollY: "400px",
             scrollCollapse: true,
             processing: true,
-            dom: 
-                "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'i><'col-md-6'p>>",
+            dom:
+              "<'row'<'col-md-6'B><'col-md-6'f>>" +
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'i><'col-md-6'p>>",
 
             select: {
               style: "single",
             },
 
             buttons: [
-              
+
               {
                 extend: "pdfHtml5",
                 text: "PDF",
@@ -52,10 +52,10 @@ class Table extends Component {
                   backgroundColor: "red",
                   margin: "1rem",
                 },
-                
-                init: function(api, node, config) {
+
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -64,7 +64,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -73,42 +73,42 @@ class Table extends Component {
                     }
                   );
                 },
-                  action: function (e, dt, button, config) {
+                action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
-                      return this.innerText;
+                    return this.innerText;
                   }).get();
                   var excludedColumns = [1, 8];
                   var columnIndexes = headers
-                      .map(function(column, index) { 
-                          if (excludedColumns.includes(index)) {
-                              return null;
-                          }
-                          return index;
-                      })
-                      .filter(function(columnIndex) {
-                          return columnIndex !== null;
-                      });
+                    .map(function (column, index) {
+                      if (excludedColumns.includes(index)) {
+                        return null;
+                      }
+                      return index;
+                    })
+                    .filter(function (columnIndex) {
+                      return columnIndex !== null;
+                    });
                   data = JSON.parse(JSON.stringify(data).replace(/<[^>]*>/g, ''));
                   var doc = new jsPDF('l', 'pt', this.pageSize);
                   doc.autoTable(
-                      columnIndexes.map(function(columnIndex) {
-                          return headers[columnIndex];
-                      }), 
-                      data.body.map(function(row) {
-                          return columnIndexes.map(function(columnIndex) {
-                              return row[columnIndex];
-                          });
-                      }), 
-                      {
-                          startY: 60,
-                          margin: { top: 60 },
-                          styles: { overflow: 'linebreak' },
-                          columnStyles: { 0: { cellWidth: 120 } },
-                          addPageContent: function (data) {
-                              doc.text('Product Management POS', 40, 30);
-                          },
-                      }
+                    columnIndexes.map(function (columnIndex) {
+                      return headers[columnIndex];
+                    }),
+                    data.body.map(function (row) {
+                      return columnIndexes.map(function (columnIndex) {
+                        return row[columnIndex];
+                      });
+                    }),
+                    {
+                      startY: 60,
+                      margin: { top: 60 },
+                      styles: { overflow: 'linebreak' },
+                      columnStyles: { 0: { cellWidth: 120 } },
+                      addPageContent: function (data) {
+                        doc.text('Product Management POS', 40, 30);
+                      },
+                    }
                   );
                   doc.save('Product Management POS.pdf');
                 },
@@ -123,9 +123,9 @@ class Table extends Component {
                   },
                 },
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -134,7 +134,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -160,9 +160,9 @@ class Table extends Component {
                     .css("font-size", "inherit");
                 },
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -171,7 +171,7 @@ class Table extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -227,7 +227,7 @@ class Table extends Component {
               <img
                 className="table-product-img"
                 src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`}
-                style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 20px 20px'}}
+                style={{ height: '155.54px', width: '200px', objectFit: 'cover', objectPosition: 'center center', borderRadius: '20px 20px 20px 20px' }}
                 alt="product"
               />
             </td>
@@ -252,7 +252,7 @@ class Table extends Component {
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
-                    
+
                   }
                 }}
               >
@@ -266,22 +266,22 @@ class Table extends Component {
       alert(e.message);
     }
   };
-  
+
   handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/produk/${id}`, {
+    axios.delete(process.env.REACT_APP_BASE_API + `/produk/${id}`, {
       headers: {
         'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
       }
     })
       .then(response => {
         console.log(response.data);
-        Toast({ message: "Product Delete Succesfully!", type: "success" });
+        Toast({ message: "Product Delete Succesfully!", type: "success" });
         window.location.reload();
       })
       .catch(error => {
         console.log(error);
       });
-  };  
+  };
 
   render() {
     return (

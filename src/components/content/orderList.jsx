@@ -48,7 +48,7 @@ function orderList(props) {
       };
 
       const apiKey = "e3fd6b146fcb65f7419e3531a0a84f4d700b8210";
-      const response = await fetch("http://localhost:8080/transaksi", {
+      const response = await fetch(process.env.REACT_APP_BASE_API + "/transaksi", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

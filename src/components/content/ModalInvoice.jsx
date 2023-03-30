@@ -17,7 +17,7 @@ const ModalInvoice = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const transaksiRes = await axios.get("http://localhost:8080/transaksi/today", {
+                const transaksiRes = await axios.get(process.env.REACT_APP_BASE_API + "/transaksi/today", {
                     headers: {
                         api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
                     },
