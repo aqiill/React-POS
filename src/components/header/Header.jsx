@@ -28,7 +28,7 @@ const Header = () => {
         </Link>
         {/* Right navbar links */}
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
+          <li key="item1" className="nav-item">
             <a
               className="nav-link"
               data-widget="fullscreen"

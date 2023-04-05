@@ -154,7 +154,7 @@ const Content = () => {
                     <img
                       className="top-card-icon"
                       src="./docs/assets/img/revenue_icon.png"
-                      alt
+                      alt="Total Revenue"
                     />
                     <div className="top-card-text">
                       {/* <span className="up-down">▲ 100%</span> */}
@@ -195,7 +195,7 @@ const Content = () => {
                     <img
                       className="top-card-icon"
                       src="./docs/assets/img/profit_icon.png"
-                      alt
+                      alt="Total Profit"
                     />
                     <div className="top-card-text">
                       {/* <span className="up-down">▲ 100%</span> */}
@@ -228,11 +228,11 @@ const Content = () => {
                     <img
                       className="top-card-icon"
                       src="./docs/assets/img/profile-circle.png"
-                      alt
+                      alt="Employees"
                     />
                     <div className="top-card-text">
                       <span className="card-amount">{users}</span>
-                      <span class="card-desc">
+                      <span className="card-desc">
                         {users === 1 ? "EMPLOYEE" : "EMPLOYEES"}
                       </span>
                     </div>
@@ -254,7 +254,7 @@ const Content = () => {
                   <img
                     className="top-card-icon"
                     src="./docs/assets/img/member_icon.png"
-                    alt
+                    alt="Total Transaction"
                   />
                   <div className="top-card-text">
                     <span className="card-amount">
@@ -486,7 +486,7 @@ const Content = () => {
                         <div className="card-susu float-right mb-2">
                           <img
                             src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
-                            alt="Image"
+                            alt="Product"
                           />
                           <div
                             className="card-text mt-1 p-0 ml-1"

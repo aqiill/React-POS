@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { MD5 } from "crypto-js";
 
 const NavItem = ({ to, iconSrc, altText, text, isActive }) => (
-  <li className="nav-item menu-open">
+  <li key={text} className="nav-item menu-open">
     <Link to={to} className={`nav-link ${isActive && "active"}`}>
       <img className="nav-icon" src={iconSrc} alt={altText} />
       <p>{text}</p>
@@ -106,7 +106,7 @@ const Sidebar = ({ activePage }) => {
           >
             {menus.map((menuGroup) => (
               <React.Fragment key={menuGroup.label}>
-                <li className="nav-header">
+                <li key={menuGroup.label} className="nav-header">
                   <p>{menuGroup.label}</p>
                 </li>
                 {menuGroup.items.map((menu) => (
@@ -122,7 +122,7 @@ const Sidebar = ({ activePage }) => {
               </React.Fragment>
             ))}
             {/* Sign Out Nav */}
-            <li className="nav-item">
+            <li key="Sign Out" className="nav-item">
               <a href="#!" className="nav-link" onClick={handleLogout}>
                 <img
                   className="nav-icon"

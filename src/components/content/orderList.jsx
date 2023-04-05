@@ -11,7 +11,6 @@ function orderList(props) {
 
   const handlePay = async () => {
     try {
-
       const no_pembayaran = Math.floor(Math.random() * 1000000000);
 
       //   {
@@ -40,22 +39,25 @@ function orderList(props) {
 
       const data = {
         id_user: localStorage.getItem("id_user"),
-        total_pembayaran: props.total + (props.total * 0.11),
+        total_pembayaran: props.total + props.total * 0.11,
         total_diskon: 0,
         no_pembayaran: no_pembayaran,
         status_bayar: "Y",
-        detail: cart
+        detail: cart,
       };
 
       const apiKey = "e3fd6b146fcb65f7419e3531a0a84f4d700b8210";
-      const response = await fetch(process.env.REACT_APP_BASE_API + "/transaksi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          api_key: apiKey,
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_BASE_API + "/transaksi",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            api_key: apiKey,
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create transaction");
@@ -72,14 +74,25 @@ function orderList(props) {
   return (
     <div>
       <div>
-        <div className="card" style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", borderRadius: 10 }}>
-          <div className="card-header border-0" style={{ display: 'flex', justifyContent: 'flex-end' }} >
+        <div
+          className="card"
+          style={{
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            borderRadius: 10,
+          }}
+        >
+          <div
+            className="card-header border-0"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
             <h6>Payment Details</h6>
           </div>
-          <div className="card-body d-flex justify-content-between" style={{ padding: "0px 24px", }}>
-            <div>
-            </div>
-            <div className="d-flex payment-details" >
+          <div
+            className="card-body d-flex justify-content-between"
+            style={{ padding: "0px 24px" }}
+          >
+            <div></div>
+            <div className="d-flex payment-details">
               <div>
                 <p>Sub Total :</p>
                 <p>Tax :</p>
@@ -88,30 +101,51 @@ function orderList(props) {
               <div>
                 <p>{formatPrice(props.total)}</p>
                 <p>{formatPrice(props.total * 0.11)}</p>
-                <p>{formatPrice(props.total + (props.total * 0.11))}</p>
+                <p>{formatPrice(props.total + props.total * 0.11)}</p>
               </div>
             </div>
           </div>
           <div className="m-12">
-            <button type="button" className="btn btn-primary float-right" data-target="#invoiceModal" data-toggle="modal">
+            <button
+              type="button"
+              className="btn btn-primary float-right"
+              data-target="#invoiceModal"
+              data-toggle="modal"
+            >
               Procceed
             </button>
           </div>
           {/* Modal */}
-          <div className="modal fade invoiceModal" id="invoiceModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div
+            className="modal fade invoiceModal"
+            id="invoiceModal"
+            tabIndex={-1}
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
                     INVOICE
                   </h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div className="modal-body">
                   <div className="row">
-                    <img className="invoiceLogo" src="../docs/assets/img/POS_logo.png" alt />
+                    <img
+                      className="invoiceLogo"
+                      src="../docs/assets/img/POS_logo.png"
+                      alt="BLeven Logo"
+                    />
                   </div>
                   <div className="row">
                     <div className="col">
@@ -120,7 +154,7 @@ function orderList(props) {
                     </div>
                     <div className="col text-right">
                       <p>{new Date().toLocaleDateString()}</p>
-                      <p>{formatPrice(props.total + (props.total * 0.11))}</p>
+                      <p>{formatPrice(props.total + props.total * 0.11)}</p>
                     </div>
                   </div>
                   <div className="row invoiceTable">
@@ -133,7 +167,7 @@ function orderList(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        {props.cart.map(item => (
+                        {props.cart.map((item) => (
                           <tr>
                             <th scope="row">{item.nama}</th>
                             <td>{item.jumlah}</td>
@@ -148,14 +182,20 @@ function orderList(props) {
                         <tr>
                           <th scope="row" />
                           <td>Total</td>
-                          <td>{formatPrice(props.total + (props.total * 0.11))}</td>
+                          <td>
+                            {formatPrice(props.total + props.total * 0.11)}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button onClick={handlePay} type="button" className="btn btn-primary rounded blueAccent horizontalCenter generateInvoice">
+                  <button
+                    onClick={handlePay}
+                    type="button"
+                    className="btn btn-primary rounded blueAccent horizontalCenter generateInvoice"
+                  >
                     Pay
                   </button>
                 </div>
