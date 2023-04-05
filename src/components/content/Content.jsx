@@ -385,11 +385,11 @@ const Content = () => {
                             className="stock"
                             style={{ fontWeight: "normal" }}
                           >
-                            Remaining:{" "}
                             <span className="stock-amount">
                               {" "}
                               {product.stok}{" "}
                             </span>
+                            remaining
                           </div>
                           <div
                             className="details mt-3"
