@@ -23,6 +23,9 @@ function Employee() {
     },
   };
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // tambahan state untuk show password
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // tambahan state untuk show password
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,6 +44,13 @@ function Employee() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      if (formValues.password !== confirmPassword) {
+        Toast({
+          message: "Password and Confirm Password must match",
+          type: "error",
+        });
+        return;
+      }
       const response = await axios.post("/users", formValues, apiConfig);
       setFormValues({
         nama_user: "",
@@ -48,7 +58,11 @@ function Employee() {
         password: "",
         role: "Employee",
       });
-      Toast({ message: "Employee create.", type: "success" });
+      setConfirmPassword("");
+      Toast({
+        message: "Employee has been created successfully",
+        type: "success",
+      });
       fetchData();
     } catch (error) {
       console.error(error);
@@ -69,6 +83,10 @@ function Employee() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
 
   return (
     <>
@@ -157,18 +175,81 @@ function Employee() {
                                     </div>
                                     <div className="form-group">
                                       <label htmlFor="password">Password</label>
-                                      <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        name="password"
-                                        aria-describedby="examplHelp"
-                                        placeholder="Input Password"
-                                        autoComplete="off"
-                                        value={formValues.password}
-                                        onChange={handleInputChange}
-                                        required
-                                      />
+                                      <div className="input-group">
+                                        <input
+                                          type={
+                                            showPassword ? "text" : "password"
+                                          } // menyesuaikan tipe input berdasarkan state showPassword
+                                          className="form-control"
+                                          id="password"
+                                          name="password"
+                                          aria-describedby="examplHelp"
+                                          placeholder="Input Password"
+                                          autoComplete="off"
+                                          value={formValues.password}
+                                          onChange={handleInputChange}
+                                          required
+                                        />
+                                        <div className="input-group-append">
+                                          <span
+                                            className="input-group-text"
+                                            onClick={() =>
+                                              setShowPassword(!showPassword)
+                                            } // toggle show password ketika icon diklik
+                                            style={{ cursor: "pointer" }}
+                                          >
+                                            <i
+                                              className={
+                                                showPassword
+                                                  ? "fas fa-eye-slash"
+                                                  : "fas fa-eye"
+                                              }
+                                            ></i>
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="form-group">
+                                      <label htmlFor="confirmPassword">
+                                        Confirm Password
+                                      </label>
+                                      <div className="input-group">
+                                        <input
+                                          type={
+                                            showConfirmPassword
+                                              ? "text"
+                                              : "password"
+                                          }
+                                          className="form-control"
+                                          id="confirmPassword"
+                                          name="confirmPassword"
+                                          aria-describedby="examplHelp"
+                                          placeholder="Confirm Password"
+                                          autoComplete="off"
+                                          value={confirmPassword}
+                                          onChange={handleConfirmPasswordChange}
+                                          required
+                                        />
+                                        <div className="input-group-append">
+                                          <span
+                                            className="input-group-text"
+                                            onClick={() =>
+                                              setShowConfirmPassword(
+                                                !showConfirmPassword
+                                              )
+                                            } // toggle show password ketika icon diklik
+                                            style={{ cursor: "pointer" }}
+                                          >
+                                            <i
+                                              className={
+                                                showConfirmPassword
+                                                  ? "fas fa-eye-slash"
+                                                  : "fas fa-eye"
+                                              }
+                                            ></i>
+                                          </span>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
