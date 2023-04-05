@@ -18,7 +18,7 @@ const Content = () => {
     const fetchData = async () => {
       try {
         const expiredRes = await axios.get(
-          process.env.REACT_APP_BASE_API+"/produk/expired",
+          process.env.REACT_APP_BASE_API + "/produk/expired",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -27,15 +27,18 @@ const Content = () => {
         );
         setExpiredProducts(expiredRes.data.data);
 
-        const stockRes = await axios.get(process.env.REACT_APP_BASE_API+"/produk/stok", {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
-        });
+        const stockRes = await axios.get(
+          process.env.REACT_APP_BASE_API + "/produk/stok",
+          {
+            headers: {
+              api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+            },
+          }
+        );
         setStockProducts(stockRes.data.data);
 
         const transaksiRes = await axios.get(
-          process.env.REACT_APP_BASE_API+"/transaksi/today",
+          process.env.REACT_APP_BASE_API + "/transaksi/today",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -47,7 +50,7 @@ const Content = () => {
         // console.log(transaksiRes.data.data);
 
         const bestSellingRes = await axios.get(
-          process.env.REACT_APP_BASE_API+"/transaksi/best_selling",
+          process.env.REACT_APP_BASE_API + "/transaksi/best_selling",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -58,7 +61,7 @@ const Content = () => {
         setBestSelling(bestSellingRes.data.data);
 
         const pendapatan = await axios.get(
-          process.env.REACT_APP_BASE_API+"/transaksi/pendapatan",
+          process.env.REACT_APP_BASE_API + "/transaksi/pendapatan",
           {
             headers: {
               api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -68,12 +71,18 @@ const Content = () => {
 
         setPendapatan(pendapatan.data.data);
 
-        const usersRes = await axios.get(process.env.REACT_APP_BASE_API+"/users", {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
-        });
-        setUsers(usersRes.data.data.length);
+        const usersRes = await axios.get(
+          process.env.REACT_APP_BASE_API + "/users",
+          {
+            headers: {
+              api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+            },
+          }
+        );
+        const employees = usersRes.data.data.filter(
+          (user) => user.role === "Employee"
+        );
+        setUsers(employees.length);
       } catch (error) {
         console.error(error);
       }
@@ -121,7 +130,10 @@ const Content = () => {
                 to="/report"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <div className="small-box drop-shadow flex-row mb-3" style={{ backgroundColor: "white"  }}> 
+                <div
+                  className="small-box drop-shadow flex-row mb-3"
+                  style={{ backgroundColor: "white" }}
+                >
                   {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Today
@@ -158,7 +170,10 @@ const Content = () => {
               >
                 <div
                   className="small-box drop-shadow flex-row mb-3"
-                  style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white"  }}
+                  style={{
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    backgroundColor: "white",
+                  }}
                 >
                   {/* <div className="dropdown d-flex flex-row-reverse">
                                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -192,29 +207,42 @@ const Content = () => {
             <div className="clearfix hidden-md-up" />
             {/* Employee */}
             <div className="col-12 col-sm-6 col-md-3">
-              <div
-                className="small-box drop-shadow flex-row mb-3"
-                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white"   }}
+              <Link
+                to="/employee"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
-                <div className="d-flex flex-row">
-                  <img
-                    className="top-card-icon"
-                    src="./docs/assets/img/profile-circle.png"
-                    alt
-                  />
-                  <div className="top-card-text">
-                    <span className="card-amount">{users}</span>
-                    <span className="card-desc">EMPLOYEES</span>
+                <div
+                  className="small-box drop-shadow flex-row mb-3"
+                  style={{
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <div className="d-flex flex-row">
+                    <img
+                      className="top-card-icon"
+                      src="./docs/assets/img/profile-circle.png"
+                      alt
+                    />
+                    <div className="top-card-text">
+                      <span className="card-amount">{users}</span>
+                      <span class="card-desc">
+                        {users === 1 ? "EMPLOYEE" : "EMPLOYEES"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
             {/* /.employee */}
             {/* Member */}
             <div className="col-12 col-sm-6 col-md-3">
               <div
                 className="small-box drop-shadow flex-row mb-3"
-                style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", backgroundColor: "white" }}
+                style={{
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  backgroundColor: "white",
+                }}
               >
                 <div className="d-flex flex-row">
                   <img
