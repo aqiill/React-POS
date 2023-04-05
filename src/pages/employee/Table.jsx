@@ -41,15 +41,26 @@ class Table extends Component {
                 orientation: "landscape",
                 pageSize: "A4",
                 titleAttr: "PDF",
-                className: "btn btn-secondary bg-secondary",
-                style: {
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: "normal",
-                  fontSize: "smaller",
-                  width: 100,
-                  height: 35,
-                  border: "none",
+                className: "btn",
+                init: function (api, node, config) {
+                  $(node).hover(
+                    function () {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function () {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
                 },
                 action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
@@ -107,8 +118,29 @@ class Table extends Component {
                     selected: false,
                   },
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function (api, node, config) {
+                  $(node).hover(
+                    function () {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function () {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
+              
               {
                 extend: "print",
                 exportOptions: {
@@ -124,7 +156,27 @@ class Table extends Component {
                     .addClass("compact")
                     .css("font-size", "inherit");
                 },
-                className: "btn btn-secondary bg-secondary",
+                className: "btn",
+                init: function (api, node, config) {
+                  $(node).hover(
+                    function () {
+                      // efek hover saat tombol dihover
+                      $(this).css({
+                        borderRadius: '10px',
+                        backgroundColor: "#5B7CFD",
+                        color: "white",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                      });
+                    },
+                    function () {
+                      // efek ketika mouse meninggalkan tombol
+                      $(this).css({
+                        backgroundColor: "white",
+                        color: "black"
+                      });
+                    }
+                  );
+                }
               },
             ],
             fnRowCallback: function (
