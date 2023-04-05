@@ -137,13 +137,18 @@ function HelpAndSupport() {
                               </p>
                             </div>
                             <div className="social-media-contact">
-                              <img
-                                className="d-inline mr-2"
-                                src="../dist/img/whatsapp.svg"
-                                alt="whatsappLogo"
-                                style={{ height: 20 }}
-                              />
-                              <p className="d-inline">089612744649</p>
+                              <a
+                                href="https://wa.me/6289612744649"
+                                target="_blank"
+                              >
+                                <img
+                                  className="d-inline mr-2"
+                                  src="../dist/img/whatsapp.svg"
+                                  alt="whatsappLogo"
+                                  style={{ height: 20 }}
+                                />
+                                <p className="d-inline">089612744649</p>
+                              </a>
                             </div>
                           </div>
                           <div className="social-media mb-4">
