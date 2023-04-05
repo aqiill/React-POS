@@ -52,22 +52,22 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
-                }
-                , action: function (e, dt, button, config) {
+                },
+                action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt
                     .columns()
@@ -129,21 +129,21 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
-                }
+                },
               },
               {
                 extend: "print",
@@ -166,21 +166,21 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
-                }
+                },
               },
             ],
             fnRowCallback: function (
@@ -201,11 +201,7 @@ class Table extends Component {
                 },
               },
             ],
-            columns: [
-              { width: "10%" },
-              { width: "70%" },
-              { width: "20%" },
-            ],
+            columns: [{ width: "10%" }, { width: "70%" }, { width: "20%" }],
           });
         }, 1000);
       });
@@ -233,9 +229,7 @@ class Table extends Component {
                 style={{ borderRadius: "50%" }}
                 onClick={() => {
                   if (
-                    window.confirm(
-                      "Are you sure want to delete this category?"
-                    )
+                    window.confirm("Are you sure want to delete this category?")
                   ) {
                     this.handleDelete(item.kategori_id);
                   }
@@ -245,10 +239,7 @@ class Table extends Component {
               </button>
             </td>
           </tr>
-
         );
-
-
       });
     } catch (e) {
       alert(e.message);
@@ -256,17 +247,18 @@ class Table extends Component {
   };
 
   handleDelete = (id) => {
-    axios.delete(process.env.REACT_APP_BASE_API + `/kategori/${id}`, {
-      headers: {
-        'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
-      }
-    })
-      .then(response => {
+    axios
+      .delete(process.env.REACT_APP_BASE_API + `/kategori/${id}`, {
+        headers: {
+          api_key: `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`,
+        },
+      })
+      .then((response) => {
         console.log(response.data);
         Toast({ message: "Category Deleted Succesfully!", type: "success" });
         window.location.reload();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -274,8 +266,7 @@ class Table extends Component {
   render() {
     return (
       <>
-
-        <div class="card-body mt-0 pt-1">
+        <div className="card-body mt-0 pt-1">
           <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
             <table
               id="table"
@@ -294,7 +285,6 @@ class Table extends Component {
         </div>
 
         <EditModal />
-
       </>
     );
   }

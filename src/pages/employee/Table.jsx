@@ -47,17 +47,17 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
@@ -124,23 +124,23 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
-                }
+                },
               },
-              
+
               {
                 extend: "print",
                 exportOptions: {
@@ -162,21 +162,21 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
                       });
                     }
                   );
-                }
+                },
               },
             ],
             fnRowCallback: function (
@@ -260,7 +260,9 @@ class Table extends Component {
     newProducts.splice(index, 1);
 
     try {
-      await axios.delete(process.env.REACT_APP_BASE_API + `/produk/${products[index].id}`);
+      await axios.delete(
+        process.env.REACT_APP_BASE_API + `/produk/${products[index].id}`
+      );
       this.setState({ products: newProducts });
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -270,7 +272,7 @@ class Table extends Component {
   render() {
     return (
       <>
-        <div class="card-body">
+        <div className="card-body">
           <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
             <table
               id="table"
