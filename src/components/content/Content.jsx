@@ -25,7 +25,12 @@ const Content = () => {
             },
           }
         );
-        setExpiredProducts(expiredRes.data.data);
+        const sortedExpired = expiredRes.data.data.sort((a, b) => {
+          const dateA = new Date(a.expired_date);
+          const dateB = new Date(b.expired_date);
+          return dateB - dateA; // mengubah urutan menjadi dari terlama hingga tercepat
+        });
+        setExpiredProducts(sortedExpired);
 
         const stockRes = await axios.get(
           process.env.REACT_APP_BASE_API + "/produk/stok",
@@ -35,7 +40,8 @@ const Content = () => {
             },
           }
         );
-        setStockProducts(stockRes.data.data);
+        const sortedStock = stockRes.data.data.sort((a, b) => a.stok - b.stok);
+        setStockProducts(sortedStock);
 
         const transaksiRes = await axios.get(
           process.env.REACT_APP_BASE_API + "/transaksi/today",
@@ -358,23 +364,28 @@ const Content = () => {
                             style={{
                               height: 6,
                               width: 162,
-                              backgroundColor: "red",
+                              backgroundColor: "white",
                               borderRadius: 10,
                             }}
                           >
                             <div
                               className="progress-bar"
                               role="progressbar"
-                              aria-valuenow={0}
+                              aria-valuenow={product.stok}
                               aria-valuemin={0}
                               aria-valuemax={100}
+                              style={{
+                                width: `${product.stok}%`,
+                                backgroundColor: "red",
+                                borderRadius: 10,
+                              }}
                             />
                           </div>
                           <div
                             className="stock"
                             style={{ fontWeight: "normal" }}
                           >
-                            Sisa{" "}
+                            Remaining:{" "}
                             <span className="stock-amount">
                               {" "}
                               {product.stok}{" "}
@@ -425,7 +436,7 @@ const Content = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <td scope="col">Tanggal</td>
+                        <td scope="col">Date</td>
                         <td scope="col">Total</td>
                         <td scope="col">Action</td>
                       </tr>
@@ -488,7 +499,7 @@ const Content = () => {
                               style={{
                                 height: 6,
                                 width: 162,
-                                backgroundColor: "red",
+                                backgroundColor: "white",
                                 marginTop: 35,
                                 borderRadius: 10,
                               }}
@@ -496,9 +507,19 @@ const Content = () => {
                               <div
                                 className="progress-bar"
                                 role="progressbar"
-                                aria-valuenow={0}
+                                aria-valuenow={calculateDays(
+                                  product.expired_date
+                                )}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
+                                aria-valuemax={180}
+                                style={{
+                                  width: `${
+                                    (calculateDays(product.expired_date) /
+                                      180) *
+                                    100
+                                  }%`,
+                                  backgroundColor: "red",
+                                }}
                               />
                             </div>
                             <div
