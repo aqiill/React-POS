@@ -267,6 +267,16 @@ class Table extends Component {
     }
   };
 
+  UpdateModal = (props) => {
+    const {
+      handleSubmit,
+      handleChange,
+      handleFileChange,
+      categories,
+      product,
+    } = props;
+  };
+
   handleDelete = (id) => {
     axios.delete(process.env.REACT_APP_BASE_API + `/produk/${id}`, {
       headers: {
@@ -285,6 +295,7 @@ class Table extends Component {
 
   render() {
     return (
+      <>
       <div class="card-body mt-0 pt-1 mb-4">
         <div className=" scrollable-table" style={{ overflowX: "hidden", }}>
           <table
@@ -308,6 +319,185 @@ class Table extends Component {
           </table>
         </div>
       </div>
+      <div
+        className="modal fade bd-example-modal-sm2"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="myModal"
+      >
+        <div
+        className="modal-dialog modal-sm"
+        role="document"
+      >
+        {/* <form onSubmit={handleSubmit}> */}
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Update Product</h5>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">
+                  Image
+                </label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="productImage"
+                  aria-describedby="emailHelp"
+                  placeholder="Image's src"
+                  name="gambar"
+                  // onChange={handleFileChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="productCode">
+                  Product Code
+                </label>
+                <input
+                  type="number"
+                  name="kode_produk"
+                  className="form-control"
+                  id="productCode"
+                  aria-describedby="emailHelp"
+                  placeholder="Input Product Code"
+                  // onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="productName">
+                  Product Name
+                </label>
+                <input
+                  type="text"
+                  name="nama_produk"
+                  className="form-control"
+                  id="productName"
+                  aria-describedby="emailHelp"
+                  placeholder="Input Product Name"
+                  // onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="category">
+                  Category
+                </label>
+                <select name="kategori_id" className="form-control" id="category" >
+                  {/* <option value="">Select Category</option>
+                  {category.map((category) => (
+                    <option value={category.kategori_id}>{category.nama_kategori}</option>
+                  ))} */}
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="productExpireDate">
+                  Expire Date
+                </label>
+                <div id="sandbox-container">
+                  <div className="input-group date">
+                    <input
+                      type="date"
+                      name="expired_date"
+                      className="form-control"
+                      id="productExpireDate"
+                      // onChange={handleChange}
+                    />
+                    <span className="input-group-addon">
+                      <i className="glyphicon glyphicon-th" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">
+                  Stocks
+                </label>
+                <input
+                  type="number"
+                  name="stok"
+                  className="form-control"
+                  id="productStocksAmount"
+                  aria-describedby="emailHelp"
+                  placeholder="Eg. 200"
+                  // onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">
+                  Capital Price
+                </label>
+                <input
+                  type="number"
+                  name="harga_modal"
+                  className="form-control"
+                  id="productCapitalPrice"
+                  aria-describedby="emailHelp"
+                  placeholder="Eg. IDR 25,000.00"
+                  // onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">
+                  Price
+                </label>
+                <input
+                  type="number"
+                  name="harga_jual"
+                  className="form-control"
+                  id="productPrice"
+                  aria-describedby="emailHelp"
+                  placeholder="Eg. IDR 35,000.00"
+                  // onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  fontWeight: "normal",
+                  fontSize: "smaller",
+                  width: 100,
+                  height: 35,
+                  border: "none",
+                }}
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <a href="/product">
+                <button
+            
+                type="submit"
+                className="btn btn-primary"
+                style={{
+                  backgroundColor: "#5B7CFD",
+                  color: "white",
+                  fontWeight: "normal",
+                  fontSize: "smaller",
+                  width: 125,
+                  height: 35,
+                }}
+                id="saveBtn"
+                
+              >
+                Update
+              </button>
+              </a>
+              
+            </div>
+          </div>
+        {/* </form> */}
+      </div>
+      </div>
+      
+
+      </>
+      
     );
   }
 }
