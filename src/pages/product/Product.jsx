@@ -76,7 +76,7 @@ function Product() {
       .then((response) => {
         console.log(response.data);
         // navigate('/product')
-        Toast({ message: "Product created!", type: "success" });
+        Toast({ message: "Product created!", type: "success" });
         window.location.reload();
       })
       .catch((error) => {
@@ -143,11 +143,9 @@ function Product() {
     return formatter.format(price);
   };
 
-  if (loading) {
-    return <div className="loading-container"><p>Loading...</p></div>;
-  } else {
-    return (
-      <>
+
+  return (
+    <>
       <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
       <ToastContainer />
       <div className="wrapper">
@@ -176,7 +174,7 @@ function Product() {
                       style={{ marginBottom: 20, overflowX: "scroll" }}
                     >
                       <div className="card-deck d-grid" style={{ gridTemplateRows: "auto auto", maxHeight: "258px" }}>
-                        <div className="card-columns" style={{rowCount:'2', columnGap:'1rem'}}>
+                        <div className="card-columns" style={{ rowCount: '2', columnGap: '1rem' }}>
                           {expiredProducts.map((product) => (
                             <div className="card-susu mb-2">
                               <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product" />
@@ -262,7 +260,7 @@ function Product() {
                               className="card-img-top"
                               src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
                               alt="Product"
-                              style={{height:'155.54px', width: '200px', objectFit:'cover', objectPosition:'center center'  ,borderRadius:'20px 20px 0 0'}}
+                              style={{ height: '155.54px', width: '200px', objectFit: 'cover', objectPosition: 'center center', borderRadius: '20px 20px 0 0' }}
                             />
                             <div
                               className="card-body p-0 ml-1"
@@ -488,24 +486,24 @@ function Product() {
                               </button>
                               <a href="/product">
                                 <button
-                            
-                                type="submit"
-                                className="btn btn-primary"
-                                style={{
-                                  backgroundColor: "#5B7CFD",
-                                  color: "white",
-                                  fontWeight: "normal",
-                                  fontSize: "smaller",
-                                  width: 125,
-                                  height: 35,
-                                }}
-                                id="saveBtn"
-                                
-                              >
-                                Save changes
-                              </button>
+
+                                  type="submit"
+                                  className="btn btn-primary"
+                                  style={{
+                                    backgroundColor: "#5B7CFD",
+                                    color: "white",
+                                    fontWeight: "normal",
+                                    fontSize: "smaller",
+                                    width: 125,
+                                    height: 35,
+                                  }}
+                                  id="saveBtn"
+
+                                >
+                                  Save changes
+                                </button>
                               </a>
-                              
+
                             </div>
                           </div>
                         </form>
@@ -514,7 +512,7 @@ function Product() {
 
                     <Table
                       products={products}
-                      
+                      loading={loading}
                     />
                   </div>
                 </div>
@@ -525,10 +523,10 @@ function Product() {
         </div >
       </div >
 
-      </>
+    </>
 
-    );
-  }
+  );
+
 
 
 }

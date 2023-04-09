@@ -24,10 +24,10 @@ class TableRev extends Component {
             scrollY: "430px",
             scrollCollapse: true,
             processing: true,
-            dom: 
-                "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-md-12't>>" +
-                "<'row'<'col-md-6'i><'col-md-6'p>>",
+            dom:
+              "<'row'<'col-md-6'B><'col-md-6'f>>" +
+              "<'row'<'col-md-12't>>" +
+              "<'row'<'col-md-6'i><'col-md-6'p>>",
             select: {
               style: "single",
             },
@@ -40,9 +40,9 @@ class TableRev extends Component {
                 pageSize: "A4",
                 titleAttr: "PDF",
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -51,7 +51,7 @@ class TableRev extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -60,8 +60,8 @@ class TableRev extends Component {
                     }
                   );
                 }
-                
-                ,action: function (e, dt, button, config) {
+
+                , action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
                   var headers = dt.columns().header().to$().map(function () {
                     return this.innerText;
@@ -105,9 +105,9 @@ class TableRev extends Component {
                 extend: "csv",
                 text: "Excel",
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -116,7 +116,7 @@ class TableRev extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -136,9 +136,9 @@ class TableRev extends Component {
                     .css("font-size", "inherit");
                 },
                 className: "btn",
-                init: function(api, node, config) {
+                init: function (api, node, config) {
                   $(node).hover(
-                    function() {
+                    function () {
                       // efek hover saat tombol dihover
                       $(this).css({
                         borderRadius: '10px',
@@ -147,7 +147,7 @@ class TableRev extends Component {
                         boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
                       });
                     },
-                    function() {
+                    function () {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
@@ -201,6 +201,13 @@ class TableRev extends Component {
   };
 
   render() {
+    if (this.props.loading) {
+      return (
+        <div className="loading-container">
+          <p>Loading...</p>
+        </div>
+      );
+    }
     return (
       <div class="card-body" style={{ padding: "0px 24px" }}>
         <div className=" scrollable-table" style={{ overflowX: "hidden" }}>

@@ -264,6 +264,15 @@ class Table extends Component {
   };
 
   render() {
+
+    if (this.props.loading) {
+      return (
+        <div className="loading-container">
+          <p>Loading...</p>
+        </div>
+      );
+    }
+
     return (
       <>
         <div className="card-body mt-0 pt-1">

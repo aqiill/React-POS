@@ -10,6 +10,7 @@ import Toast from "../../components/toast/Toast";
 
 function Employee() {
   const [employee, setEmployee] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [formValues, setFormValues] = useState({
     nama_user: "",
     email_user: "",
@@ -74,6 +75,7 @@ function Employee() {
     try {
       const response = await axios.get("/users", apiConfig);
       setEmployee(response.data.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
       setEmployee([]);
@@ -297,7 +299,7 @@ function Employee() {
                     </div>
                     {/* TABLE */}
                     <div className="card-body" style={{ padding: "0px 24px" }}>
-                      <Table employee={employee} />
+                      <Table employee={employee} loading={loading} />
                     </div>
                   </div>
                 </div>
