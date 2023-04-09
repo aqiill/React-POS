@@ -122,7 +122,7 @@ const Sidebar = ({ activePage }) => {
               </React.Fragment>
             ))}
             {/* Sign Out Nav */}
-            <li key="Sign Out" className="nav-item">
+            <li key="Sign Out" className="nav-item" id="sign-out">
               <a href="#!" className="nav-link" onClick={handleLogout}>
                 <img
                   className="nav-icon"
