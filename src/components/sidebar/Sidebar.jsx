@@ -128,6 +128,7 @@ const Sidebar = ({ activePage }) => {
                   className="nav-icon"
                   src="./docs/assets/img/logout_FILL0_wght400_GRAD0_opsz48.svg"
                   alt="Logo Keluar"
+                  id="logout"
                 />
                 <p>Sign Out</p>
               </a>

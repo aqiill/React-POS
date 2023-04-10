@@ -46,7 +46,7 @@ const Sidebar = ({ activePage }) => {
             {/* Sign Out Nav */}
             <li className="nav-item">
               <a href="#!" className="nav-link" onClick={handleLogout}>
-                <img className="nav-icon" src="./docs/assets/img/logout_FILL0_wght400_GRAD0_opsz48.svg" alt="Sign Out Logo" />
+                <img className="nav-icon" src="./docs/assets/img/logout_FILL0_wght400_GRAD0_opsz48.svg" alt="Sign Out Logo" id="logout"/>
                 <p>Sign Out</p>
               </a>
             </li>
