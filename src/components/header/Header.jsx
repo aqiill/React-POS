@@ -34,6 +34,7 @@ const Header = () => {
               data-widget="fullscreen"
               href="#"
               role="button"
+              id="fullscreenbutton"
             >
               <i className="fas fa-expand-arrows-alt" />
             </a>

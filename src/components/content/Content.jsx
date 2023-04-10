@@ -216,6 +216,7 @@ const Content = () => {
               <Link
                 to="/employee"
                 style={{ textDecoration: "none", color: "inherit" }}
+                id="employeecard"
               >
                 <div
                   className="small-box drop-shadow flex-row mb-3"
