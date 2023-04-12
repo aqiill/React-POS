@@ -22,7 +22,7 @@ function App() {
           <Route
             path="/home"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role="Administrator">
                 <Dashboard />
               </ProtectedRouter>
             }
@@ -31,7 +31,7 @@ function App() {
           <Route
             path="/product"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role="Administrator">
                 <Product />
               </ProtectedRouter>
             }
@@ -39,7 +39,7 @@ function App() {
           <Route
             path="/category"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role="Administrator">
                 <Category />
               </ProtectedRouter>
             }
@@ -47,7 +47,7 @@ function App() {
           <Route
             path="/report"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role="Administrator">
                 <Report />
               </ProtectedRouter>
             }
@@ -55,32 +55,23 @@ function App() {
           <Route
             path="/employee"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role="Administrator">
                 <Employee />
               </ProtectedRouter>
             }
           />
           <Route
-            path="/member"
+            path="/contact-us"
             element={
-              <ProtectedRouter>
-                <Member />
+              <ProtectedRouter role="Administrator">
+                <ContactUs />
               </ProtectedRouter>
             }
           />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRouter>
-                <Settings />
-              </ProtectedRouter>
-            }
-          />
-          <Route path="/contact-us" element={<ContactUs />} />
           <Route
             path="/profile"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role={["Administrator", "Employee"]}>
                 <Profile />
               </ProtectedRouter>
             }
@@ -88,12 +79,19 @@ function App() {
           <Route
             path="/profileEdit"
             element={
-              <ProtectedRouter>
+              <ProtectedRouter role={["Administrator", "Employee"]}>
                 <ProfileEdit />
               </ProtectedRouter>
             }
           />
-          <Route path="/cashier" element={<Cashier />} />
+          <Route
+            path="/cashier"
+            element={
+              <ProtectedRouter role="Employee">
+                <Cashier />
+              </ProtectedRouter>
+            }
+          />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
@@ -102,10 +100,27 @@ function App() {
 }
 
 export default App;
-export function ProtectedRouter({ children }) {
-  if (localStorage.getItem("email_user")) {
-    return children;
+
+export function ProtectedRouter({ children, role }) {
+  const userRole = localStorage.getItem("role");
+  
+  if (Array.isArray(role)) {
+    if (role.includes(userRole)) {
+      return children;
+    } else if (userRole === "Employee" && role.includes("Administrator")) {
+      return <Navigate to="/cashier" />;
+    } else if (userRole === "Administrator" && role.includes("Employee")) {
+      return <Navigate to="/home" />;
+    }
   } else {
-    return <Navigate to="/login" />;
+    if (userRole === role) {
+      return children;
+    } else if (userRole === "Employee" && role === "Administrator") {
+      return <Navigate to="/cashier" />;
+    } else if (userRole === "Administrator" && role === "Employee") {
+      return <Navigate to="/home" />;
+    }
   }
+      
+  return <Navigate to="/login" />;
 }
