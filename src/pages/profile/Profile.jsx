@@ -44,10 +44,8 @@ const Profile = () => {
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
       <div className="wrapper">
-
+        <Header />
         {sidebar}
-
-
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{
