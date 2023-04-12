@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const role = localStorage.getItem("role");
+
   return (
     <div>
       <nav className="main-header navbar navbar-expand">
@@ -17,10 +19,14 @@ const Header = () => {
           </a>
         </span>
         {/* Brand Logo */}
-        <Link to="/home" className="brand-link-custom" style={{ height: 90 }}>
+        <Link
+          to={role === "Employee" ? "/cashier" : "/home"}
+          className="brand-link-custom"
+          style={{ height: 90 }}
+        >
           <img
             src="./docs/assets/img/bleven_logo.png"
-            alt="POS Logo"
+            alt="Logo POS"
             className="brand-image"
             style={{ height: 43, width: 230 }}
           />
