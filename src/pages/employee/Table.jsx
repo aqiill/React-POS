@@ -113,7 +113,7 @@ class Table extends Component {
                 extend: "csv",
                 text: "Excel",
                 exportOptions: {
-                  columns: [0, 2, 3, 4, 5, 6, 7],
+                  columns: [0, 1, 2, 3],
                   modifier: {
                     selected: false,
                   },
