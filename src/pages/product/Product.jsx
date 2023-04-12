@@ -18,7 +18,7 @@ function Product() {
   // const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BASE_API + '/produk').then((response) => {
+    axios.get(process.env.REACT_APP_BASE_API + "/produk").then((response) => {
       setProducts(response.data);
     });
   }, []);
@@ -84,7 +84,6 @@ function Product() {
       });
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -96,27 +95,42 @@ function Product() {
             },
           }
         );
-        setExpiredProducts(expiredRes.data.data);
-
-        const stockRes = await axios.get(process.env.REACT_APP_BASE_API + "/produk/stok", {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
+        const sortedExpired = expiredRes.data.data.sort((a, b) => {
+          const dateA = new Date(a.expired_date);
+          const dateB = new Date(b.expired_date);
+          return dateB - dateA; // mengubah urutan menjadi dari terlama hingga tercepat
         });
-        setStockProducts(stockRes.data.data);
+        setExpiredProducts(sortedExpired);
 
-        const categoryRes = await axios.get(process.env.REACT_APP_BASE_API + "/kategori", {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
-        });
+        const stockRes = await axios.get(
+          process.env.REACT_APP_BASE_API + "/produk/stok",
+          {
+            headers: {
+              api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+            },
+          }
+        );
+        const sortedStock = stockRes.data.data.sort((a, b) => a.stok - b.stok);
+        setStockProducts(sortedStock);
+
+        const categoryRes = await axios.get(
+          process.env.REACT_APP_BASE_API + "/kategori",
+          {
+            headers: {
+              api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+            },
+          }
+        );
         setCategory(categoryRes.data.data);
 
-        const productRes = await axios.get(process.env.REACT_APP_BASE_API + "/produk/kategori", {
-          headers: {
-            api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
-          },
-        });
+        const productRes = await axios.get(
+          process.env.REACT_APP_BASE_API + "/produk/kategori",
+          {
+            headers: {
+              api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
+            },
+          }
+        );
 
         setProducts(productRes.data.data);
         setLoading(false);
@@ -143,7 +157,6 @@ function Product() {
     return formatter.format(price);
   };
 
-
   return (
     <>
       <CommonComponent pageTitle="Product" backgroundStyle="#e7eef8" />
@@ -161,7 +174,7 @@ function Product() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 373
+                      height: 373,
                     }}
                   >
                     <div className="card-header border-0">
@@ -173,11 +186,23 @@ function Product() {
                       className="card-body pl-4 pr-4 mr-4 ml-4"
                       style={{ marginBottom: 20, overflowX: "scroll" }}
                     >
-                      <div className="card-deck d-grid" style={{ gridTemplateRows: "auto auto", maxHeight: "258px" }}>
-                        <div className="card-columns" style={{ rowCount: '2', columnGap: '1rem' }}>
+                      <div
+                        className="card-deck d-grid"
+                        style={{
+                          gridTemplateRows: "auto auto",
+                          maxHeight: "258px",
+                        }}
+                      >
+                        <div
+                          className="card-columns"
+                          style={{ rowCount: "2", columnGap: "1rem" }}
+                        >
                           {expiredProducts.map((product) => (
                             <div className="card-susu mb-2">
-                              <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`} alt="Product" />
+                              <img
+                                src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
+                                alt="Product"
+                              />
                               <div
                                 className="card-text mt-1 p-0 ml-1"
                                 style={{ fontWeight: "bold" }}
@@ -188,7 +213,7 @@ function Product() {
                                   style={{
                                     height: 6,
                                     width: 162,
-                                    backgroundColor: "red",
+                                    backgroundColor: "white",
                                     marginTop: 35,
                                     borderRadius: 10,
                                   }}
@@ -196,9 +221,19 @@ function Product() {
                                   <div
                                     className="progress-bar"
                                     role="progressbar"
-                                    aria-valuenow={0}
+                                    aria-valuenow={calculateDays(
+                                      product.expired_date
+                                    )}
                                     aria-valuemin={0}
-                                    aria-valuemax={100}
+                                    aria-valuemax={180}
+                                    style={{
+                                      width: `${
+                                        (calculateDays(product.expired_date) /
+                                          180) *
+                                        100
+                                      }%`,
+                                      backgroundColor: "red",
+                                    }}
                                   />
                                 </div>
                                 <div
@@ -210,7 +245,8 @@ function Product() {
                                   }}
                                 >
                                   <div className="col-md-6">
-                                    {calculateDays(product.expired_date)} Days Left
+                                    {calculateDays(product.expired_date)} Days
+                                    Left
                                   </div>
                                   <div className="col-md-6 text-right">
                                     {product.expired_date}
@@ -231,7 +267,7 @@ function Product() {
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 373
+                      height: 373,
                     }}
                   >
                     <div className="card-header">
@@ -260,7 +296,13 @@ function Product() {
                               className="card-img-top"
                               src={`${process.env.REACT_APP_IMAGE_BASE_URL}${product.gambar}`}
                               alt="Product"
-                              style={{ height: '155.54px', width: '200px', objectFit: 'cover', objectPosition: 'center center', borderRadius: '20px 20px 0 0' }}
+                              style={{
+                                height: "155.54px",
+                                width: "200px",
+                                objectFit: "cover",
+                                objectPosition: "center center",
+                                borderRadius: "20px 20px 0 0",
+                              }}
                             />
                             <div
                               className="card-body p-0 ml-1"
@@ -272,16 +314,21 @@ function Product() {
                                 style={{
                                   height: 6,
                                   width: 162,
-                                  backgroundColor: "red",
+                                  backgroundColor: "white",
                                   borderRadius: 10,
                                 }}
                               >
                                 <div
                                   className="progress-bar"
                                   role="progressbar"
-                                  aria-valuenow={0}
+                                  aria-valuenow={product.stok}
                                   aria-valuemin={0}
                                   aria-valuemax={100}
+                                  style={{
+                                    width: `${product.stok}%`,
+                                    backgroundColor: "red",
+                                    borderRadius: 10,
+                                  }}
                                 />
                               </div>
                               <div
@@ -314,11 +361,14 @@ function Product() {
                 </div>
 
                 <div className="col-lg-12">
-                  <div className="card" style={{
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                    borderRadius: 10,
-                    height: 610,
-                  }}>
+                  <div
+                    className="card"
+                    style={{
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: 10,
+                      height: 610,
+                    }}
+                  >
                     <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
@@ -342,10 +392,7 @@ function Product() {
                       aria-hidden="true"
                       id="myModal"
                     >
-                      <div
-                        className="modal-dialog modal-sm"
-                        role="document"
-                      >
+                      <div className="modal-dialog modal-sm" role="document">
                         <form onSubmit={handleSubmit}>
                           <div className="modal-content">
                             <div className="modal-header">
@@ -395,13 +442,18 @@ function Product() {
                                 />
                               </div>
                               <div className="form-group">
-                                <label htmlFor="category">
-                                  Category
-                                </label>
-                                <select name="kategori_id" className="form-control" id="category" onChange={handleChange}>
+                                <label htmlFor="category">Category</label>
+                                <select
+                                  name="kategori_id"
+                                  className="form-control"
+                                  id="category"
+                                  onChange={handleChange}
+                                >
                                   <option value="">Select Category</option>
                                   {category.map((category) => (
-                                    <option value={category.kategori_id}>{category.nama_kategori}</option>
+                                    <option value={category.kategori_id}>
+                                      {category.nama_kategori}
+                                    </option>
                                   ))}
                                 </select>
                               </div>
@@ -486,7 +538,6 @@ function Product() {
                               </button>
                               <a href="/product">
                                 <button
-
                                   type="submit"
                                   className="btn btn-primary"
                                   style={{
@@ -498,37 +549,26 @@ function Product() {
                                     height: 35,
                                   }}
                                   id="saveBtn"
-
                                 >
                                   Save changes
                                 </button>
                               </a>
-
                             </div>
                           </div>
                         </form>
                       </div>
                     </div>
 
-                    <Table
-                      products={products}
-                      loading={loading}
-                    />
+                    <Table products={products} loading={loading} />
                   </div>
                 </div>
               </div>
             </div>
           </section>
-
-        </div >
-      </div >
-
+        </div>
+      </div>
     </>
-
   );
-
-
-
 }
 
 export default Product;
