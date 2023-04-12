@@ -57,23 +57,11 @@ const Sidebar = ({ activePage }) => {
           title: "Employee",
           name: "employee",
         },
-        // {
-        //   to: "/member",
-        //   icon: "./docs/assets/img/group_FILL0_wght400_GRAD0_opsz48.svg",
-        //   title: "Member",
-        //   name: "member",
-        // },
       ],
     },
     {
       label: "OTHER",
       items: [
-        // {
-        //   to: "/settings",
-        //   icon: "./docs/assets/img/settings_FILL0_wght400_GRAD0_opsz48.svg",
-        //   title: "Settings",
-        //   name: "settings",
-        // },
         {
           to: "/contact-us",
           icon: "./docs/assets/img/support_agent_FILL0_wght400_GRAD0_opsz48.svg",
