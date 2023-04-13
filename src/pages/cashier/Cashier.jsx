@@ -155,7 +155,6 @@ const Cashier = () => {
                           position: "sticky",
                           top: "0",
                           backgroundColor: "#fff",
-                          textAlign: "right",
                         }}
                       >
                         <tr className="text-muted fs-10">
