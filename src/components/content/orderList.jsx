@@ -73,26 +73,24 @@ function orderList(props) {
 
   return (
     <div>
-      <div>
+      <div >
         <div
           className="card"
           style={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             borderRadius: 10,
+            marginBottom:0
           }}
         >
-          <div
-            className="card-header border-0"
-            style={{ display: "flex", justifyContent: "flex-end" }}
-          >
+          <div className="card-header border-0" style={{ display: "flex", justifyContent: "flex-end" }} >
             <h6>Payment Details</h6>
           </div>
           <div
             className="card-body d-flex"
-            style={{ padding: "0px 24px", align-content: "right" }}
+            style={{ padding: "0px 24px",  alignContent: "right"}}
           >
             <div></div>
-            <div className="d-flex payment-details">
+            <div className="d-flex payment-details ">
               <div>
                 <p>Sub Total :</p>
                 <p>Tax :</p>
@@ -143,8 +141,9 @@ function orderList(props) {
                   <div className="row">
                     <img
                       className="invoiceLogo"
-                      src="../docs/assets/img/POS_logo.png"
-                      alt="BLeven Logo"
+                      src="./docs/assets/img/bleven_logo.png"
+                      style={{ width: "35%", height: "35%" }}
+                      alt="logo"
                     />
                   </div>
                   <div className="row">
