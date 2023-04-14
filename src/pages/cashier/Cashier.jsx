@@ -13,7 +13,7 @@ const Cashier = () => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    document.title = "POS | Cashier";
+    document.title = "POS | Transaction";
     document.body.classList.add(
       "hold-transition",
       "light-mode",
@@ -50,13 +50,13 @@ const Cashier = () => {
 
       if (response.data) {
         const produk = response.data;
-        const produkSudahAda = cart.find((p) => p.id === produk.data.produk_id);
+        const produkSudahAda = cart.find((p) => p.kode_produk === produk.data.kode_produk);
         // console.log(produkSudahAda);
         if (produkSudahAda) {
           // Jika produk sudah ada di dalam cart, tambahkan jumlahnya
           setCart(
             cart.map((p) => {
-              if (p.id === produk.data.produk_id) {
+              if (p.kode_produk === produk.data.kode_produk) {
                 return {
                   ...p,
                   jumlah: p.jumlah + 1,
@@ -70,7 +70,7 @@ const Cashier = () => {
           setCart([
             ...cart,
             {
-              id: produk.data.produk_id,
+              kode_produk: produk.data.kode_produk,
               nama: produk.data.nama_produk,
               harga: produk.data.harga_jual,
               expired: produk.data.expired_date,
@@ -99,6 +99,13 @@ const Cashier = () => {
     setTotal(total);
   }, [cart]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      // 👇 Get input value
+      handleTambahProduk()
+    }
+  };
+
   // console.log(total);
   return (
     <>
@@ -106,9 +113,9 @@ const Cashier = () => {
         <Header />
         <SidebarCashier activePage="Cashier" />
         <div className="content-wrapper row">
-          <section className="content col">
-            <section className="container-fluid">
-              <div className="col-lg-12">
+          <section className="content col" style={{height: "calc (100vh - 90px)"}}>
+            <section className="container-fluid" >
+              <div className="col-lg-12" style={{display:"grid", gridTemplateRows:"calc(100vh - 339px) auto"}}>
                 <div
                   className="card"
                   style={{
@@ -123,12 +130,15 @@ const Cashier = () => {
                       type="search"
                       value={kodeProduk}
                       onChange={(e) => setKodeProduk(e.target.value)}
+                      onKeyDown={handleKeyDown}
                       placeholder="input kode produk"
                       style={{
                         borderRadius: "10px",
                         margin: "10px",
                         width: "25%",
                         padding: "3px",
+                        textIndent: "5px",
+                        fontSize: "10pt"
                       }}
                     />
                     <button
@@ -145,8 +155,7 @@ const Cashier = () => {
                       padding: "0px 24px",
                       margin: "10px",
                       overflowY: "scroll",
-                      minHeight: "300px",
-                      maxHeight: "300px",
+                      height: "100%"
                     }}
                   >
                     <table className="table">
