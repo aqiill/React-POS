@@ -89,7 +89,7 @@ function orderList(props) {
           </div>
           <div
             className="card-body d-flex"
-            style={{ padding: "0px 24px", align-content: "right" }}
+            style={{ padding: "0px 24px", alignContent: "right" }}
           >
             <div></div>
             <div className="d-flex payment-details">
