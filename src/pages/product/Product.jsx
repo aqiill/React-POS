@@ -373,9 +373,10 @@ function Product() {
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
-                            className="btn bg-transparent table-product-button"
+                            className="btn bg-transparent table-add-button"
                             data-toggle="modal"
                             data-target=".bd-example-modal-sm"
+                            style={{padding: "0.375rem 0.325rem"}}
                           >
                             <iconify-icon icon="oi:plus" />
                             Add Product
@@ -519,7 +520,9 @@ function Product() {
                                 />
                               </div>
                             </div>
-                            <div className="modal-footer">
+                            <div className="modal-footer" 
+                              style={{ border: "none" }}
+                            >
                               <button
                                 type="button"
                                 className="btn btn-secondary"
@@ -534,7 +537,7 @@ function Product() {
                                 }}
                                 data-dismiss="modal"
                               >
-                                Close
+                                Cancel
                               </button>
                               <a href="/product">
                                 <button
@@ -545,12 +548,12 @@ function Product() {
                                     color: "white",
                                     fontWeight: "normal",
                                     fontSize: "smaller",
-                                    width: 125,
+                                    width: "fit",
                                     height: 35,
                                   }}
                                   id="saveBtn"
                                 >
-                                  Save changes
+                                  Add products
                                 </button>
                               </a>
                             </div>

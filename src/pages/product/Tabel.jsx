@@ -26,8 +26,8 @@ class Table extends Component {
         setTimeout(function () {
           $("#table").DataTable({
             destroy: true,
-            pageLength: 4,
-            scrollY: "400px",
+            pageLength: 5,
+            scrollY: "calc(610px - 230px)",
             scrollCollapse: true,
             processing: true,
             dom:
@@ -69,7 +69,8 @@ class Table extends Component {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -139,7 +140,8 @@ class Table extends Component {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -176,7 +178,8 @@ class Table extends Component {
                       // efek ketika mouse meninggalkan tombol
                       $(this).css({
                         backgroundColor: "white",
-                        color: "black"
+                        color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -240,16 +243,14 @@ class Table extends Component {
             <td className="">{item.harga_jual}</td>
             <td>
               <button
-                className="btn table-actions-button bg-transparent border drop-shadow"
+                className="btn table-actions-button bg-transparent border drop-shadow mr-2 align-item-center rounded-circle"
                 data-toggle="modal"
                 data-target={`#updateModal${item.produk_id}`}
-                style={{ borderRadius: "50%", alignItems: "center" }}
               >
                 <iconify-icon icon="oi:pencil" />
               </button>
               <button
-                className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                style={{ borderRadius: "50%" }}
+                className="btn table-actions-button bg-transparent border drop-shadow delete-row align-item-center rounded-circle"
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
@@ -306,11 +307,11 @@ class Table extends Component {
 
     return (
       <>
-        <div class="card-body mt-0 pt-1 mb-4">
-          <div className=" scrollable-table" style={{ overflowX: "hidden", }}>
+        <div class="card-body mt-0 pt-1 mb-4 pr-0">
+          <div className=" scrollable-table overflow-hidden">
             <table
               id="table"
-              className="table align-items-center justify-content-center"
+              className="table align-items-center justify-content-center" 
             >
               <thead>
                 <tr>

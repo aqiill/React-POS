@@ -22,7 +22,7 @@ class Table extends Component {
           $("#table").DataTable({
             destroy: true,
             pageLength: 10,
-            scrollY: "210px",
+            scrollY: "calc(100vh - 300px)",
             scrollCollapse: true,
             processing: true,
             dom:
@@ -58,6 +58,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -135,6 +136,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -173,6 +175,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
                       });
                     }
                   );
@@ -222,16 +225,14 @@ class Table extends Component {
               <td className="">{item.email_user}</td>
               <td>
                 <button
-                  className="btn table-actions-button bg-transparent border drop-shadow"
+                  className="btn table-actions-button bg-transparent border drop-shadow align-items-center rounded-circle mr-2"
                   data-toggle="modal"
                   data-target=".bd-example-modal-sm2"
-                  style={{ borderRadius: "50%", alignItems: "center" }}
                 >
                   <iconify-icon icon="oi:pencil" />
                 </button>
                 <button
-                  className="btn table-actions-button bg-transparent border drop-shadow ml-2 delete-row"
-                  style={{ borderRadius: "50%" }}
+                  className="btn table-actions-button bg-transparent border drop-shadow delete-row align-items-center rounded-circle"
                   onClick={() => {
                     if (
                       window.confirm(
@@ -281,8 +282,8 @@ class Table extends Component {
 
     return (
       <>
-        <div className="card-body">
-          <div className=" scrollable-table" style={{ overflowX: "hidden" }}>
+        <div className="card-body mt-0 pt-1 px-0">
+          <div className=" scrollable-table overflow-hidden">
             <table
               id="table"
               className="table align-items-center justify-content-center mb-0"
@@ -336,7 +337,7 @@ class Table extends Component {
                 </div>
               </div>
               <div
-                className="modal-footer d-flex justify-content-between"
+                className="modal-footer"
                 style={{ border: "none" }}
               >
                 <button
@@ -363,12 +364,12 @@ class Table extends Component {
                     color: "white",
                     fontWeight: "normal",
                     fontSize: "smaller",
-                    width: 100,
+                    width: "fit",
                     height: 35,
                   }}
                   id="saveBtn"
                 >
-                  Update
+                  Update Employee
                 </button>
               </div>
             </div>

@@ -233,7 +233,8 @@ const EditModal = ({ }) => {
                                         />
                                     </div>
                                 </div>
-                                <div className="modal-footer">
+                                <div className="modal-footer" 
+                                    style={{ border: "none" }}>
                                     <button
                                         type="button"
                                         className="btn btn-secondary"
@@ -260,13 +261,13 @@ const EditModal = ({ }) => {
                                                 color: "white",
                                                 fontWeight: "normal",
                                                 fontSize: "smaller",
-                                                width: 125,
+                                                width: "fit",
                                                 height: 35,
                                             }}
                                             id="saveBtn"
 
                                         >
-                                            Update
+                                            Update Product
                                         </button>
                                     </a>
 

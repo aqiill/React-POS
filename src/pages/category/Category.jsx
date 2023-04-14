@@ -92,27 +92,27 @@ function Category() {
         <Sidebar activePage="category" />
         <div className="content-wrapper row">
           <section className="content col">
-            <div className="container-fluid">
+            <div className="container-fluid" style={{height: "calc (100vh - 90px)"}}>
               <div className="row content-card">
                 <div className="col-lg-12">
                   <div
-                    className="card"
+                    className="card mb-0"
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 600,
+                      height: "100%"
                     }}
                   >
                     <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">
                         <div
-                          className="add-export"
                           style={{ display: "flex" }}
                         >
                           <button
-                            className="btn bg-transparent table-cashier-button"
+                            className="btn bg-transparent table-add-button"
                             data-toggle="modal"
                             data-target=".bd-example-modal-sm"
+                            style={{padding: "0.375rem 0.325rem"}}
                           >
                             <iconify-icon icon="oi:plus" />
                             Add Category
@@ -161,7 +161,7 @@ function Category() {
                                     </div>
                                   </div>
                                   <div
-                                    className="modal-footer d-flex justify-content-between"
+                                    className="modal-footer"
                                     style={{ border: "none" }}
                                   >
                                     <button
@@ -188,12 +188,12 @@ function Category() {
                                         color: "white",
                                         fontWeight: "normal",
                                         fontSize: "smaller",
-                                        width: 100,
+                                        width: "fit",
                                         height: 35,
                                       }}
                                       id="saveBtn"
                                     >
-                                      Add
+                                      Add Category
                                     </button>
                                   </div>
                                 </form>
@@ -205,8 +205,8 @@ function Category() {
                     </div>
                     {/* TABLE */}
                     <div
-                      className="card-body"
-                      style={{ padding: "0px 24px" }}
+                      className="card-body pr-0"
+                      style={{ padding: "0px 24px", height:"calc(100vh - 152px"}}
                     >
                       <Table category={category} loading={loading} />
                     </div>

@@ -111,7 +111,7 @@ const EditModal = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className="modal-footer d-flex justify-content-between"
+                                    className="modal-footer"
                                     style={{ border: "none" }}
                                 >
                                     <button
@@ -138,12 +138,12 @@ const EditModal = () => {
                                             color: "white",
                                             fontWeight: "normal",
                                             fontSize: "smaller",
-                                            width: 100,
+                                            width: "fit",
                                             height: 35,
                                         }}
                                         id="saveBtn"
                                     >
-                                        Update
+                                        Update Category
                                     </button>
                                 </div>
                             </div>

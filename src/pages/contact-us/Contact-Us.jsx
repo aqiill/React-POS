@@ -44,23 +44,24 @@ function HelpAndSupport() {
         <div className="content-wrapper row">
           <section className="content col">
             <section className="container-fluid">
-              <div className="col-lg-12">
+              <div className="col-lg-12"  style={{height:"calc(100vh - 102px)"}}>
                 <div
                   className="card mb-0"
                   style={{
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     borderRadius: 10,
-                    height: "auto",
+                    height: "100%",
+                    marginBottom: 0
                   }}
                 >
                   <div className="card-header border-0">
                     <h4>Get in touch</h4>
                   </div>
-                  <div className="card-body" style={{ padding: "0px 24px" }}>
+                  <div className="card-body" style={{padding: "0px 24px" }}>
                     <div
                       className="scrollable-table"
                       style={{
-                        height: 480,
+                        height: "100%",
                         overflowY: "auto",
                         overflowX: "hidden",
                       }}
@@ -119,7 +120,15 @@ function HelpAndSupport() {
                             <button
                               type="submit"
                               className="btn btn-primary mb-2"
-                              style={{ float: "right" }}
+                              style={{
+                                backgroundColor: "#5B7CFD",
+                                color: "white",
+                                fontWeight: "normal",
+                                fontSize: "smaller",
+                                width: 125,
+                                height: 35,
+                                float: "right"
+                            }}
                             >
                               Submit
                             </button>
@@ -205,7 +214,6 @@ function HelpAndSupport() {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => setIsEmailSentModalOpen(false)}
                 >
                   Close
                 </button>

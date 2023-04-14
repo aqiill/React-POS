@@ -1,4 +1,4 @@
-import axios from "axios";
+ import axios from "axios";
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -100,25 +100,27 @@ function Employee() {
           <section className="content col">
             <div className="container-fluid">
               <div className="row content-card">
-                <div className="col-lg-12">
+                <div className="col-lg-12" style={{height: "calc (100vh - 90px)"}}>
                   <div
                     className="card"
                     style={{
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: 10,
-                      height: 755,
+                      height: "100%",
+                      marginBottom: 0
                     }}
                   >
-                    <div className="card-header border-0">
+                    <div className="card-header border-0 mb-0 pb-0">
                       <div className="d-flex justify-content-between">
                         <div className="add-export" style={{ display: "flex" }}>
                           <button
-                            className="btn bg-transparent table-cashier-button"
+                            className="btn bg-transparent table-add-button"
                             data-toggle="modal"
                             data-target=".bd-example-modal-sm"
+                            style={{padding: "0.375rem 0.325rem"}}
                           >
                             <iconify-icon icon="oi:plus" />
-                            Add Cashier
+                            Add Employee
                           </button>
 
                           {/* MODAL */}
@@ -255,7 +257,7 @@ function Employee() {
                                     </div>
                                   </div>
                                   <div
-                                    className="modal-footer d-flex justify-content-between"
+                                    className="modal-footer"
                                     style={{ border: "none" }}
                                   >
                                     <button
@@ -282,12 +284,12 @@ function Employee() {
                                         color: "white",
                                         fontWeight: "normal",
                                         fontSize: "smaller",
-                                        width: 100,
+                                        width: "fit",
                                         height: 35,
                                       }}
                                       id="saveBtn"
                                     >
-                                      Add Cashier
+                                      Add Employee
                                     </button>
                                   </div>
                                 </form>
@@ -298,7 +300,7 @@ function Employee() {
                       </div>
                     </div>
                     {/* TABLE */}
-                    <div className="card-body" style={{ padding: "0px 24px" }}>
+                    <div className="card-body pr-0" style={{ padding: "0px 24px", height:"calc(100vh - 152px"}}>
                       <Table employee={employee} loading={loading} />
                     </div>
                   </div>
