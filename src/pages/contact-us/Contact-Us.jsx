@@ -48,7 +48,7 @@ function HelpAndSupport() {
                 <div
                   className="card mb-0"
                   style={{
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    boxShadow: "rgba(0, 0, 0, 0.25) 0px 4px 4px",
                     borderRadius: 10,
                     height: "100%",
                     marginBottom: 0
