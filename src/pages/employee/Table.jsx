@@ -12,6 +12,7 @@ import "jspdf-autotable";
 import "jspdf-font";
 import React, { Component } from "react";
 import axios from "axios";
+import Toast from "../../components/toast/Toast";
 
 import $ from "jquery";
 class Table extends Component {
@@ -58,7 +59,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
@@ -136,7 +137,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
@@ -175,7 +176,7 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
@@ -239,7 +240,7 @@ class Table extends Component {
                         "Are you sure want to delete this product?"
                       )
                     ) {
-                      this.handleDelete(index);
+                      this.handleDelete(item.id_user);
                     }
                   }}
                 >
@@ -255,23 +256,27 @@ class Table extends Component {
     }
   };
 
-  handleDelete = async (index) => {
-    const { products } = this.props;
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-
-    try {
-      await axios.delete(
-        process.env.REACT_APP_BASE_API + `/produk/${products[index].id}`
-      );
-      this.setState({ products: newProducts });
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
+  handleDelete = (id) => {
+    axios
+      .delete(process.env.REACT_APP_BASE_API + `/users/${id}`, {
+        headers: {
+          api_key: `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        Toast({
+          message: "Employee has been deleted succesfully!",
+          type: "success",
+        });
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render() {
-
     if (this.props.loading) {
       return (
         <div className="loading-container">
@@ -336,10 +341,7 @@ class Table extends Component {
                   />
                 </div>
               </div>
-              <div
-                className="modal-footer"
-                style={{ border: "none" }}
-              >
+              <div className="modal-footer" style={{ border: "none" }}>
                 <button
                   type="button"
                   className="btn"
