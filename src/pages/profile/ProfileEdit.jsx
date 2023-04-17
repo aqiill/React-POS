@@ -116,13 +116,14 @@ const ProfileEdit = () => {
           }}
         >
           <div className="box">
-            <div className="card" style={{ height: 755, width: 750 }}>
+          <div className="card" style={{ height: 750, width: 750, borderRadius: "10px",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
               <Link
                 to="/profile"
                 className="btn btn-secondary position-absolute top-0 start-0 m-3"
                 style={{ backgroundColor: "rgba(1, 1, 1, 0)", border: "none" }}
               >
-                <i className="fas fa-arrow-left" style={{ color: "black" }} />
+                <i className="fas fa-arrow-left" id="backButton" style={{ color: "black" }} />
               </Link>
               <form onSubmit={handleSubmit}>
                 <div className="card-body">
@@ -232,14 +233,17 @@ const ProfileEdit = () => {
                       <button
                         type="submit"
                         className="btn btn-primary btn-rounded"
-                        id="saveBtn"
+                        id="saveButton"
                         style={{
                           backgroundColor: "#5B7CFD",
-                          borderRadius: 5,
-                          width: 125,
+                          color: "white",
+                          fontWeight: "normal",
+                          fontSize: "smaller",
+                          width: "fit",
+                          height: 35,
                         }}
                       >
-                        Save{" "}
+                        Save Changes{" "}
                       </button>
                     </div>
                   </div>

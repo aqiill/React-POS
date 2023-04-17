@@ -52,11 +52,12 @@ const Profile = () => {
             backgroundColor: "#E7EEF8",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <div className="box">
-            <div className="card" style={{ height: 755, width: 750 }}>
+            <div className="card" style={{ height: 750, width: 750, borderRadius: "10px",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
               <div className="card-body">
                 <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
                   <a href="https://gravatar.com/" target="v_blank"><img src={avatar} alt="Profile" /></a>

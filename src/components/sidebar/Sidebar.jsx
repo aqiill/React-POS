@@ -123,7 +123,7 @@ const Sidebar = ({ activePage }) => {
             </li>
           </ul>
           <div
-            className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4"
+            className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4 justify-content-start"
             style={{ borderRadius: 10 }}
           >
             <div className="image">
@@ -138,6 +138,7 @@ const Sidebar = ({ activePage }) => {
                 to={"/profile"}
                 className="d-block"
                 style={{ color: "black" }}
+                id="profileButton"
               >
                 {nama_user}
               </Link>
