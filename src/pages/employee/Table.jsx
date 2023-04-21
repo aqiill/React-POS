@@ -237,7 +237,7 @@ class Table extends Component {
                   onClick={() => {
                     if (
                       window.confirm(
-                        "Are you sure want to delete this product?"
+                        "Are you sure want to delete this employee?"
                       )
                     ) {
                       this.handleDelete(item.id_user);
