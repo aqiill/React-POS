@@ -14,7 +14,7 @@ function Report() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const transaksiRes = await axios.get(process.env.REACT_APP_BASE_API + "/transaksi/", {
+        const transaksiRes = await axios.get(process.env.REACT_APP_BASE_API + "/transaksi", {
           headers: {
             api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
           },
