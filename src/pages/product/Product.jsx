@@ -67,7 +67,7 @@ function Product() {
     data.append("gambar", formData.gambar);
     data.append("expired_date", formData.expired_date);
     axios
-      .post(process.env.REACT_APP_BASE_API + "/produk/", data, {
+      .post(process.env.REACT_APP_BASE_API + "/produk", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           api_key: "e3fd6b146fcb65f7419e3531a0a84f4d700b8210",
@@ -227,11 +227,10 @@ function Product() {
                                     aria-valuemin={0}
                                     aria-valuemax={180}
                                     style={{
-                                      width: `${
-                                        (calculateDays(product.expired_date) /
+                                      width: `${(calculateDays(product.expired_date) /
                                           180) *
                                         100
-                                      }%`,
+                                        }%`,
                                       backgroundColor: "red",
                                     }}
                                   />
@@ -376,7 +375,7 @@ function Product() {
                             className="btn bg-transparent table-add-button"
                             data-toggle="modal"
                             data-target=".bd-example-modal-sm"
-                            style={{padding: "0.375rem 0.325rem"}}
+                            style={{ padding: "0.375rem 0.325rem" }}
                           >
                             <iconify-icon icon="oi:plus" />
                             Add Product
@@ -520,7 +519,7 @@ function Product() {
                                 />
                               </div>
                             </div>
-                            <div className="modal-footer" 
+                            <div className="modal-footer"
                               style={{ border: "none" }}
                             >
                               <button
