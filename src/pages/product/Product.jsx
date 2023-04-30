@@ -77,7 +77,7 @@ function Product() {
         console.log(response.data);
         // navigate('/product')
         Toast({ message: "Product created!", type: "success" });
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(error);
