@@ -81,6 +81,7 @@ function Product() {
       })
       .catch((error) => {
         console.log(error);
+        Toast({ message: "Failed to add product", type: "error" });
       });
   };
 
