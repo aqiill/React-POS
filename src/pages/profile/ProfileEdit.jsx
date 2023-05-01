@@ -34,6 +34,7 @@ const ProfileEdit = () => {
   };
 
   const handleSubmit = (event) => {
+    console.log(formData);
     event.preventDefault();
     const email = localStorage.getItem("email_user");
     const data = new FormData();
@@ -62,6 +63,7 @@ const ProfileEdit = () => {
           draggable: true,
           progress: undefined,
         });
+        
       })
       .catch((error) => {
         console.log(error);
@@ -82,7 +84,7 @@ const ProfileEdit = () => {
       try {
         const response = await axios.get("/users/" + id_user, apiConfig);
         setProfile(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
       } catch (error) {
         console.error(error);
         // Tambahkan pesan error yang jelas untuk memberitahu pengguna tentang kesalahan yang terjadi
@@ -146,12 +148,10 @@ const ProfileEdit = () => {
                       id="name"
                       name="nama_user"
                       defaultValue={profile.nama_user}
-                      selected
                       style={{
                         borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                         fontSize: "larger",
                       }}
-                      autoFocus
                       onChange={handleChange}
                     />
                     <label
@@ -182,7 +182,7 @@ const ProfileEdit = () => {
                     <input
                       type="password"
                       className="form-control-plaintext"
-                      id="pw"
+                      id="pwOld"
                       name="password"
                       defaultValue
                       style={{
@@ -201,7 +201,7 @@ const ProfileEdit = () => {
                     <input
                       type="password"
                       className="form-control-plaintext"
-                      id="pw"
+                      id="pwNew"
                       name="password_baru"
                       defaultValue
                       style={{
@@ -220,7 +220,7 @@ const ProfileEdit = () => {
                     <input
                       type="password"
                       className="form-control-plaintext"
-                      id="pw"
+                      id="pwConfirm"
                       name="kon_password_baru"
                       defaultValue
                       style={{

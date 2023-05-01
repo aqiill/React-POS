@@ -141,12 +141,12 @@ function Employee() {
                                   className="modal-header"
                                   style={{ border: "none" }}
                                 >
-                                  <h5 className="modal-title">Add Cashier</h5>
+                                  <h5 className="modal-title">Add Employee</h5>
                                 </div>
                                 <form onSubmit={handleSubmit}>
                                   <div className="modal-body">
                                     <div className="form-group">
-                                      <label htmlFor="name">Cashier Name</label>
+                                      <label htmlFor="name">Employee Name</label>
                                       <input
                                         type="name"
                                         className="form-control"
@@ -155,7 +155,7 @@ function Employee() {
                                         value={formValues.nama_user}
                                         onChange={handleInputChange}
                                         aria-describedby="name"
-                                        placeholder="Input Cashier Name"
+                                        placeholder="Input Employee Name"
                                         autoComplete="off"
                                         required
                                       />
