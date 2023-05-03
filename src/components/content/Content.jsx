@@ -131,13 +131,13 @@ const Content = () => {
           {/* Info boxes */}
           <div className="row">
             {/* Revenue */}
-            <div className="col-12 col-sm-6 col-md-3">
+            <div className="col-12 col-sm-6 col-md-3 ">
               <Link
                 to="/report"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div
-                  className="small-box drop-shadow flex-row mb-3"
+                  className="small-box drop-shadow flex-row mb-3 unset "
                   style={{ backgroundColor: "white" }}
                 >
                   {/* <div className="dropdown d-flex flex-row-reverse">
@@ -175,7 +175,7 @@ const Content = () => {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div
-                  className="small-box drop-shadow flex-row mb-3"
+                  className="small-box drop-shadow flex-row mb-3 unset"
                   style={{
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     backgroundColor: "white",
@@ -219,7 +219,7 @@ const Content = () => {
                 id="employeecard"
               >
                 <div
-                  className="small-box drop-shadow flex-row mb-3"
+                  className="small-box drop-shadow flex-row mb-3 unset"
                   style={{
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                     backgroundColor: "white",
@@ -393,11 +393,11 @@ const Content = () => {
                             remaining
                           </div>
                           <div
-                            className="details mt-3"
+                            className="details mt-3 "
                             style={{ textAlign: "center" }}
                           >
                             <a
-                              href="#!"
+                              href="/product"
                               className="d-block"
                               style={{ color: "grey", fontWeight: "lighter" }}
                             >

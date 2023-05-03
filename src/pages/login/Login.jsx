@@ -22,6 +22,18 @@ function Login() {
     };
   }, []);
 
+  
+  useEffect(() => {
+    if (window.performance.navigation.type === 1) {
+      // Reset login page styles
+      document.title = "Login | BLEVEN";
+      document.body.classList.add("login-page", "hold-transition");
+      document.body.style.background = "#e7eef8";
+      document.body.style.background = "url('/assets/img/background_wide.png') no-repeat center center";
+      document.body.style.backgroundSize = "cover";
+    }
+  }, []);
+
   useEffect(() => {
     if (localStorage.getItem("email_user")) {
       navigate("/home");
