@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import emailjs from "@emailjs/browser";
-import $ from "jquery";
+// import $ from "jquery";
 
-function HelpAndSupport() {
+function ContactUs() {
   const form = useRef();
 
   const [isEmailSentModalOpen, setIsEmailSentModalOpen] = useState(false);
@@ -40,24 +40,27 @@ function HelpAndSupport() {
 
       <div className="wrapper" style={{ overflow: "hidden" }}>
         <Header />
-        <Sidebar activePage="help-and-support" />
+        <Sidebar activePage="contact-us" />
         <div className="content-wrapper row">
           <section className="content col">
             <section className="container-fluid">
-              <div className="col-lg-12"  style={{height:"calc(100vh - 102px)"}}>
+              <div
+                className="col-lg-12"
+                style={{ height: "calc(100vh - 102px)" }}
+              >
                 <div
                   className="card mb-0"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.25) 0px 4px 4px",
                     borderRadius: 10,
                     height: "100%",
-                    marginBottom: 0
+                    marginBottom: 0,
                   }}
                 >
                   <div className="card-header border-0">
                     <h4>Get in touch</h4>
                   </div>
-                  <div className="card-body" style={{padding: "0px 24px" }}>
+                  <div className="card-body" style={{ padding: "0px 24px" }}>
                     <div
                       className="scrollable-table"
                       style={{
@@ -127,8 +130,8 @@ function HelpAndSupport() {
                                 fontSize: "smaller",
                                 width: 125,
                                 height: 35,
-                                float: "right"
-                            }}
+                                float: "right",
+                              }}
                             >
                               Submit
                             </button>
@@ -211,10 +214,7 @@ function HelpAndSupport() {
                 <p>Your message has been sent successfully!</p>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                >
+                <button type="button" className="btn btn-secondary">
                   Close
                 </button>
               </div>
@@ -259,4 +259,4 @@ function HelpAndSupport() {
   );
 }
 
-export default HelpAndSupport;
+export default ContactUs;
