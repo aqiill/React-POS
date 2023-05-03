@@ -3,7 +3,6 @@ import React, { Component, useEffect, useState } from "react";
 import CommonComponent from "../../components/common/CommonComponent";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import SidebarCashier from "../../components/sidebar/SidebarCashier";
 import { Link } from "react-router-dom";
 import { MD5 } from "crypto-js";
 import { ToastContainer, toast } from "react-toastify";
@@ -63,7 +62,6 @@ const ProfileEdit = () => {
           draggable: true,
           progress: undefined,
         });
-        
       })
       .catch((error) => {
         console.log(error);
@@ -99,15 +97,12 @@ const ProfileEdit = () => {
   const avatar =
     "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
-  const role = localStorage.getItem("role");
-  const sidebar = role === 'Administrator' ? <Sidebar /> : <SidebarCashier activePage="Cashier" />;
-
   return (
     <>
       <CommonComponent pageTitle={"Edit Profile"} backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
-        {sidebar}
+        <Sidebar activePage="Profile" />;
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{
@@ -118,14 +113,25 @@ const ProfileEdit = () => {
           }}
         >
           <div className="box">
-          <div className="card" style={{ height: 750, width: 750, borderRadius: "10px",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
+            <div
+              className="card"
+              style={{
+                height: 750,
+                width: 750,
+                borderRadius: "10px",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              }}
+            >
               <Link
                 to="/profile"
                 className="btn btn-secondary position-absolute top-0 start-0 m-3"
                 style={{ backgroundColor: "rgba(1, 1, 1, 0)", border: "none" }}
               >
-                <i className="fas fa-arrow-left" id="backButton" style={{ color: "black" }} />
+                <i
+                  className="fas fa-arrow-left"
+                  id="backButton"
+                  style={{ color: "black" }}
+                />
               </Link>
               <form onSubmit={handleSubmit}>
                 <div className="card-body">

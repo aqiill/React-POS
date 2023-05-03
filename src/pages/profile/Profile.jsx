@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import SidebarCashier from "../../components/sidebar/SidebarCashier";
 import CommonComponent from "../../components/common/CommonComponent";
 import axios from "axios";
 import { MD5 } from "crypto-js";
@@ -34,33 +33,41 @@ const Profile = () => {
   }, []);
 
   const email = localStorage.getItem("email_user");
-  const avatar = 'https://gravatar.com/avatar/' + MD5(email).toString() + '?d=mm&s=300';
+  const avatar =
+    "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
   const role = localStorage.getItem("role");
-  const sidebar = role === 'Administrator' ? <Sidebar /> : <SidebarCashier activePage="Cashier" />;
-
 
   return (
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
-        {sidebar}
+        <Sidebar activePage="Cashier" />;
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{
             backgroundColor: "#E7EEF8",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <div className="box">
-            <div className="card" style={{ height: 750, width: 750, borderRadius: "10px",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
+            <div
+              className="card"
+              style={{
+                height: 750,
+                width: 750,
+                borderRadius: "10px",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              }}
+            >
               <div className="card-body">
                 <div className="profile-pic mt-3" style={{ marginLeft: 280 }}>
-                  <a href="https://gravatar.com/" target="v_blank"><img src={avatar} alt="Profile" /></a>
+                  <a href="https://gravatar.com/" target="v_blank">
+                    <img src={avatar} alt="Profile" />
+                  </a>
                 </div>
                 <div className="form-group" style={{ marginTop: 56 }}>
                   <label
@@ -80,17 +87,26 @@ const Profile = () => {
                         borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
                         fontSize: "larger",
                       }}
-                      readOnly disabled
+                      readOnly
+                      disabled
                     />
-                    <Link to="/profileedit" className="btn btn-secondary input-group-text" style={{
-                      borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
-                      backgroundColor: "rgba(1, 1, 1, 0)",
-                      borderTop: "none",
-                      borderLeft: "none",
-                      borderRight: "none",
-                      borderRadius: 0,
-                    }} id="editButton">
-                      <i className="bi bi-pencil-fill" style={{ color: "black" }} />
+                    <Link
+                      to="/profileedit"
+                      className="btn btn-secondary input-group-text"
+                      style={{
+                        borderBottom: "3px solid rgba(211, 211, 211, 0.8)",
+                        backgroundColor: "rgba(1, 1, 1, 0)",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                        borderRadius: 0,
+                      }}
+                      id="editButton"
+                    >
+                      <i
+                        className="bi bi-pencil-fill"
+                        style={{ color: "black" }}
+                      />
                     </Link>
                   </div>
                   <label
