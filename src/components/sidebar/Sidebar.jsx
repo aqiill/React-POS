@@ -57,6 +57,12 @@ const Sidebar = ({ activePage }) => {
           title: "Employee",
           name: "employee",
         },
+        {
+          to: "/cashier",
+          icon: "./docs/assets/img/dashboard_FILL0_wght400_GRAD0_opsz48.svg",
+          title: "Transaction",
+          name: "transaction",
+        },
       ],
     },
     {
@@ -94,21 +100,68 @@ const Sidebar = ({ activePage }) => {
           >
             {menus.map((menuGroup) => (
               <React.Fragment key={menuGroup.label}>
-                <li key={menuGroup.label} className="nav-header">
-                  <p>{menuGroup.label}</p>
-                </li>
-                {menuGroup.items.map((menu) => (
-                  <NavItem
-                    key={menu.name}
-                    to={menu.to}
-                    iconSrc={menu.icon}
-                    altText={menu.title + " Logo"}
-                    text={menu.title}
-                    isActive={activePage === menu.name}
-                  />
-                ))}
+                {localStorage.getItem("role") === "Administrator" &&
+                  menuGroup.label === "MENU" && (
+                    <>
+                      <li key={menuGroup.label} className="nav-header">
+                        <p>{menuGroup.label}</p>
+                      </li>
+                      {menuGroup.items.map(
+                        (menu) =>
+                          menu.name !== "transaction" && (
+                            <NavItem
+                              key={menu.name}
+                              to={menu.to}
+                              iconSrc={menu.icon}
+                              altText={menu.title + " Logo"}
+                              text={menu.title}
+                              isActive={activePage === menu.name}
+                            />
+                          )
+                      )}
+                    </>
+                  )}
+                {localStorage.getItem("role") === "Employee" &&
+                  menuGroup.label === "MENU" && (
+                    <>
+                      <li key={menuGroup.label} className="nav-header">
+                        <p>{menuGroup.label}</p>
+                      </li>
+                      {menuGroup.items.map(
+                        (menu) =>
+                          menu.name === "transaction" && (
+                            <NavItem
+                              key={menu.name}
+                              to={menu.to}
+                              iconSrc={menu.icon}
+                              altText={menu.title + " Logo"}
+                              text={menu.title}
+                              isActive={activePage === menu.name}
+                            />
+                          )
+                      )}
+                    </>
+                  )}
+                {menuGroup.label !== "MENU" && (
+                  <>
+                    <li key={menuGroup.label} className="nav-header">
+                      <p>{menuGroup.label}</p>
+                    </li>
+                    {menuGroup.items.map((menu) => (
+                      <NavItem
+                        key={menu.name}
+                        to={menu.to}
+                        iconSrc={menu.icon}
+                        altText={menu.title + " Logo"}
+                        text={menu.title}
+                        isActive={activePage === menu.name}
+                      />
+                    ))}
+                  </>
+                )}
               </React.Fragment>
             ))}
+
             {/* Sign Out Nav */}
             <li key="Sign Out" className="nav-item" id="sign-out">
               <a href="#!" className="nav-link" onClick={handleLogout}>

@@ -63,7 +63,7 @@ function App() {
           <Route
             path="/contact-us"
             element={
-              <ProtectedRouter role="Administrator">
+              <ProtectedRouter role={["Administrator", "Employee"]}>
                 <ContactUs />
               </ProtectedRouter>
             }

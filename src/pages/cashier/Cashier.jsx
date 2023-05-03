@@ -1,5 +1,5 @@
 import Header from "../../components/header/Header";
-import SidebarCashier from "../../components/sidebar/SidebarCashier";
+import Sidebar from "../../components/sidebar/Sidebar";
 import OrderList from "../../components/content/orderList";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -50,7 +50,9 @@ const Cashier = () => {
 
       if (response.data) {
         const produk = response.data;
-        const produkSudahAda = cart.find((p) => p.kode_produk === produk.data.kode_produk);
+        const produkSudahAda = cart.find(
+          (p) => p.kode_produk === produk.data.kode_produk
+        );
         // console.log(produkSudahAda);
         if (produkSudahAda) {
           // Jika produk sudah ada di dalam cart, tambahkan jumlahnya
@@ -100,9 +102,9 @@ const Cashier = () => {
   }, [cart]);
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       // 👇 Get input value
-      handleTambahProduk()
+      handleTambahProduk();
     }
   };
 
@@ -111,11 +113,20 @@ const Cashier = () => {
     <>
       <div className="wrapper" style={{ overflow: "hidden" }}>
         <Header />
-        <SidebarCashier activePage="Cashier" />
+        <Sidebar activePage="transaction" />
         <div className="content-wrapper row">
-          <section className="content col" style={{height: "calc (100vh - 90px)"}}>
-            <section className="container-fluid" >
-              <div className="col-lg-12" style={{display:"grid", gridTemplateRows:"calc(100vh - 339px) auto"}}>
+          <section
+            className="content col"
+            style={{ height: "calc (100vh - 90px)" }}
+          >
+            <section className="container-fluid">
+              <div
+                className="col-lg-12"
+                style={{
+                  display: "grid",
+                  gridTemplateRows: "calc(100vh - 339px) auto",
+                }}
+              >
                 <div
                   className="card"
                   style={{
@@ -138,7 +149,7 @@ const Cashier = () => {
                         width: "25%",
                         padding: "3px",
                         textIndent: "5px",
-                        fontSize: "10pt"
+                        fontSize: "10pt",
                       }}
                     />
                     <button
@@ -155,7 +166,7 @@ const Cashier = () => {
                       padding: "0px 24px",
                       margin: "10px",
                       overflowY: "scroll",
-                      height: "100%"
+                      height: "100%",
                     }}
                   >
                     <table className="table">
