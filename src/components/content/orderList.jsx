@@ -79,7 +79,7 @@ function orderList(props) {
           style={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             borderRadius: 10,
-            marginBottom:0
+            marginBottom: 0
           }}
         >
           <div className="card-header border-0" style={{ display: "flex", justifyContent: "flex-end" }} >
@@ -111,6 +111,13 @@ function orderList(props) {
               data-toggle="modal"
             >
               Procceed
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary float-right mr-3"
+              onClick={() => window.location.reload()}
+            >
+              Reset
             </button>
           </div>
           {/* Modal */}
