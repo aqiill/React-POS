@@ -14,6 +14,8 @@ function Login() {
     document.title = "Login | BLEVEN";
     document.body.classList.add("login-page", "hold-transition");
     document.body.style.background = "#e7eef8";
+    document.body.style.background = "url('/assets/img/background_wide.png') no-repeat center center";
+    document.body.style.backgroundSize = "cover";
     return () => {
       document.body.style.background = null;
       document.body.classList.remove("login-page", "hold-transition");
