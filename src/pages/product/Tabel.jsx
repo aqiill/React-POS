@@ -7,17 +7,16 @@ import "datatables.net-buttons/js/buttons.flash.js";
 import "datatables.net-buttons/js/buttons.html5.js";
 import "datatables.net-buttons/js/buttons.print.js";
 import "pdfmake/build/pdfmake.min.js";
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import 'jspdf-font';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import "jspdf-font";
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/toast/Toast";
 import $ from "jquery";
 import EditModal from "../product/EditModal";
-
 
 class Table extends Component {
   componentDidMount() {
@@ -30,17 +29,13 @@ class Table extends Component {
             scrollY: "calc(610px - 230px)",
             scrollCollapse: true,
             processing: true,
-            dom:
-              "<'row'<'col-md-6'B><'col-md-6'f>>" +
-              "<'row'<'col-md-12't>>" +
-              "<'row'<'col-md-6'i><'col-md-6'p>>",
+            dom: "<'row'<'col-md-6'B><'col-md-6'f>>" + "<'row'<'col-md-12't>>" + "<'row'<'col-md-6'i><'col-md-6'p>>",
 
             select: {
               style: "single",
             },
 
             buttons: [
-
               {
                 extend: "pdfHtml5",
                 text: "PDF",
@@ -59,10 +54,10 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
@@ -70,16 +65,21 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
                 },
                 action: function (e, dt, button, config) {
                   var data = dt.buttons.exportData();
-                  var headers = dt.columns().header().to$().map(function () {
-                    return this.innerText;
-                  }).get();
+                  var headers = dt
+                    .columns()
+                    .header()
+                    .to$()
+                    .map(function () {
+                      return this.innerText;
+                    })
+                    .get();
                   var excludedColumns = [1, 8];
                   var columnIndexes = headers
                     .map(function (column, index) {
@@ -91,8 +91,8 @@ class Table extends Component {
                     .filter(function (columnIndex) {
                       return columnIndex !== null;
                     });
-                  data = JSON.parse(JSON.stringify(data).replace(/<[^>]*>/g, ''));
-                  var doc = new jsPDF('l', 'pt', this.pageSize);
+                  data = JSON.parse(JSON.stringify(data).replace(/<[^>]*>/g, ""));
+                  var doc = new jsPDF("l", "pt", this.pageSize);
                   doc.autoTable(
                     columnIndexes.map(function (columnIndex) {
                       return headers[columnIndex];
@@ -105,14 +105,14 @@ class Table extends Component {
                     {
                       startY: 60,
                       margin: { top: 60 },
-                      styles: { overflow: 'linebreak' },
+                      styles: { overflow: "linebreak" },
                       columnStyles: { 0: { cellWidth: 120 } },
                       addPageContent: function (data) {
-                        doc.text('Product Management POS', 40, 30);
+                        doc.text("Product Management POS", 40, 30);
                       },
                     }
                   );
-                  doc.save('Product Management POS.pdf');
+                  doc.save("Product Management POS.pdf");
                 },
               },
               {
@@ -121,7 +121,7 @@ class Table extends Component {
                 exportOptions: {
                   columns: [0, 2, 3, 4, 5, 6, 7],
                   modifier: {
-                    selected: false
+                    selected: false,
                   },
                 },
                 className: "btn",
@@ -130,10 +130,10 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
@@ -141,26 +141,23 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
-                }
+                },
               },
               {
                 extend: "print",
                 exportOptions: {
                   columns: [0, 2, 3, 4, 5, 6, 7],
                   modifier: {
-                    selected: false
+                    selected: false,
                   },
                 },
                 customize: function (win) {
                   $(win.document.body).css("font-size", "10pt");
-                  $(win.document.body)
-                    .find("table")
-                    .addClass("compact")
-                    .css("font-size", "inherit");
+                  $(win.document.body).find("table").addClass("compact").css("font-size", "inherit");
                 },
                 className: "btn",
                 init: function (api, node, config) {
@@ -168,10 +165,10 @@ class Table extends Component {
                     function () {
                       // efek hover saat tombol dihover
                       $(this).css({
-                        borderRadius: '10px',
+                        borderRadius: "10px",
                         backgroundColor: "#5B7CFD",
                         color: "white",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.3)",
                       });
                     },
                     function () {
@@ -179,19 +176,14 @@ class Table extends Component {
                       $(this).css({
                         backgroundColor: "white",
                         color: "black",
-                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)"
+                        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0)",
                       });
                     }
                   );
-                }
+                },
               },
             ],
-            fnRowCallback: function (
-              nRow,
-              aData,
-              iDisplayIndex,
-              iDisplayIndexFull
-            ) {
+            fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
               var index = iDisplayIndexFull + 1;
               $("td:first", nRow).html(index);
               return nRow;
@@ -231,7 +223,7 @@ class Table extends Component {
               <img
                 className="table-product-img"
                 src={`${process.env.REACT_APP_IMAGE_BASE_URL}${item.gambar}`}
-                style={{ height: '155.54px', width: '200px', objectFit: 'cover', objectPosition: 'center center', borderRadius: '20px 20px 20px 20px' }}
+                style={{ height: "155.54px", width: "200px", objectFit: "cover", objectPosition: "center center", borderRadius: "20px 20px 20px 20px" }}
                 alt="product"
               />
             </td>
@@ -242,11 +234,7 @@ class Table extends Component {
             <td className="">{item.harga_modal}</td>
             <td className="">{item.harga_jual}</td>
             <td>
-              <button
-                className="btn table-actions-button bg-transparent border drop-shadow mr-2 align-item-center rounded-circle"
-                data-toggle="modal"
-                data-target={`#updateModal${item.produk_id}`}
-              >
+              <button className="btn table-actions-button bg-transparent border drop-shadow mr-2 align-item-center rounded-circle" data-toggle="modal" data-target={`#updateModal${item.produk_id}`}>
                 <iconify-icon icon="oi:pencil" />
               </button>
               <button
@@ -254,7 +242,6 @@ class Table extends Component {
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
-
                   }
                 }}
               >
@@ -270,33 +257,27 @@ class Table extends Component {
   };
 
   UpdateModal = (props) => {
-    const {
-      handleSubmit,
-      handleChange,
-      handleFileChange,
-      categories,
-      product,
-    } = props;
+    const { handleSubmit, handleChange, handleFileChange, categories, product } = props;
   };
 
   handleDelete = (id) => {
-    axios.delete(process.env.REACT_APP_BASE_API + `/produk/${id}`, {
-      headers: {
-        'api_key': `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`
-      }
-    })
-      .then(response => {
+    axios
+      .delete(process.env.REACT_APP_BASE_API + `/produk/${id}`, {
+        headers: {
+          api_key: `e3fd6b146fcb65f7419e3531a0a84f4d700b8210`,
+        },
+      })
+      .then((response) => {
         console.log(response.data);
         Toast({ message: "Product Delete Succesfully!", type: "success" });
         window.location.reload();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
 
   render() {
-
     if (this.props.loading) {
       return (
         <div className="loading-container">
@@ -308,11 +289,8 @@ class Table extends Component {
     return (
       <>
         <div class="card-body mt-0 pt-1 mb-4 pr-0">
-          <div className=" scrollable-table overflow-hidden">
-            <table
-              id="table"
-              className="table align-items-center justify-content-center" 
-            >
+          <div className=" scrollable-table" style={{ height: "500px", overflowY: "auto" }}>
+            <table id="table" className="table align-items-center justify-content-center">
               <thead>
                 <tr>
                   <th className="">No</th>
@@ -332,10 +310,7 @@ class Table extends Component {
         </div>
 
         <EditModal />
-
-
       </>
-
     );
   }
 }
