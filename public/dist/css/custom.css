@@ -161,7 +161,11 @@
 }
 
 .light-mode a:not(.btn):hover {
-  color: #fff !important;
+  color: #e7eef8 !important;
+}
+
+.unset:hover {
+  color: #e7eef8 !important;
 }
 
 .sidebar-mini .main-sidebar .nav-link,

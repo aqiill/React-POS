@@ -179,17 +179,17 @@ const Sidebar = ({ activePage }) => {
             className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4 justify-content-start"
             style={{ borderRadius: 10 }}
           >
-            <div className="image">
+            <div className="image ">
               <img
                 src={avatar}
-                className="img-circle elevation-2"
+                className="img-circle elevation-2 "
                 alt="Gambar Pengguna"
               />
             </div>
-            <div className="info">
+            <div className="info ">
               <Link
                 to={"/profile"}
-                className="d-block"
+                className="d-block "
                 style={{ color: "black" }}
                 id="profileButton"
               >
