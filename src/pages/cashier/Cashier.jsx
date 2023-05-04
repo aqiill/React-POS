@@ -72,6 +72,7 @@ const Cashier = () => {
           setCart([
             ...cart,
             {
+              id: produk.data.produk_id,
               kode_produk: produk.data.kode_produk,
               nama: produk.data.nama_produk,
               harga: produk.data.harga_jual,
