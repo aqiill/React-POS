@@ -75,16 +75,19 @@ function orderList(props) {
 
   return (
     <div>
-      <div >
+      <div>
         <div
           className="card"
           style={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             borderRadius: 10,
-            marginBottom: 0
+            marginBottom: 0,
           }}
         >
-          <div className="card-header border-0" style={{ display: "flex", justifyContent: "flex-end" }} >
+          <div
+            className="card-header border-0"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
             <h6>Payment Details</h6>
           </div>
           <div
@@ -107,12 +110,13 @@ function orderList(props) {
           </div>
           <div className="m-12">
             <button
+              id="proceed-button"
               type="button"
               className="btn btn-primary float-right"
               data-target="#invoiceModal"
               data-toggle="modal"
             >
-              Procceed
+              Proceed
             </button>
             <button
               type="button"
@@ -200,6 +204,7 @@ function orderList(props) {
                 </div>
                 <div className="modal-footer">
                   <button
+                    id="pay-button"
                     onClick={handlePay}
                     type="button"
                     className="btn btn-primary rounded blueAccent horizontalCenter generateInvoice"

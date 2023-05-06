@@ -1,6 +1,9 @@
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import OrderList from "../../components/content/orderList";
+import CommonComponent from "../../components/common/CommonComponent";
+import Toast from "../../components/toast/Toast";
+import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -11,31 +14,6 @@ const Cashier = () => {
   const [kodeProduk, setKodeProduk] = useState("");
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    document.title = "POS | Transaction";
-    document.body.classList.add(
-      "hold-transition",
-      "light-mode",
-      "sidebar-mini",
-      "layout-fixed",
-      "layout-navbar-fixed",
-      "layout-footer-fixed",
-      "sidebar-mini-xs"
-    );
-
-    return () => {
-      document.body.classList.remove(
-        "hold-transition",
-        "light-mode",
-        "sidebar-mini",
-        "layout-fixed",
-        "layout-navbar-fixed",
-        "layout-footer-fixed",
-        "sidebar-mini-xs"
-      );
-    };
-  }, []);
 
   const handleTambahProduk = async () => {
     try {
@@ -48,7 +26,7 @@ const Cashier = () => {
         }
       );
 
-      if (response.data) {
+      if (response.data !== null && response.data !== undefined) {
         const produk = response.data;
         const produkSudahAda = cart.find(
           (p) => p.kode_produk === produk.data.kode_produk
@@ -67,6 +45,10 @@ const Cashier = () => {
               return p;
             })
           );
+          Toast({
+            message: "Product added to order list",
+            type: "success",
+          });
         } else {
           // Jika produk belum ada di dalam cart, tambahkan produk baru
           setCart([
@@ -81,6 +63,10 @@ const Cashier = () => {
               jumlah: 1,
             },
           ]);
+          Toast({
+            message: "Product added to order list",
+            type: "success",
+          });
         }
 
         // Kosongkan input kode_produk setelah berhasil menambahkan produk ke cart
@@ -93,6 +79,7 @@ const Cashier = () => {
       alert("Terjadi kesalahan pada server");
     }
   };
+
   // Hitung total harga produk yang ada di cart
   useEffect(() => {
     let total = 0;
@@ -104,7 +91,7 @@ const Cashier = () => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      // 👇 Get input value
+      //  Get input value
       handleTambahProduk();
     }
   };
@@ -112,6 +99,8 @@ const Cashier = () => {
   // console.log(total);
   return (
     <>
+      <CommonComponent pageTitle="Transaction" backgroundStyle="#e7eef8" />
+      <ToastContainer />
       <div className="wrapper" style={{ overflow: "hidden" }}>
         <Header />
         <Sidebar activePage="transaction" />
@@ -138,6 +127,7 @@ const Cashier = () => {
                 >
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     <input
+                      id="product-code-search-bar"
                       autoFocus
                       type="search"
                       value={kodeProduk}
@@ -154,6 +144,7 @@ const Cashier = () => {
                       }}
                     />
                     <button
+                      id="add-product"
                       class="btn bg-transparent table-category-button"
                       style={{ marginRight: "15px", marginLeft: "0px" }}
                       onClick={handleTambahProduk}
@@ -205,14 +196,6 @@ const Cashier = () => {
                             <td>{product.harga}</td>
                             <td>{product.jumlah}</td>
                             <td>{product.harga * product.jumlah}</td>
-                            {/* <td>
-                              <button className="btn table-actions-button bg-transparent">
-                                <iconify-icon icon="mdi:minus-circle-outline" style={{ color: 'black', width: '20' }}></iconify-icon>
-                              </button>
-                              <button className="btn table-actions-button bg-transparent">
-                                <iconify-icon icon="mdi:plus-circle-outline" style={{ color: 'black', width: '20' }}></iconify-icon>
-                              </button>
-                            </td> */}
                           </tr>
                         ))}
                       </tbody>
