@@ -36,14 +36,12 @@ const Profile = () => {
   const avatar =
     "https://gravatar.com/avatar/" + MD5(email).toString() + "?d=mm&s=300";
 
-  const role = localStorage.getItem("role");
-
   return (
     <>
       <CommonComponent pageTitle="Profile" backgroundStyle="#e7eef8" />
       <div className="wrapper">
         <Header />
-        <Sidebar activePage="Cashier" />;
+        <Sidebar activePage="Profile" />;
         <div
           className="content-wrapper mt-0 pt-0 mb-0 pb-0"
           style={{
