@@ -119,6 +119,7 @@ function orderList(props) {
               Proceed
             </button>
             <button
+              id="reset-button"
               type="button"
               className="btn btn-secondary float-right mr-3"
               onClick={() => window.location.reload()}
