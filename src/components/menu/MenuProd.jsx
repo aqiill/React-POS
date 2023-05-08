@@ -23,7 +23,7 @@ const MenuProduct = () => {
             </li>
             {/* Product Nav */}
             <li className="nav-item">
-            <a href="pages/widgets.html" className="nav-link active">
+            <a id="productB" href="pages/widgets.html" className="nav-link active">
                 <div className="icon-active">
                 <img className="nav-icon" src="../docs/assets/img/file-tray-stacked-outline.svg" alt="Product Logo" />
                 </div>
@@ -54,7 +54,7 @@ const MenuProduct = () => {
             </li>
             {/* Employee Nav */}
             <li className="nav-item">
-            <a href="pages/widgets.html" className="nav-link">
+            <a id="productB" href="pages/widgets.html" className="nav-link">
                 <img className="nav-icon" src="../docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg" alt="Employee Logo" />
                 <p>
                 Employee
