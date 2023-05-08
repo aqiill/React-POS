@@ -54,7 +54,7 @@ const MenuProduct = () => {
             </li>
             {/* Employee Nav */}
             <li className="nav-item">
-            <a id="productB" href="pages/widgets.html" className="nav-link">
+            <a id="employeeB" href="pages/widgets.html" className="nav-link">
                 <img className="nav-icon" src="../docs/assets/img/badge_FILL0_wght400_GRAD0_opsz48.svg" alt="Employee Logo" />
                 <p>
                 Employee
