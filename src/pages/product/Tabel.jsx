@@ -240,8 +240,7 @@ class Table extends Component {
               </button>
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow delete-row align-item-center rounded-circle"
-                key={index} id={`button-${index}`}
-          
+                id={`button-${index}`}
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
