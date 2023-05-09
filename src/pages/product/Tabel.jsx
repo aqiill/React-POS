@@ -248,7 +248,6 @@ class Table extends Component {
                   }
                 }}
                 >
-                {item}
                 <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
               </button>
             </td>
