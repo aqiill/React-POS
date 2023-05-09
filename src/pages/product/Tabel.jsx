@@ -240,14 +240,15 @@ class Table extends Component {
               </button>
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow delete-row align-item-center rounded-circle"
-                key={index} id={`button-${index}`}>
-                {item}
+                key={index} id={`button-${index}`}
+          
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
                   }
                 }}
-              >
+                >
+                {item}
                 <iconify-icon icon="oi:trash" style={{ marginLeft: 2 }} />
               </button>
             </td>
