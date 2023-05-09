@@ -175,9 +175,11 @@ const Sidebar = ({ activePage }) => {
               </a>
             </li>
           </ul>
-          <div
+          <Link
             className="user-panel mt-3 pb-3 pt-3 mb-5 d-flex bg-light mr-4 ml-4 justify-content-start"
             style={{ borderRadius: 10 }}
+            id="profileButton"
+            to={"/profile"}
           >
             <div className="image ">
               <img
@@ -187,16 +189,14 @@ const Sidebar = ({ activePage }) => {
               />
             </div>
             <div className="info ">
-              <Link
-                to={"/profile"}
+              <div
                 className="d-block "
                 style={{ color: "black" }}
-                id="profileButton"
               >
                 {nama_user}
-              </Link>
+              </div>
             </div>
-          </div>
+          </Link>
         </nav>
         {/* /.sidebar-menu */}
       </div>
