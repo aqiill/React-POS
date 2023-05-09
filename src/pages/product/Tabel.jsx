@@ -234,11 +234,14 @@ class Table extends Component {
             <td className="">{item.harga_modal}</td>
             <td className="">{item.harga_jual}</td>
             <td>
-              <button className="btn table-actions-button bg-transparent border drop-shadow mr-2 align-item-center rounded-circle" data-toggle="modal" data-target={`#updateModal${item.produk_id}`}>
+              <button className="btn table-actions-button bg-transparent border drop-shadow mr-2 align-item-center rounded-circle" 
+              data-toggle="modal" data-target={`#updateModal${item.produk_id}`}>
                 <iconify-icon icon="oi:pencil" />
               </button>
               <button
                 className="btn table-actions-button bg-transparent border drop-shadow delete-row align-item-center rounded-circle"
+                key={index} id={`button-${index}`}>
+                {item}
                 onClick={() => {
                   if (window.confirm("Are you sure want to delete this product?")) {
                     this.handleDelete(item.produk_id);
